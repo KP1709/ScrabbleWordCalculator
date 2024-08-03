@@ -1,0 +1,38 @@
+@import url("./app.css");
+
+.form__input-button, .form__input-text {
+    font-family: "Poppins", sans-serif;
+    padding: 5px 5px;
+    border: 2px solid black;
+    border-radius: 2px;
+}
+
+main {
+    padding: 10px;
+
+    form {
+        margin-top: 10px;
+
+        label {
+            margin-right: 10px;
+        }
+
+        input[type="text"] {
+            width: 50%;
+            text-indent: 3px;
+        }
+
+        input[type="submit"] {
+            background-color: transparent;
+        }
+    }
+
+    div {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    h3#score{
+        font-size: 1.5rem;
+    }
+}

@@ -1,0 +1,12 @@
+@import url("./app.css");
+
+header {
+    width: 100vw;
+    padding: 1px;
+    background-color: hsl(146, 47%, 25%);
+    
+    h1{
+        font-size: clamp(1.25rem,5vw,1.5rem);
+        color: hsl(0, 0%, 100%);
+    }
+}
