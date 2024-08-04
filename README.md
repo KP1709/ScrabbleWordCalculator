@@ -1,4 +1,5 @@
 # Scrabble Word Calculator
+[![Netlify Status](https://api.netlify.com/api/v1/badges/88b1162f-6ee5-437e-a3bc-a3ba498c33ae/deploy-status)](https://app.netlify.com/sites/kareenapatel-scrabblewordcalculator/deploys)
 
 ## ⌨️ Tech stack
 React / Typescript / CSS / npm / Nodejs / HTML / APIs
