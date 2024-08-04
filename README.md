@@ -21,3 +21,4 @@ Owning and playing the original version of Scrabble, I know it would sometimes b
 
 ## ➕ Features to add 
 - Enable user to indicate which tiles have a double score or triple score and update the total word score 
+- Check to see if the word has the correct number of letters (e.g. Can't allow words with two K's (e.g 'kick') )
