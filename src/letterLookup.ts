@@ -2,9 +2,9 @@
 
 // Type alias for letters array
 type letterProperties = {
-    letter: String,
-    score: Number,
-    maxAmount: Number
+    letter: string,
+    score: number,
+    maxAmount: number
 }
 
 export const letters:letterProperties[] = [
