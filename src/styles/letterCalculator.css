@@ -22,6 +22,14 @@ main {
             text-indent: 3px;
         }
 
+        input[type="text"]:focus{
+            outline-color: hsl(146, 61%, 39%);
+        }
+
+        input[type="text"]:hover{
+            border-color: hsl(0, 0%, 50%) ;
+        }
+
         input[type="submit"] {
             background-color: transparent;
         }
