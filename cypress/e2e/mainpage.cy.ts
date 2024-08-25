@@ -19,6 +19,8 @@ describe('Scrabble Word Calculator', () => {
     cy.getDataTest('check-word-button').click()
     cy.getDataTest('start-screen').should('not.exist')
     cy.getDataTest('invalid-input-screen').should('exist')
+
   })
+
 
 })
