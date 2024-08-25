@@ -92,7 +92,7 @@ export default function LetterCalculator() {
     const screenOutput = (isValidString: string, isValidWord: boolean) => {
         if (isValidString === "start") {
             return (
-                <div className="flex-centre">
+                <div className="flex-centre" data-test="start-screen">
                     <h2>Enter a word to calculate score</h2>
                 </div>
             )
