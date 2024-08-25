@@ -22,5 +22,23 @@ describe('Scrabble Word Calculator', () => {
 
   })
 
+  // Sad path - unknown word
+  it('Unknown word entered', () => {
+    cy.getDataTest('word-calculator-form').type('zeel')
+    cy.getDataTest('check-word-button').click()
+
+    // Testing API get request 
+    cy.intercept('GET', 'http://localhost:3000/examples', {
+      // Return data from a file 
+      body: {
+          message: "Requests made to API"
+      }
+  })
+
+    cy.getDataTest('invalid-input-screen').should('not.exist')
+    cy.getDataTest('unknown-input-screen').should('exist')
+
+  })
+
 
 })
