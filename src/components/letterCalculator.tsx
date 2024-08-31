@@ -126,7 +126,7 @@ export default function LetterCalculator() {
 
         else {
             return (
-                <div className="flex-centre">
+                <div className="flex-centre" data-test="valid-input-screen">
                     <ul className="flex-centre">
                         {wordToCheckArray.map(char =>
                             <li key={uuid()} className="flex-centre" >
