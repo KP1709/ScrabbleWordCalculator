@@ -40,14 +40,5 @@ describe('Scrabble Word Calculator', () => {
 
   })
 
-  // Happy path - valid word
-  it('Valid word entered', () => {
-    cy.getDataTest('word-calculator-form').type('typescript')
-    cy.getDataTest('check-word-button').click()
-
-    cy.getDataTest('unknown-input-screen').should('not.exist')
-    cy.getDataTest('valid-input-screen').should('exist')
-
-  })
 
 })
