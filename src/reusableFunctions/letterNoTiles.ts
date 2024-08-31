@@ -1,8 +1,6 @@
-import {letters} from "../letterLookup"
+import {letters as letterLookupList} from "../letterLookup"
 
 export function getLetterNoTiles(enteredLetter: string): number{
-    const usedLetter = enteredLetter.toUpperCase()
-    const output = (letters.filter(item => item.letter === usedLetter))
-    const maxAmount:number = output[0].maxAmount
+    const maxAmount: number | undefined = letterLookupList.get(enteredLetter.toUpperCase()).maxAmount
     return maxAmount
 }
