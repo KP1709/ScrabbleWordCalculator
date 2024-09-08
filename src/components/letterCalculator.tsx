@@ -94,6 +94,10 @@ export default function LetterCalculator() {
             return (
                 <div className="flex-centre">
                     <h2>Enter a word to calculate score</h2>
+                    <ul>
+                        <li>If the input contains non-alphabetic characters, <em>'Invalid entry'</em> is displayed</li>
+                        <li>If the input cannot be found in the dictionary, <em>'Unknown word'</em> is displayed</li>
+                    </ul>
                 </div>
             )
         }
