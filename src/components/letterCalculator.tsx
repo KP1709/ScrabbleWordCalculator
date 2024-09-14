@@ -28,6 +28,7 @@ export default function LetterCalculator() {
 
     useEffect(() => {
         async function checkWord() {
+            if (wordUsed === "" ) return null
             setIsAnalysing(true)
             try {
                 const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${wordUsed}`)
