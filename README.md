@@ -14,11 +14,13 @@ Owning and playing the original version of Scrabble, I know it would sometimes b
 - Score for whole word is calculated
 - Tried to maintain accessibility throughout application
 - Unit tests for application in 'testing' branch
+- Instructions available on the start screen as an open and closable modal
 
 ## 📚 Resources
 - Understanding how to push and retain objects in an array - https://stackoverflow.com/questions/70941970/pushing-objects-in-an-array-only-returns-last-object-pushed-in-react
 - Using regex to test for alphabetic characters - https://stackoverflow.com/questions/6067592/regular-expression-to-match-only-alphabetic-characters
 - Dictionary API used - https://dictionaryapi.dev/
+- Learn React Portal in 12 minutes by building a modal - https://www.youtube.com/watch?v=LyLa7dU5tp8
 
 
 ## ➕ Features to add 
