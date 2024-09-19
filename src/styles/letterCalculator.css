@@ -7,6 +7,14 @@
     border-radius: 2px;
 }
 
+.start__instructions-button{
+    font-family: "Poppins", sans-serif;
+    padding: 5px 5px;
+    border: none;
+    background-color: transparent;
+    border-radius: 2px;
+}
+
 main {
     padding: 10px;
 
