@@ -20,12 +20,20 @@
     padding: 10px;
     background-color: hsl(146, 47%, 25%);
     z-index: 1;
-    
-    h2, p {
+
+    h2,
+    p {
         color: #fff;
     }
 
-    p{
+    p {
         font-size: 0.9rem;
+    }
+
+    button {
+        font-family: "Poppins", sans-serif;
+        padding: 5px 5px;
+        border: none;
+        border-radius: 2px;
     }
 }

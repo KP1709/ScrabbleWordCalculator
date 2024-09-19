@@ -100,7 +100,7 @@ export default function LetterCalculator() {
                 <div className="flex-centre">
                     <h2>Enter a word to calculate score</h2>
                     <div>
-                        <button onClick={() => setIsOpen(true)}>Open Instructions</button>
+                        <button className="start__instructions-button" onClick={() => setIsOpen(true)}>View instructions here</button>
                         <HowToModal open={isOpen} onClose={() => setIsOpen(false)} />
                     </div>
                 </div>
