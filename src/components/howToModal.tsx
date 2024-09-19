@@ -1,8 +1,13 @@
 import { createPortal } from "react-dom";
 import "../styles/modal.css"
 
+type ModalProps = {
+    children: React.ReactNode,
+    open: boolean,
+    onClose: () => void
+}
 
-export default function HowToModal({ children, open, onClose }: any) {
+export default function HowToModal({ children, open, onClose }: ModalProps) {
     if (!open) return null
 
     return createPortal(
