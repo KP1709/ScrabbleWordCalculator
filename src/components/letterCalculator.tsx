@@ -101,7 +101,7 @@ export default function LetterCalculator() {
                     <h2>Enter a word to calculate score</h2>
                     <div>
                         <button onClick={() => setIsOpen(true)}>Open Instructions</button>
-                        <HowToModal open={isOpen} onClose={() => setIsOpen(false)}>Hello</HowToModal >
+                        <HowToModal open={isOpen} onClose={() => setIsOpen(false)} />
                     </div>
                 </div>
             )
