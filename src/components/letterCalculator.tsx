@@ -12,6 +12,7 @@ type LetterProperties = {
     score: number,
     originalScore: number,
     action: 'double' | 'triple' | 'restore',
+    colour: '#90e0ef'| '#0077b6'| '#ffffff'
 }
 
 // Union Type - three keywords allowed to be used
@@ -65,11 +66,11 @@ export default function LetterCalculator() {
             if (tile.id === id) {
                 switch (tile.action) {
                     case 'double':
-                        return { ...tile, score: tile.originalScore * 2, action: 'triple' };
+                        return { ...tile, score: tile.originalScore * 2, action: 'triple', colour: '#90e0ef' };
                     case 'triple':
-                        return { ...tile, score: tile.originalScore * 3, action: 'restore' };
+                        return { ...tile, score: tile.originalScore * 3, action: 'restore', colour: '#0077b6' };
                     case 'restore':
-                        return { ...tile, score: tile.originalScore, action: 'double' };
+                        return { ...tile, score: tile.originalScore, action: 'double', colour: '#ffffff' };
                 }
             }
             return tile
@@ -88,6 +89,7 @@ export default function LetterCalculator() {
                 originalScore: getLetterScore(item), // Required to use for triple + doubling
                 score: getLetterScore(item),
                 action: 'restore',
+                colour: '#ffffff'
             }
             setWordToCheckArray(prevLetters => [...prevLetters, newLetter])
         })
@@ -162,6 +164,7 @@ export default function LetterCalculator() {
                                     score={char.score}
                                     onClick={() => handleTileClick(char.id)}
                                     action={char.action}
+                                    colour={char.colour}
                                 />
                             </li>
                         )}
@@ -175,7 +178,7 @@ export default function LetterCalculator() {
                             Triple total score
                         </button>}
                         {totalWordScoreMultiplier !== 1 && <button className="multiplier__button" onClick={handleReset}>
-                            Reset score
+                            Reset score multiplier
                         </button>}
                     </div>
                 </div>
