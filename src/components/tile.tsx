@@ -1,15 +1,18 @@
 import "../styles/tile.css"
 
-type Tile = {
+type TileProp = {
+    id: string,
     letter: string,
-    score: number
+    score: number,
+    onClick: () => void
+    action: 'double' | 'triple' | 'restore';
 }
 
-export default function Tile(props : Tile){
+export default function Tile({letter, score, onClick} : TileProp){
     return(
-        <>
-            <h2>{props.letter}</h2>
-            <h3>{props.score}</h3>
-        </>
+        <div onClick={onClick}>
+            <h2>{letter}</h2>
+            <h3>{score}</h3>
+        </div>
     )
 }
