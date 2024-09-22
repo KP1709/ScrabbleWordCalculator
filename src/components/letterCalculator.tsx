@@ -167,15 +167,17 @@ export default function LetterCalculator() {
                         )}
                     </ul>
                     <h3 id="score"> Total : {totalWordScore}</h3>
-                    {totalWordScoreMultiplier === 1 && <button onClick={() => handleMultiply(2)}>
-                        Multiply Total by 2
-                    </button>}
-                    {totalWordScoreMultiplier === 1 && <button onClick={() => handleMultiply(3)}>
-                        Multiply Total by 3
-                    </button>}
-                    {totalWordScoreMultiplier !== 1 && <button onClick={handleReset}>
-                        Reset Multiplier
-                    </button>}
+                    <div id="multiplier__buttons" className="flex-centre">
+                        {totalWordScoreMultiplier === 1 && <button className="multiplier__button" onClick={() => handleMultiply(2)}>
+                            Double total score
+                        </button>}
+                        {totalWordScoreMultiplier === 1 && <button className="multiplier__button" onClick={() => handleMultiply(3)}>
+                            Triple total score
+                        </button>}
+                        {totalWordScoreMultiplier !== 1 && <button className="multiplier__button" onClick={handleReset}>
+                            Reset score
+                        </button>}
+                    </div>
                 </div>
             )
         }
