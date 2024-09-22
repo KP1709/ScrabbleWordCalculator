@@ -161,7 +161,7 @@ export default function LetterCalculator() {
                                     letter={char.letter}
                                     score={char.score}
                                     onClick={() => handleTileClick(char.id)}
-                                    action={char.action === "restore" ? "double" : "triple"}
+                                    action={char.action}
                                 />
                             </li>
                         )}
