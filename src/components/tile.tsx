@@ -4,14 +4,15 @@ type TileProp = {
     id: string,
     letter: string,
     score: number,
-    onClick: () => void
-    action: 'double' | 'triple' | 'restore';
+    onClick: () => void,
+    action: 'double' | 'triple' | 'restore',
+    colour: '#90e0ef'| '#0077b6'| '#ffffff'
 }
 
-export default function Tile({letter, score, onClick} : TileProp){
+export default function Tile({letter, score, onClick, colour} : TileProp){
     return(
         <div onClick={onClick}>
-            <h2>{letter}</h2>
+            <h2 style={{backgroundColor:`${colour}`}}>{letter}</h2>
             <h3>{score}</h3>
         </div>
     )
