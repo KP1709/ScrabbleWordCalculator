@@ -9,7 +9,9 @@ import HowToModal from "../components/howToModal"
 type LetterProperties = {
     id: string,
     letter: string,
-    score: number
+    score: number,
+    originalScore: number,
+    action: 'double' | 'triple' | 'restore',
 }
 
 // Union Type - three keywords allowed to be used
@@ -18,17 +20,12 @@ type validString = "true" | "false" | "start"
 export default function LetterCalculator() {
     const [wordToCheck, setWordToCheck] = useState("")
     const [wordUsed, setWordUsed] = useState("") // Saves word at submission
-
     const [isAnalysing, setIsAnalysing] = useState<boolean>(false)
-
     const [wordToCheckArray, setWordToCheckArray] = useState<LetterProperties[]>([])
-    const [wordScoreArray, setWordScoreArray] = useState<number[]>([])
-
+    const [totalWordScore, setTotalWordScore] = useState(0)
     const [isValidString, setIsValidString] = useState<validString>("start") // Regex check
     const [isValidWord, setIsValidWord] = useState<boolean>(false) // Word lookup check
-
     const [isOpen, setIsOpen] = useState(false)
-
 
     useEffect(() => {
         async function checkWord() {
@@ -39,34 +36,47 @@ export default function LetterCalculator() {
                 const data = await res.json()
 
                 // if ok 200 - data is returned as array 
-                if (Array.isArray(data)) {
-                    setIsValidWord(true)
-                }
-
+                if (Array.isArray(data)) setIsValidWord(true)
                 // if error 404 - data returned as object
-                else {
-                    setIsValidWord(false)
-                }
+                else setIsValidWord(false)
             }
-            catch (err) {
-                setIsValidWord(false)
-            }
+            catch (err) { setIsValidWord(false) }
             setIsAnalysing(false)
         }
         checkWord()
     }, [wordUsed])
 
+    useEffect(() => {
+        const newTotal = wordToCheckArray.reduce((sum, tile) => sum + tile.score, 0)
+        setTotalWordScore(newTotal)
+    }, [wordToCheckArray])
+
     const handleSubmit = (e: { preventDefault: () => void }): void => {
         setWordToCheckArray([]) // Clear array before adding new characters
-        setWordScoreArray([]) // Clear array before adding new numbers
         e.preventDefault();
-        { validation(wordToCheck) ? separateLetters(wordToCheck) : setIsValidString("false") }
-
+        { validation(wordToCheck) ? lookupLettersFromWord(wordToCheck) : setIsValidString("false") }
         setWordToCheck("") // Clear input after submission regardless        
     }
 
+    /** Code produced by V0 but has been modified to suit original code */
+    const handleTileClick = (id: string) => {
+        setWordToCheckArray(prevValues => prevValues.map((tile) => {
+            if (tile.id === id) {
+                switch (tile.action) {
+                    case 'double':
+                        return { ...tile, score: tile.originalScore * 2, action: 'triple' };
+                    case 'triple':
+                        return { ...tile, score: tile.originalScore * 3, action: 'restore' };
+                    case 'restore':
+                        return { ...tile, score: tile.originalScore, action: 'double' };
+                }
+            }
+            return tile
+        }))
+    }
+
     // Divide string into items in array
-    const separateLetters = (wordToCheck: string) => {
+    const lookupLettersFromWord = (wordToCheck: string) => {
         const splitWordArray: string[] | void = wordToCheck.split("") // Split by no space
 
         // Insert object into array for each letter in word
@@ -74,12 +84,11 @@ export default function LetterCalculator() {
             let newLetter: LetterProperties = {
                 id: uuid(),
                 letter: item.toUpperCase(),
-                score: getLetterScore(item)
+                originalScore: getLetterScore(item), // Required to use for triple + doubling
+                score: getLetterScore(item),
+                action: 'restore',
             }
-
-            // Preserving previous letters/letter score when adding to array
             setWordToCheckArray(prevLetters => [...prevLetters, newLetter])
-            setWordScoreArray(prevLetterScores => [newLetter.score, ...prevLetterScores])
         })
     }
 
@@ -94,7 +103,7 @@ export default function LetterCalculator() {
         else return false
     }
 
-    const screenOutput = (isValidString: string, isValidWord: boolean) => {
+    const responseInterfaces = (isValidString: string, isValidWord: boolean) => {
         if (isValidString === "start") {
             return (
                 <div className="flex-centre">
@@ -139,16 +148,16 @@ export default function LetterCalculator() {
                     <ul className="flex-centre">
                         {wordToCheckArray.map(char =>
                             <li key={uuid()} className="flex-centre" >
-                                <Tile letter={char.letter} score={char.score} />
+                                <Tile id={char.id}
+                                    letter={char.letter}
+                                    score={char.score}
+                                    onClick={() => handleTileClick(char.id)}
+                                    action={char.action === "restore" ? "double" : "triple"}
+                                />
                             </li>
                         )}
                     </ul>
-
-                    <h3 id="score"> Total : {
-                        // Calculate word score and display
-                        wordScoreArray.reduce((a, v) => a = a + v, 0)
-                    }</h3>
-
+                    <h3 id="score"> Total : {totalWordScore}</h3>
                 </div>
             )
         }
@@ -169,7 +178,7 @@ export default function LetterCalculator() {
                 <input type="submit" value="Check" className="form__input-button" />
             </form>
 
-            {screenOutput(isValidString, isValidWord)}
+            {responseInterfaces(isValidString, isValidWord)}
 
         </main>
     )
