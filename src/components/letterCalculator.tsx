@@ -23,6 +23,7 @@ export default function LetterCalculator() {
     const [isAnalysing, setIsAnalysing] = useState<boolean>(false)
     const [wordToCheckArray, setWordToCheckArray] = useState<LetterProperties[]>([])
     const [totalWordScore, setTotalWordScore] = useState(0)
+    const [totalWordScoreMultiplier, setTotalWordScoreMultiplier] = useState(1)
     const [isValidString, setIsValidString] = useState<validString>("start") // Regex check
     const [isValidWord, setIsValidWord] = useState<boolean>(false) // Word lookup check
     const [isOpen, setIsOpen] = useState(false)
@@ -48,8 +49,8 @@ export default function LetterCalculator() {
 
     useEffect(() => {
         const newTotal = wordToCheckArray.reduce((sum, tile) => sum + tile.score, 0)
-        setTotalWordScore(newTotal)
-    }, [wordToCheckArray])
+        setTotalWordScore(newTotal * totalWordScoreMultiplier)
+    }, [wordToCheckArray, totalWordScoreMultiplier])
 
     const handleSubmit = (e: { preventDefault: () => void }): void => {
         setWordToCheckArray([]) // Clear array before adding new characters
@@ -101,6 +102,14 @@ export default function LetterCalculator() {
             return true
         }
         else return false
+    }
+
+    const handleMultiply = (factor: number) => {
+        setTotalWordScoreMultiplier(prevMultiplier => prevMultiplier * factor)
+    }
+
+    const handleReset = () => {
+        setTotalWordScoreMultiplier(1)
     }
 
     const responseInterfaces = (isValidString: string, isValidWord: boolean) => {
@@ -158,6 +167,15 @@ export default function LetterCalculator() {
                         )}
                     </ul>
                     <h3 id="score"> Total : {totalWordScore}</h3>
+                    {totalWordScoreMultiplier === 1 && <button onClick={() => handleMultiply(2)}>
+                        Multiply Total by 2
+                    </button>}
+                    {totalWordScoreMultiplier === 1 && <button onClick={() => handleMultiply(3)}>
+                        Multiply Total by 3
+                    </button>}
+                    {totalWordScoreMultiplier !== 1 && <button onClick={handleReset}>
+                        Reset Multiplier
+                    </button>}
                 </div>
             )
         }
