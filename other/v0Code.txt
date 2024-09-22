@@ -1,0 +1,69 @@
+'use client'
+
+import { useState } from 'react'
+import { Button } from "@/components/ui/button"
+
+interface ScoreState {
+  id: number;
+  originalScore: number;
+  currentScore: number;
+  action: 'double' | 'triple' | 'restore';
+}
+
+export default function Component() {
+  const [scores, setScores] = useState<ScoreState[]>([
+    { id: 1, originalScore: 10, currentScore: 10, action: 'double' },
+    { id: 2, originalScore: 20, currentScore: 20, action: 'double' },
+    { id: 3, originalScore: 30, currentScore: 30, action: 'double' },
+  ])
+
+  const handleClick = (id: number) => {
+    setScores(prevScores =>
+      prevScores.map(score => {
+        if (score.id === id) {
+          switch (score.action) {
+            case 'double':
+              return { ...score, currentScore: score.currentScore * 2, action: 'triple' };
+            case 'triple':
+              return { ...score, currentScore: score.currentScore * 3, action: 'restore' };
+            case 'restore':
+              return { ...score, currentScore: score.originalScore, action: 'double' };
+          }
+        }
+        return score;
+      })
+    )
+  }
+
+  const getButtonText = (action: string) => {
+    switch (action) {
+      case 'double':
+        return 'Click to Double';
+      case 'triple':
+        return 'Click to Triple';
+      case 'restore':
+        return 'Click to Restore';
+    }
+  }
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100">
+      <h1 className="text-3xl font-bold mb-6 text-gray-800">Cycle Score Buttons</h1>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {scores.map(score => (
+          <div key={score.id} className="flex flex-col items-center p-6 bg-white border rounded-lg shadow-md">
+            <p className="text-xl font-semibold mb-2 text-gray-700">Score: {score.currentScore}</p>
+            <p className="text-sm mb-4 text-gray-500">Original: {score.originalScore}</p>
+            <Button 
+              onClick={() => handleClick(score.id)}
+              className="w-full"
+              variant={score.action === 'restore' ? 'outline' : 'default'} <-- Uses UI library so prop is passed in
+            >
+              {getButtonText(score.action)}
+            </Button>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
