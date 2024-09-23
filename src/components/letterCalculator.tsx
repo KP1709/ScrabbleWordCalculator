@@ -45,7 +45,8 @@ export default function LetterCalculator() {
         setWordToCheckArray([])
         e.preventDefault();
         { validation(wordToCheck) ? lookupLettersFromWord(wordToCheck) : setIsValidString("false") }
-        setWordToCheck("")      
+        setWordToCheck("")  
+        handleReset()    
     }
 
     // Code produced by V0 but has been modified to work with original code written
