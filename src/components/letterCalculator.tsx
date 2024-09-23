@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react"
+import { useState, useEffect, useRef, useLayoutEffect } from "react"
 import { v4 as uuid } from "uuid"
 import { getLetterScore } from "../reusableFunctions/letterScore"
 import "../styles/letterCalculator.css"
@@ -45,8 +45,8 @@ export default function LetterCalculator() {
         setWordToCheckArray([])
         e.preventDefault();
         { validation(wordToCheck) ? lookupLettersFromWord(wordToCheck) : setIsValidString("false") }
-        setWordToCheck("")  
-        handleReset()    
+        setWordToCheck("")
+        handleReset()
     }
 
     // Code produced by V0 but has been modified to work with original code written
@@ -104,31 +104,45 @@ export default function LetterCalculator() {
         setTotalWordScoreMultiplier(1)
     }
 
+    // Auto focus input after when component renders to page
+    const AutoFocusInput = () => {
+        const inputRef = useRef(null)
+
+        useLayoutEffect(() => {
+            inputRef.current.focus();
+        }, [])
+
+        return (
+            <input type="text"
+                className="form__input-text"
+                name="word"
+                id="word"
+                value={wordToCheck}
+                onChange={(e) => setWordToCheck(e.target.value)}
+                placeholder="scrabble"
+                ref={inputRef}
+            />
+        )
+    }
+
     return (
         <main>
             <form onSubmit={handleSubmit} className="flex-centre">
                 <label htmlFor="word">Word:</label>
-                <input type="text"
-                    className="form__input-text"
-                    name="word"
-                    id="word"
-                    value={wordToCheck}
-                    onChange={(e) => setWordToCheck(e.target.value)}
-                    placeholder="scrabble"
-                />
+                <AutoFocusInput />
                 <input type="submit" value="Check" className="form__input-button" />
             </form>
 
-            <ResponseInterfaces 
-            isValidString={isValidString} 
-            isValidWord={isValidWord} 
-            handleTileClick={handleTileClick} 
-            handleMultiply={handleMultiply} 
-            handleReset={handleReset} 
-            totalWordScore={totalWordScore} 
-            isAnalysing={isAnalysing} 
-            totalWordScoreMultiplier={totalWordScoreMultiplier}
-            wordToCheckArray={wordToCheckArray}/>
+            <ResponseInterfaces
+                isValidString={isValidString}
+                isValidWord={isValidWord}
+                handleTileClick={handleTileClick}
+                handleMultiply={handleMultiply}
+                handleReset={handleReset}
+                totalWordScore={totalWordScore}
+                isAnalysing={isAnalysing}
+                totalWordScoreMultiplier={totalWordScoreMultiplier}
+                wordToCheckArray={wordToCheckArray} />
         </main>
     )
 }
