@@ -5,8 +5,7 @@ import "../styles/letterCalculator.css"
 import ResponseInterfaces from "./responseInterfaces"
 import { LetterProperties } from "../reusableTypes/LetterProperties"
 
-// Union Type - three keywords allowed to be used
-type validString = "true" | "false" | "start"
+type ValidString = "true" | "false" | "start"
 
 export default function LetterCalculator() {
     const [wordToCheck, setWordToCheck] = useState("")
@@ -15,20 +14,18 @@ export default function LetterCalculator() {
     const [wordToCheckArray, setWordToCheckArray] = useState<LetterProperties[]>([])
     const [totalWordScore, setTotalWordScore] = useState(0)
     const [totalWordScoreMultiplier, setTotalWordScoreMultiplier] = useState(1)
-    const [isValidString, setIsValidString] = useState<validString>("start") // Regex check
+    const [isValidString, setIsValidString] = useState<ValidString>("start") // Regex check
     const [isValidWord, setIsValidWord] = useState<boolean>(false) // Word lookup check
 
     useEffect(() => {
+        /** Check to see if word is in dictionary */
         async function checkWord() {
             if (wordUsed === "") return null
             setIsAnalysing(true)
             try {
                 const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${wordUsed}`)
                 const data = await res.json()
-
-                // if ok 200 - data is returned as array 
                 if (Array.isArray(data)) setIsValidWord(true)
-                // if error 404 - data returned as object
                 else setIsValidWord(false)
             }
             catch (err) { setIsValidWord(false) }
@@ -38,18 +35,21 @@ export default function LetterCalculator() {
     }, [wordUsed])
 
     useEffect(() => {
+        /** Updates total if word changes or word multiplier changes */
         const newTotal = wordToCheckArray.reduce((sum, tile) => sum + tile.score, 0)
         setTotalWordScore(newTotal * totalWordScoreMultiplier)
     }, [wordToCheckArray, totalWordScoreMultiplier])
 
+    /** Handles word submitted in form */
     const handleSubmit = (e: { preventDefault: () => void }): void => {
-        setWordToCheckArray([]) // Clear array before adding new characters
+        setWordToCheckArray([])
         e.preventDefault();
         { validation(wordToCheck) ? lookupLettersFromWord(wordToCheck) : setIsValidString("false") }
-        setWordToCheck("") // Clear input after submission regardless        
+        setWordToCheck("")      
     }
 
-    /** Code produced by V0 but has been modified to suit original code */
+    // Code produced by V0 but has been modified to work with original code written
+    /** Handles multiplying letter score on tile */
     const handleTileClick = (id: string) => {
         setWordToCheckArray(prevValues => prevValues.map((tile) => {
             if (tile.id === id) {
@@ -66,11 +66,10 @@ export default function LetterCalculator() {
         }))
     }
 
-    // Divide string into items in array
+    /** Divides word into letters and looks up letter to get and store required information */
     const lookupLettersFromWord = (wordToCheck: string) => {
-        const splitWordArray: string[] | void = wordToCheck.split("") // Split by no space
+        const splitWordArray: string[] | void = wordToCheck.split("")
 
-        // Insert object into array for each letter in word
         splitWordArray.forEach(item => {
             let newLetter: LetterProperties = {
                 id: uuid(),
@@ -84,7 +83,6 @@ export default function LetterCalculator() {
         })
     }
 
-    // Validating input using regex
     const validation = (wordToCheck: string): boolean => {
         const regex = /^[A-Z]+$/i
         if (wordToCheck.match(regex)) {
@@ -95,10 +93,12 @@ export default function LetterCalculator() {
         else return false
     }
 
+    // Used to multiply word score by a factor
     const handleMultiply = (factor: number) => {
         setTotalWordScoreMultiplier(prevMultiplier => prevMultiplier * factor)
     }
 
+    // Reset multiplied score to original score
     const handleReset = () => {
         setTotalWordScoreMultiplier(1)
     }

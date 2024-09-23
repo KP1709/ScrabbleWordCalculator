@@ -40,7 +40,8 @@ export default function ResponseInterfaces(
             <ul className="flex-centre">
                 {wordToCheckArray.map(char =>
                     <li key={uuid()} className="flex-centre" >
-                        <Tile id={char.id}
+                        <Tile
+                            id={char.id}
                             letter={char.letter}
                             score={char.score}
                             onClick={() => handleTileClick(char.id)}
