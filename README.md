@@ -15,6 +15,9 @@ Owning and playing the original version of Scrabble, I know it would sometimes b
 - Tried to maintain accessibility throughout application
 - Unit tests for application in 'testing' branch
 - Instructions available on the start screen as an open and closable modal
+- Can indicate which tiles have a double score or triple score and update the total word score 
+- Can indicate if the total word score doubles or triples
+  -  Option to reset score without multiplier
 
 ## 📚 Resources
 - Understanding how to push and retain objects in an array - https://stackoverflow.com/questions/70941970/pushing-objects-in-an-array-only-returns-last-object-pushed-in-react
@@ -23,6 +26,17 @@ Owning and playing the original version of Scrabble, I know it would sometimes b
 - Learn React Portal in 12 minutes by building a modal - https://www.youtube.com/watch?v=LyLa7dU5tp8
 
 
+## 🤖 AI Assistance
+To implement the double/triple tile score and the double/triple total word score feature, I asked V0 by Vercel to create code which implemented the logic I was after. The code was specified to be written in React but the AI chose to use Typescript. I integrated the code into the original code I wrote. 
+
+### Prompts asked in order:
+- "Create a button in react which toggles between doubling and halving the number"
+- "Do this but enable the button to cycle through the original value, doubling and tripling"
+- "Do this for multiple buttons"
+- "Do this but add together the total value from the buttons"
+- "Do this but includes buttons which can multiply the total by 2 and by 3"
+
+(Outcome and results will vary)
+
 ## ➕ Features to add 
-- Enable user to indicate which tiles have a double score or triple score and update the total word score 
 - Check to see if the word has the correct number of letters (e.g. Can't allow words with two K's (e.g 'kick') )
