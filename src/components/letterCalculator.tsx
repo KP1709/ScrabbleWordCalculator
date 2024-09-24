@@ -106,10 +106,10 @@ export default function LetterCalculator() {
 
     // Auto focus input after when component renders to page
     const AutoFocusInput = () => {
-        const inputRef = useRef(null)
+        const inputRef = useRef<HTMLInputElement>(null)
 
         useLayoutEffect(() => {
-            inputRef.current.focus();
+            inputRef.current?.focus();
         }, [])
 
         return (
