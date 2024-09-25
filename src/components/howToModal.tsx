@@ -12,8 +12,8 @@ export default function HowToModal({ open, onClose }: ModalProps) {
     return createPortal(
         <>
             <div className="modal-overlay"></div>
-            <div className="modal">
-                <button onClick={onClose}>Close</button>
+            <div data-test="how-to-modal" className="modal">
+                <button onClick={onClose} data-test="close-instructions-button">Close</button>
                 <h2>How to use the calculator</h2>
                 <p>Enter a word in the text box and either press enter or the 'check' button</p>
                 <p>If the word contains other characters than letters it will display 'Invalid entry'</p>

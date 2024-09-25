@@ -106,7 +106,7 @@ export default function LetterCalculator() {
 
     return (
         <main>
-            <form onSubmit={handleSubmit} className="flex-centre">
+            <form onSubmit={handleSubmit} className="flex-centre" data-test="word-calculator-form">
                 <label htmlFor="word">Word:</label>
                 <input type="text"
                 className="form__input-text"
@@ -116,7 +116,7 @@ export default function LetterCalculator() {
                 onChange={(e) => setWordToCheck(e.target.value)}
                 placeholder="scrabble"
             />
-                <input type="submit" value="Check" className="form__input-button" />
+                <input type="submit" value="Check" className="form__input-button" data-test="check-word-button"/>
             </form>
 
             <ResponseInterfaces

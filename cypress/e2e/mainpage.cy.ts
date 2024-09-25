@@ -7,9 +7,13 @@ describe('Scrabble Word Calculator', () => {
     cy.getDataTest('page-header').contains(/Scrabble word calculator/i)
   })
 
-  it('Contains correct start message', () => {
+  it('Start screen works correctly', () => {
     cy.getDataTest('start-screen').within(() => {
       cy.get('h2').contains(/Enter a word/i)
+      cy.getDataTest('view-instructions-button').click()
+      cy.wait(3000)
+      cy.get('div').should('be.visible')
+      cy.reload()
     })
   })
 
