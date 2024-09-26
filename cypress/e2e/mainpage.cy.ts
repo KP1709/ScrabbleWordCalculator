@@ -51,7 +51,16 @@ describe('Scrabble Word Calculator', () => {
 
     cy.getDataTest('unknown-input-screen').should('not.exist')
     cy.getDataTest('valid-input-screen').should('exist')
-
   })
 
+  it('Valid word functionality works correctly', () => {
+    cy.getDataTest('reset-multiplier-button').should('not.exist')
+    cy.getDataTest('double-multiplier-button').click()
+    cy.getDataTest('reset-multiplier-button').should('exist')
+    cy.getDataTest('reset-multiplier-button').click()
+    cy.getDataTest('reset-multiplier-button').should('not.exist')
+    cy.getDataTest('triple-multiplier-button').click()
+    cy.getDataTest('reset-multiplier-button').click()
+  })
+  
 })

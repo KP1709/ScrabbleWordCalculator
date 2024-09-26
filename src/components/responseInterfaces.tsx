@@ -55,19 +55,22 @@ export default function ResponseInterfaces(
             <div id="multiplier__buttons" className="flex-centre">
                 {totalWordScoreMultiplier === 1 &&
                     <button className="multiplier__button"
-                        onClick={() => handleMultiply(2)}>
+                        onClick={() => handleMultiply(2)}
+                        data-test="double-multiplier-button">
                         Double total score
                     </button>}
 
                 {totalWordScoreMultiplier === 1 &&
                     <button className="multiplier__button"
-                        onClick={() => handleMultiply(3)}>
+                        onClick={() => handleMultiply(3)}
+                        data-test="triple-multiplier-button">
                         Triple total score
                     </button>}
 
                 {totalWordScoreMultiplier !== 1 &&
                     <button className="multiplier__button"
-                        onClick={handleReset}>
+                        onClick={handleReset}
+                        data-test="reset-multiplier-button">
                         Reset score multiplier
                     </button>}
             </div>
