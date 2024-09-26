@@ -12,7 +12,7 @@ type TileProp = {
 export default function Tile({letter, score, onClick, colour} : TileProp){
     return(
         <div onClick={onClick}>
-            <h2 style={{backgroundColor:`${colour}`}}>{letter}</h2>
+            <h2 style={{backgroundColor:`${colour}`}} data-test="tile-selection">{letter}</h2>
             <h3>{score}</h3>
         </div>
     )

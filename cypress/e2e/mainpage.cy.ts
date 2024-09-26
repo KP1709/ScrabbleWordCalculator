@@ -61,6 +61,11 @@ describe('Scrabble Word Calculator', () => {
     cy.getDataTest('reset-multiplier-button').should('not.exist')
     cy.getDataTest('triple-multiplier-button').click()
     cy.getDataTest('reset-multiplier-button').click()
+
+    cy.getDataTest('tile-selection').click({multiple: true, timeout: 30})
+    cy.getDataTest('tile-selection').click({multiple: true, timeout: 30})
+    cy.getDataTest('tile-selection').click({multiple: true, timeout: 30})
+    cy.getDataTest('tile-selection').click({multiple: true, timeout: 30})
   })
-  
+ 
 })
