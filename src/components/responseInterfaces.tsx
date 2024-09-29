@@ -4,8 +4,6 @@ import InvalidEntry from "./responseInterfaces/invalidEntry"
 import UnknownWord from "./responseInterfaces/unknownWord"
 import StartScreen from "./responseInterfaces/startScreen"
 import Word from "./word"
-import { HandleTileClickContext, HandleTileClickContextType } from "./letterCalculator"
-import { useContext } from "react"
 
 type ResponseInterface = {
     isValidString: string,
@@ -29,7 +27,6 @@ export default function ResponseInterfaces(
         wordToCheckArray }
         : ResponseInterface) {
 
-    const { handleTileClick } = useContext(HandleTileClickContext) as HandleTileClickContextType
 
     if (isValidString === "start") return (<StartScreen />)
     else if (isAnalysing) return (<IsAnalysing />)
@@ -40,7 +37,6 @@ export default function ResponseInterfaces(
         <div className="flex-centre">
             <Word
                 wordToCheckArray={wordToCheckArray}
-                handleTileClick={handleTileClick}
                 handleMultiply={handleMultiply}
                 handleReset={handleReset}
             />
