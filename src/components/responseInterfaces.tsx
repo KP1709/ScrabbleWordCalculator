@@ -1,15 +1,15 @@
-import Tile from "../components/tile"
 import { LetterProperties } from "../reusableTypes/LetterProperties"
-import { v4 as uuid } from "uuid"
 import IsAnalysing from "./responseInterfaces/isAnalysing"
 import InvalidEntry from "./responseInterfaces/invalidEntry"
 import UnknownWord from "./responseInterfaces/unknownWord"
 import StartScreen from "./responseInterfaces/startScreen"
+import Word from "./word"
+import { HandleTileClickContext, HandleTileClickContextType } from "./letterCalculator"
+import { useContext } from "react"
 
 type ResponseInterface = {
     isValidString: string,
     isValidWord: boolean
-    handleTileClick: (id: string) => void,
     handleMultiply: (factor: number) => void,
     handleReset: () => void,
     totalWordScore: number,
@@ -23,12 +23,13 @@ export default function ResponseInterfaces(
         isAnalysing,
         isValidWord,
         totalWordScore,
-        handleTileClick,
         handleMultiply,
         handleReset,
         totalWordScoreMultiplier,
         wordToCheckArray }
         : ResponseInterface) {
+
+    const { handleTileClick } = useContext(HandleTileClickContext) as HandleTileClickContextType
 
     if (isValidString === "start") return (<StartScreen />)
     else if (isAnalysing) return (<IsAnalysing />)
@@ -37,21 +38,14 @@ export default function ResponseInterfaces(
 
     return (
         <div className="flex-centre">
-            <ul className="flex-centre">
-                {wordToCheckArray.map(char =>
-                    <li key={uuid()} className="flex-centre" >
-                        <Tile
-                            id={char.id}
-                            letter={char.letter}
-                            score={char.score}
-                            onClick={() => handleTileClick(char.id)}
-                            action={char.action}
-                            colour={char.colour}
-                        />
-                    </li>
-                )}
-            </ul>
+            <Word
+                wordToCheckArray={wordToCheckArray}
+                handleTileClick={handleTileClick}
+                handleMultiply={handleMultiply}
+                handleReset={handleReset}
+            />
             <h3 id="score"> Total : {totalWordScore}</h3>
+
             <div id="multiplier__buttons" className="flex-centre">
                 {totalWordScoreMultiplier === 1 &&
                     <button className="multiplier__button"

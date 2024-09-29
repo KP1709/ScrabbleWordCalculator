@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react"
+import { useState, useEffect, createContext } from "react"
 import { v4 as uuid } from "uuid"
 import { getLetterScore } from "../reusableFunctions/letterScore"
 import "../styles/letterCalculator.css"
@@ -6,6 +6,12 @@ import ResponseInterfaces from "./responseInterfaces"
 import { LetterProperties } from "../reusableTypes/LetterProperties"
 
 type ValidString = "true" | "false" | "start"
+
+export type HandleTileClickContextType = {
+    handleTileClick: (value: string) => void
+}
+
+export const HandleTileClickContext = createContext<HandleTileClickContextType | null>(null)
 
 export default function LetterCalculator() {
     const [wordToCheck, setWordToCheck] = useState("")
@@ -109,26 +115,27 @@ export default function LetterCalculator() {
             <form onSubmit={handleSubmit} className="flex-centre">
                 <label htmlFor="word">Word:</label>
                 <input type="text"
-                className="form__input-text"
-                name="word"
-                id="word"
-                value={wordToCheck}
-                onChange={(e) => setWordToCheck(e.target.value)}
-                placeholder="scrabble"
-            />
+                    className="form__input-text"
+                    name="word"
+                    id="word"
+                    value={wordToCheck}
+                    onChange={(e) => setWordToCheck(e.target.value)}
+                    placeholder="scrabble"
+                />
                 <input type="submit" value="Check" className="form__input-button" />
             </form>
 
-            <ResponseInterfaces
-                isValidString={isValidString}
-                isValidWord={isValidWord}
-                handleTileClick={handleTileClick}
-                handleMultiply={handleMultiply}
-                handleReset={handleReset}
-                totalWordScore={totalWordScore}
-                isAnalysing={isAnalysing}
-                totalWordScoreMultiplier={totalWordScoreMultiplier}
-                wordToCheckArray={wordToCheckArray} />
+            <HandleTileClickContext.Provider value={{ handleTileClick }}>
+                <ResponseInterfaces
+                    isValidString={isValidString}
+                    isValidWord={isValidWord}
+                    handleMultiply={handleMultiply}
+                    handleReset={handleReset}
+                    totalWordScore={totalWordScore}
+                    isAnalysing={isAnalysing}
+                    totalWordScoreMultiplier={totalWordScoreMultiplier}
+                    wordToCheckArray={wordToCheckArray} />
+            </HandleTileClickContext.Provider>
         </main>
     )
 }
