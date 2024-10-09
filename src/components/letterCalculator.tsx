@@ -4,8 +4,7 @@ import { getLetterScore } from "../reusableFunctions/letterScore"
 import "../styles/letterCalculator.css"
 import ResponseInterfaces from "./responseInterfaces"
 import { LetterProperties } from "../reusableTypes/LetterProperties"
-
-type ValidString = "true" | "false" | "start"
+import { ValidString } from "../reusableTypes/ValidStringEnum"
 
 export type HandleTileClickContextType = {
     handleTileClick: (value: string) => void
@@ -20,7 +19,7 @@ export default function LetterCalculator() {
     const [wordToCheckArray, setWordToCheckArray] = useState<LetterProperties[]>([])
     const [totalWordScore, setTotalWordScore] = useState(0)
     const [totalWordScoreMultiplier, setTotalWordScoreMultiplier] = useState(1)
-    const [isValidString, setIsValidString] = useState<ValidString>("start") // Regex check
+    const [isValidString, setIsValidString] = useState(ValidString.startScreen) // Regex check
     const [isValidWord, setIsValidWord] = useState<boolean>(false) // Word lookup check
 
     useEffect(() => {
@@ -50,7 +49,7 @@ export default function LetterCalculator() {
     const handleSubmit = (e: { preventDefault: () => void }): void => {
         setWordToCheckArray([])
         e.preventDefault();
-        { validation(wordToCheck) ? lookupLettersFromWord(wordToCheck) : setIsValidString("false") }
+        { validation(wordToCheck) ? lookupLettersFromWord(wordToCheck) : setIsValidString(ValidString.false) }
         setWordToCheck("")
         handleReset()
     }
@@ -93,7 +92,7 @@ export default function LetterCalculator() {
     const validation = (wordToCheck: string): boolean => {
         const regex = /^[A-Z]+$/i
         if (wordToCheck.match(regex)) {
-            setIsValidString("true")
+            setIsValidString(ValidString.true)
             setWordUsed(wordToCheck)
             return true
         }
