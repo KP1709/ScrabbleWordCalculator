@@ -4,6 +4,7 @@ import InvalidEntry from "./responseInterfaces/invalidEntry"
 import UnknownWord from "./responseInterfaces/unknownWord"
 import StartScreen from "./responseInterfaces/startScreen"
 import Word from "./word"
+import { ValidString } from "../reusableTypes/ValidStringEnum"
 
 type ResponseInterface = {
     isValidString: string,
@@ -28,10 +29,10 @@ export default function ResponseInterfaces(
         : ResponseInterface) {
 
 
-    if (isValidString === "start") return (<StartScreen />)
+    if (isValidString === ValidString.startScreen) return (<StartScreen />)
     else if (isAnalysing) return (<IsAnalysing />)
-    else if (isValidString === "false") return (<InvalidEntry />)
-    else if (isValidString === "true" && isValidWord === false) return (<UnknownWord />)
+    else if (isValidString === ValidString.false) return (<InvalidEntry />)
+    else if (isValidString === ValidString.false && isValidWord === false) return (<UnknownWord />)
 
     return (
         <div className="flex-centre">
