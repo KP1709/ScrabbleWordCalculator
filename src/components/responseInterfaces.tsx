@@ -4,6 +4,7 @@ import InvalidEntry from "./responseInterfaces/invalidEntry"
 import UnknownWord from "./responseInterfaces/unknownWord"
 import StartScreen from "./responseInterfaces/startScreen"
 import Word from "./word"
+import ScoreModifier from "./scoreModifier"
 
 type ResponseInterface = {
     isValidString: string,
@@ -13,7 +14,8 @@ type ResponseInterface = {
     totalWordScore: number,
     isAnalysing: boolean,
     totalWordScoreMultiplier: number,
-    wordToCheckArray: LetterProperties[]
+    wordToCheckArray: LetterProperties[],
+    setWordToCheckArray: React.Dispatch<React.SetStateAction<LetterProperties[]>>
 }
 
 export default function ResponseInterfaces(
@@ -24,7 +26,8 @@ export default function ResponseInterfaces(
         handleMultiply,
         handleReset,
         totalWordScoreMultiplier,
-        wordToCheckArray }
+        wordToCheckArray,
+        setWordToCheckArray }
         : ResponseInterface) {
 
 
@@ -37,30 +40,16 @@ export default function ResponseInterfaces(
         <div className="flex-centre">
             <Word
                 wordToCheckArray={wordToCheckArray}
-                handleMultiply={handleMultiply}
-                handleReset={handleReset}
+                setWordToCheckArray={setWordToCheckArray}
             />
+
             <h3 id="score"> Total : {totalWordScore}</h3>
 
-            <div id="multiplier__buttons" className="flex-centre">
-                {totalWordScoreMultiplier === 1 &&
-                    <button className="multiplier__button"
-                        onClick={() => handleMultiply(2)}>
-                        Double total score
-                    </button>}
-
-                {totalWordScoreMultiplier === 1 &&
-                    <button className="multiplier__button"
-                        onClick={() => handleMultiply(3)}>
-                        Triple total score
-                    </button>}
-
-                {totalWordScoreMultiplier !== 1 &&
-                    <button className="multiplier__button"
-                        onClick={handleReset}>
-                        Reset score multiplier
-                    </button>}
-            </div>
+            <ScoreModifier
+                handleMultiply={handleMultiply}
+                handleReset={handleReset}
+                totalWordScoreMultiplier={totalWordScoreMultiplier}
+            />
         </div>
     )
 }
