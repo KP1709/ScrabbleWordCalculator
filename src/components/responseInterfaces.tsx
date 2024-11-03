@@ -3,7 +3,7 @@ import IsAnalysing from "./responseInterfaces/isAnalysing"
 import InvalidEntry from "./responseInterfaces/invalidEntry"
 import UnknownWord from "./responseInterfaces/unknownWord"
 import StartScreen from "./responseInterfaces/startScreen"
-import Word from "./word"
+import ValidWord from "./responseInterfaces/validWord"
 
 type ResponseInterface = {
     isValidString: string,
@@ -53,33 +53,13 @@ export default function ResponseInterfaces(
     else if (isValidString === "true" && isValidWord === false) return (<UnknownWord />)
 
     return (
-        <div className="flex-centre">
-            <Word
-                wordToCheckArray={wordToCheckArray}
-                handleTileClick={handleTileClick}
-            />
-
-            <h3 id="score"> Total : {totalWordScore}</h3>
-
-            <div id="multiplier__buttons" className="flex-centre">
-                {totalWordScoreMultiplier === 1 &&
-                    <button className="multiplier__button"
-                        onClick={() => handleMultiply(2)}>
-                        Double total score
-                    </button>}
-
-                {totalWordScoreMultiplier === 1 &&
-                    <button className="multiplier__button"
-                        onClick={() => handleMultiply(3)}>
-                        Triple total score
-                    </button>}
-
-                {totalWordScoreMultiplier !== 1 &&
-                    <button className="multiplier__button"
-                        onClick={handleReset}>
-                        Reset score multiplier
-                    </button>}
-            </div>
-        </div>
+        <ValidWord 
+        totalWordScore={totalWordScore}
+        handleMultiply={handleMultiply}
+        handleReset={handleReset}
+        totalWordScoreMultiplier={totalWordScoreMultiplier}
+        wordToCheckArray={wordToCheckArray}
+        handleTileClick={handleTileClick}
+        />
     )
 }
