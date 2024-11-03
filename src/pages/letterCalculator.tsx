@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { v4 as uuid } from "uuid"
 import { getLetterScore } from "../reusableFunctions/letterScore"
 import "../styles/letterCalculator.css"
-import ResponseInterfaces from "./responseInterfaces"
+import ResponseInterfaces from "../components/responseInterfaces"
 import { LetterProperties } from "../reusableTypes/LetterProperties"
 
 type ValidString = "true" | "false" | "start"
