@@ -5,49 +5,32 @@ import { useState } from "react";
 
 type Word = {
     wordToCheckArray: LetterProperties[]
-    setWordToCheckArray: React.Dispatch<React.SetStateAction<LetterProperties[]>>
+    handleTileClick: (id: string) => void
 }
 
-export default function Word({wordToCheckArray, setWordToCheckArray}: Word){
+export default function Word({ wordToCheckArray, handleTileClick }: Word) {
     const [wordArray, setWordArray] = useState(wordToCheckArray)
 
     const sendUpdatedWordArray = () => {
-        setWordToCheckArray(wordArray)
+        setWordArray(wordArray)
     }
 
-    // Code produced by V0 but has been modified to work with original code written
-    /** Handles multiplying letter score on tile */
-    const handleTileClick = (id: string) => {
-        setWordArray(prevValues => prevValues.map((tile) => {
-            if (tile.id === id) {
-                switch (tile.action) {
-                    case 'double':
-                        return { ...tile, score: tile.originalScore * 2, action: 'triple', colour: '#90e0ef' };
-                    case 'triple':
-                        return { ...tile, score: tile.originalScore * 3, action: 'restore', colour: '#0077b6' };
-                    case 'restore':
-                        return { ...tile, score: tile.originalScore, action: 'double', colour: '#ffffff' };
-                }
-            }
-            sendUpdatedWordArray()
-            return tile
-        }))
-    }
-    
     return (
         <ul className="flex-centre">
-                {wordToCheckArray.map(char =>
-                    <li key={uuid()} className="flex-centre" >
-                        <Tile
-                            id={char.id}
-                            letter={char.letter}
-                            score={char.score}
-                            onClick={() => {handleTileClick(char.id)}}
-                            action={char.action}
-                            colour={char.colour}
-                        />
-                    </li>
-                )}
-            </ul>
+            {wordToCheckArray.map(char =>
+                <li key={uuid()} className="flex-centre" >
+                    <Tile
+                        id={char.id}
+                        letter={char.letter}
+                        score={char.score}
+                        onClick={() => {
+                            handleTileClick(char.id), sendUpdatedWordArray()
+                        }}
+                        action={char.action}
+                        colour={char.colour}
+                    />
+                </li>
+            )}
+        </ul>
     )
 }
