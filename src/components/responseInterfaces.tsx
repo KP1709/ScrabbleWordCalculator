@@ -29,24 +29,6 @@ export default function ResponseInterfaces(
         setWordToCheckArray }
         : ResponseInterface) {
 
-    // Code produced by V0 but has been modified to work with original code written
-    /** Handles multiplying letter score on tile */
-    const handleTileClick = (id: string) => {
-        setWordToCheckArray(prevValues => prevValues.map((tile) => {
-            if (tile.id === id) {
-                switch (tile.action) {
-                    case 'double':
-                        return { ...tile, score: tile.originalScore * 2, action: 'triple', colour: '#90e0ef' };
-                    case 'triple':
-                        return { ...tile, score: tile.originalScore * 3, action: 'restore', colour: '#0077b6' };
-                    case 'restore':
-                        return { ...tile, score: tile.originalScore, action: 'double', colour: '#ffffff' };
-                }
-            }
-            return tile
-        }))
-    }
-
     if (isValidString === "start") return (<StartScreen />)
     else if (isAnalysing) return (<IsAnalysing />)
     else if (isValidString === "false") return (<InvalidEntry />)
@@ -59,7 +41,7 @@ export default function ResponseInterfaces(
         handleReset={handleReset}
         totalWordScoreMultiplier={totalWordScoreMultiplier}
         wordToCheckArray={wordToCheckArray}
-        handleTileClick={handleTileClick}
+        setWordToCheckArray={setWordToCheckArray}
         />
     )
 }

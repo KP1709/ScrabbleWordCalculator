@@ -7,11 +7,31 @@ type ValidWordType = {
     handleReset: () => void
     totalWordScoreMultiplier: number
     wordToCheckArray: LetterProperties[]
-    handleTileClick: (id: string) => void
+    setWordToCheckArray: React.Dispatch<React.SetStateAction<LetterProperties[]>>
+
 }
 
 export default function ValidWord({ ...props }: ValidWordType) {
-    const { wordToCheckArray, handleTileClick, handleMultiply, totalWordScoreMultiplier, totalWordScore, handleReset } = { ...props }
+    const { wordToCheckArray, setWordToCheckArray, handleMultiply, totalWordScoreMultiplier, totalWordScore, handleReset } = { ...props }
+    
+    // Code produced by V0 but has been modified to work with original code written
+    /** Handles multiplying letter score on tile */
+    const handleTileClick = (id: string) => {
+        setWordToCheckArray(prevValues => prevValues.map((tile) => {
+            if (tile.id === id) {
+                switch (tile.action) {
+                    case 'double':
+                        return { ...tile, score: tile.originalScore * 2, action: 'triple', colour: '#90e0ef' };
+                    case 'triple':
+                        return { ...tile, score: tile.originalScore * 3, action: 'restore', colour: '#0077b6' };
+                    case 'restore':
+                        return { ...tile, score: tile.originalScore, action: 'double', colour: '#ffffff' };
+                }
+            }
+            return tile
+        }))
+    }
+
     return (
         <div className="flex-centre">
             <Word
