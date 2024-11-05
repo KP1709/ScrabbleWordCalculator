@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, createContext, SetStateAction } from "react"
 import { v4 as uuid } from "uuid"
 import { getLetterScore } from "../reusableFunctions/letterScore"
 import "../styles/letterCalculator.css"
@@ -6,6 +6,17 @@ import ResponseInterfaces from "../components/responseInterfaces"
 import { LetterProperties } from "../reusableTypes/LetterProperties"
 
 type ValidString = "true" | "false" | "start"
+
+export type ContextType = {
+    handleMultiply: (factor: number) => void
+    handleReset: () => void
+    totalWordScoreMultiplier: number
+    wordToCheckArray: LetterProperties[]
+    setWordToCheckArray: React.Dispatch<SetStateAction<LetterProperties[]>>
+    totalWordScore: number;
+}
+
+export const Context = createContext<ContextType | null>(null)
 
 export default function LetterCalculator() {
     const [wordToCheck, setWordToCheck] = useState("")
@@ -101,17 +112,21 @@ export default function LetterCalculator() {
                 <input type="submit" value="Check" className="form__input-button" />
             </form>
 
+            <Context.Provider value={{
+                handleMultiply,
+                handleReset,
+                totalWordScoreMultiplier,
+                setWordToCheckArray,
+                wordToCheckArray,
+                totalWordScore
+            }}>
                 <ResponseInterfaces
-                isValidString={isValidString}
-                isValidWord={isValidWord}
-                handleMultiply={handleMultiply}
-                handleReset={handleReset}
-                totalWordScore={totalWordScore}
-                isAnalysing={isAnalysing}
-                totalWordScoreMultiplier={totalWordScoreMultiplier}
-                wordToCheckArray={wordToCheckArray} 
-                setWordToCheckArray={setWordToCheckArray}
-                 />
+                    isValidString={isValidString}
+                    isValidWord={isValidWord}
+                    isAnalysing={isAnalysing}
+                />
+            </Context.Provider>
+
         </main>
     )
 }

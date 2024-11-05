@@ -1,19 +1,13 @@
-import { LetterProperties } from "../../reusableTypes/LetterProperties"
+import { useContext } from "react"
 import Word from "../word"
+import { Context, ContextType } from "../../pages/letterCalculator"
+import { LetterProperties } from "../../reusableTypes/LetterProperties"
 
-type ValidWordType = {
-    totalWordScore: number,
-    handleMultiply: (factor: number) => void,
-    handleReset: () => void
-    totalWordScoreMultiplier: number
-    wordToCheckArray: LetterProperties[]
-    setWordToCheckArray: React.Dispatch<React.SetStateAction<LetterProperties[]>>
+type ValidWordType = {wordToCheckArray: LetterProperties[]}
 
-}
+export default function ValidWord({wordToCheckArray}: ValidWordType) {
+    const { handleMultiply, handleReset, totalWordScoreMultiplier, setWordToCheckArray, totalWordScore } = useContext(Context) as ContextType
 
-export default function ValidWord({ ...props }: ValidWordType) {
-    const { wordToCheckArray, setWordToCheckArray, handleMultiply, totalWordScoreMultiplier, totalWordScore, handleReset } = { ...props }
-    
     // Code produced by V0 but has been modified to work with original code written
     /** Handles multiplying letter score on tile */
     const handleTileClick = (id: string) => {
