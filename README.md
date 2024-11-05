@@ -2,7 +2,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/88b1162f-6ee5-437e-a3bc-a3ba498c33ae/deploy-status)](https://app.netlify.com/sites/kareenapatel-scrabblewordcalculator/deploys)
 
 ## ⌨️ Tech stack
-React / Typescript / CSS / npm / Nodejs / HTML / APIs / Cypress (Testing)
+React / Typescript / CSS / npm / Nodejs / HTML / APIs / Cypress (Testing - Removed for now)
 
 ## 🍼 Introduction
 Owning and playing the original version of Scrabble, I know it would sometimes be difficult to calculate a word's score. Therefore, I created my own version of a Scrabble calculator. The user enters a word and is able to see the word's score. Additionally the tool checks to see if the word is in the dictionary using a free dictionary API. Therefore enabling the user to test to see if a particular word exists.
