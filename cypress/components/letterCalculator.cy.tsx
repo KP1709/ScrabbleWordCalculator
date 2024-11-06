@@ -52,5 +52,18 @@ describe('<LetterCalculator />', () => {
     cy.getDataTest('word-tile').click({multiple: true})
     cy.getDataTest('word-tile').click({multiple: true})
     cy.getDataTest('word-tile').click({multiple: true}) 
+
+    cy.getDataTest('list-tile-E').click()
+    cy.getDataTest('list-tile-E').within(() => {
+      cy.get('h3').should('contain', 2)
+    })
+
+    cy.getDataTest('list-tile-C').click()
+    cy.getDataTest('list-tile-C').click()
+    cy.getDataTest('list-tile-C').within(() => {
+      cy.get('h3').should('contain', 9) 
+    })
+    cy.getDataTest('total-word-score').should('contain', 14)
+
   })
 })
