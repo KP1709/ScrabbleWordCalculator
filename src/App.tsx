@@ -1,5 +1,5 @@
 import Header from "./components/header"
-import LetterCalculator from "./components/letterCalculator"
+import LetterCalculator from "./pages/letterCalculator"
 import ErrorBoundary from "./components/errorBoundary"
 import "./styles/app.css"
 

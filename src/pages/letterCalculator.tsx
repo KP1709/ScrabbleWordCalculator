@@ -1,17 +1,22 @@
-import { useState, useEffect, createContext } from "react"
+import { useState, useEffect, createContext, SetStateAction } from "react"
 import { v4 as uuid } from "uuid"
 import { getLetterScore } from "../reusableFunctions/letterScore"
 import "../styles/letterCalculator.css"
-import ResponseInterfaces from "./responseInterfaces"
+import ResponseInterfaces from "../components/responseInterfaces"
 import { LetterProperties } from "../reusableTypes/LetterProperties"
 
 type ValidString = "true" | "false" | "start"
 
-export type HandleTileClickContextType = {
-    handleTileClick: (value: string) => void
+export type ContextType = {
+    handleMultiply: (factor: number) => void
+    handleReset: () => void
+    totalWordScoreMultiplier: number
+    wordToCheckArray: LetterProperties[]
+    setWordToCheckArray: React.Dispatch<SetStateAction<LetterProperties[]>>
+    totalWordScore: number;
 }
 
-export const HandleTileClickContext = createContext<HandleTileClickContextType | null>(null)
+export const Context = createContext<ContextType | null>(null)
 
 export default function LetterCalculator() {
     const [wordToCheck, setWordToCheck] = useState("")
@@ -53,24 +58,6 @@ export default function LetterCalculator() {
         { validation(wordToCheck) ? lookupLettersFromWord(wordToCheck) : setIsValidString("false") }
         setWordToCheck("")
         handleReset()
-    }
-
-    // Code produced by V0 but has been modified to work with original code written
-    /** Handles multiplying letter score on tile */
-    const handleTileClick = (id: string) => {
-        setWordToCheckArray(prevValues => prevValues.map((tile) => {
-            if (tile.id === id) {
-                switch (tile.action) {
-                    case 'double':
-                        return { ...tile, score: tile.originalScore * 2, action: 'triple', colour: '#90e0ef' };
-                    case 'triple':
-                        return { ...tile, score: tile.originalScore * 3, action: 'restore', colour: '#0077b6' };
-                    case 'restore':
-                        return { ...tile, score: tile.originalScore, action: 'double', colour: '#ffffff' };
-                }
-            }
-            return tile
-        }))
     }
 
     /** Divides word into letters and looks up letter to get and store required information */
@@ -125,17 +112,21 @@ export default function LetterCalculator() {
                 <input type="submit" value="Check" className="form__input-button" />
             </form>
 
-            <HandleTileClickContext.Provider value={{ handleTileClick }}>
+            <Context.Provider value={{
+                handleMultiply,
+                handleReset,
+                totalWordScoreMultiplier,
+                setWordToCheckArray,
+                wordToCheckArray,
+                totalWordScore
+            }}>
                 <ResponseInterfaces
                     isValidString={isValidString}
                     isValidWord={isValidWord}
-                    handleMultiply={handleMultiply}
-                    handleReset={handleReset}
-                    totalWordScore={totalWordScore}
                     isAnalysing={isAnalysing}
-                    totalWordScoreMultiplier={totalWordScoreMultiplier}
-                    wordToCheckArray={wordToCheckArray} />
-            </HandleTileClickContext.Provider>
+                />
+            </Context.Provider>
+
         </main>
     )
 }
