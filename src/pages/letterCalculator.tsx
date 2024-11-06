@@ -113,11 +113,12 @@ export default function LetterCalculator() {
                     className="form__input-text"
                     name="word"
                     id="word"
+                    data-test='word-form'
                     value={wordToCheck}
                     onChange={(e) => setWordToCheck(e.target.value)}
                     placeholder="scrabble"
                 />
-                <input type="submit" value="Check" className="form__input-button" />
+                <input type="submit" value="Check" data-test='submit-word-form-btn' className="form__input-button" />
             </form>
 
             <Context.Provider value={{

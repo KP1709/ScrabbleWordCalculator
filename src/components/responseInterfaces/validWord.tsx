@@ -26,29 +26,29 @@ export default function ValidWord({wordToCheckArray}: ValidWordType) {
     }
 
     return (
-        <div className="flex-centre">
+        <div className="flex-centre" data-test="valid-word-screen">
             <Word
                 wordToCheckArray={wordToCheckArray}
                 handleTileClick={handleTileClick}
             />
 
-            <h3 id="score"> Total : {totalWordScore}</h3>
+            <h3 id="score" data-test="total-word-score"> Total : {totalWordScore}</h3>
 
             <div id="multiplier__buttons" className="flex-centre">
                 {totalWordScoreMultiplier === 1 &&
-                    <button className="multiplier__button"
+                    <button className="multiplier__button" data-test='double-total-score-btn'
                         onClick={() => handleMultiply(2)}>
                         Double total score
                     </button>}
 
                 {totalWordScoreMultiplier === 1 &&
-                    <button className="multiplier__button"
+                    <button className="multiplier__button" data-test='triple-total-score-btn'
                         onClick={() => handleMultiply(3)}>
                         Triple total score
                     </button>}
 
                 {totalWordScoreMultiplier !== 1 &&
-                    <button className="multiplier__button"
+                    <button className="multiplier__button" data-test='reset-total-score-btn'
                         onClick={handleReset}>
                         Reset score multiplier
                     </button>}
