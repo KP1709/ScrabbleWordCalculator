@@ -85,15 +85,20 @@ describe('<LetterCalculator />', () => {
     cy.getDataTest('word-tile').click({ multiple: true })
     cy.getDataTest('word-tile').click({ multiple: true })
     cy.getDataTest('word-tile').click({ multiple: true })
+    cy.getDataTest('word-tile').each((tile: any) => {
+      cy.get(tile).get('div h2').should('have.css', 'background-color', 'rgb(255, 255, 255)') // #ffffff
+    })
 
     cy.getDataTest('list-tile-E').click()
     cy.getDataTest('list-tile-E').within(() => {
+      cy.get('h2').should('have.css', 'background-color', 'rgb(144, 224, 239)') // #90e0ef
       cy.get('h3').should('contain', 2)
     })
-
+  
     cy.getDataTest('list-tile-C').click()
     cy.getDataTest('list-tile-C').click()
     cy.getDataTest('list-tile-C').within(() => {
+      cy.get('h2').should('have.css', 'background-color', 'rgb(0, 119, 182)') // #0077b6
       cy.get('h3').should('contain', 9)
     })
     cy.getDataTest('total-word-score').should('contain', 14)
