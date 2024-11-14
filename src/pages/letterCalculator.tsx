@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext, SetStateAction } from "react"
+import { useState, useEffect, createContext, SetStateAction, useContext } from "react"
 import { v4 as uuid } from "uuid"
 import { getLetterScore } from "../reusableFunctions/letterScore"
 import "../styles/letterCalculator.css"
@@ -17,6 +17,14 @@ export type ContextType = {
 }
 
 export const Context = createContext<ContextType | null>(null)
+
+export const useScrabbleContext = () : ContextType => {
+    const context = useContext(Context);
+    if (!context) {
+        throw new Error ('useScrabbleContext must be available in Context')
+    }
+    return context
+}
 
 export default function LetterCalculator() {
     const [wordToCheck, setWordToCheck] = useState("")
