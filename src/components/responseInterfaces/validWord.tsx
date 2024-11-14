@@ -1,12 +1,11 @@
-import { useContext } from "react"
 import Word from "../word"
-import { Context, ContextType } from "../../pages/letterCalculator"
+import { useScrabbleContext } from "../../pages/letterCalculator"
 import { LetterProperties } from "../../reusableTypes/LetterProperties"
 
 type ValidWordType = {wordToCheckArray: LetterProperties[]}
 
 export default function ValidWord({wordToCheckArray}: ValidWordType) {
-    const { handleMultiply, handleReset, totalWordScoreMultiplier, setWordToCheckArray, totalWordScore } = useContext(Context) as ContextType
+    const { handleMultiply, handleReset, totalWordScoreMultiplier, setWordToCheckArray, totalWordScore } = useScrabbleContext()
 
     // Code produced by V0 but has been modified to work with original code written
     /** Handles multiplying letter score on tile */

@@ -3,8 +3,7 @@ import InvalidEntry from "./responseInterfaces/invalidEntry"
 import UnknownWord from "./responseInterfaces/unknownWord"
 import StartScreen from "./responseInterfaces/startScreen"
 import ValidWord from "./responseInterfaces/validWord"
-import { useContext } from "react"
-import { Context, ContextType } from "../pages/letterCalculator"
+import { useScrabbleContext } from "../pages/letterCalculator"
 
 type ResponseInterface = {
     isValidString: string,
@@ -18,7 +17,7 @@ export default function ResponseInterfaces(
         isValidWord}
         : ResponseInterface) {
 
-        const {wordToCheckArray} = useContext(Context) as ContextType
+        const {wordToCheckArray} = useScrabbleContext()
 
 
     if (isValidString === "start") return (<StartScreen />)
