@@ -23,5 +23,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "cypress/components/letterCalculator.cy.tsx"]
+  "include": ["src", "cypress/components/letterCalculator.cy.tsx", "cypress/components/validWordValidWord.cy.tsx"]
 }
