@@ -1,3 +1,4 @@
+import { mount } from 'cypress/react18'
 import LetterCalculator from '../../src/pages/letterCalculator'
 
 describe('<LetterCalculator />', () => {
@@ -15,7 +16,7 @@ describe('<LetterCalculator />', () => {
       })
     }).as('ValidWord')
 
-    cy.mount(<LetterCalculator />)
+    mount(<LetterCalculator />)
 
     cy.getDataTest('word-form').as('word-input')
     cy.getDataTest('submit-word-form-btn').should('exist')
@@ -47,7 +48,8 @@ describe('<LetterCalculator />', () => {
         body: { message: 'Valid word' }
       })
     }).as('ValidWord')
-    cy.mount(<LetterCalculator />)
+    
+    mount(<LetterCalculator />)
 
     cy.getDataTest('word-form').as('word-input')
     cy.get('@word-input').type('react')
@@ -73,7 +75,7 @@ describe('<LetterCalculator />', () => {
       })
     }).as('ValidWord')
 
-    cy.mount(<LetterCalculator />)
+    mount(<LetterCalculator />)
 
     cy.getDataTest('word-form').as('word-input')
     cy.get('@word-input').type('react')
