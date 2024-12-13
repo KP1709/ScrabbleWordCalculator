@@ -2,7 +2,6 @@
   "name": "scrabblewordcalculator",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -10,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "cypress": "^13.15.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "uuidv4": "^6.2.13"

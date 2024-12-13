@@ -18,7 +18,7 @@ export default function Word({ wordToCheckArray, handleTileClick }: Word) {
     return (
         <ul className="flex-centre">
             {wordToCheckArray.map(char =>
-                <li key={uuid()} className="flex-centre" >
+                <li key={uuid()} className="flex-centre" data-test='word-tile'>
                     <Tile
                         id={char.id}
                         letter={char.letter}
