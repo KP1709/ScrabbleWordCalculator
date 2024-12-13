@@ -16,6 +16,11 @@ ul {
             width: 2em;
             height: 2em;
             cursor: pointer;
+
+            /* Prevent highlighting when tapping on tile */
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* IE 10 and IE 11 */
+            user-select: none; /* Standard syntax */
         }
     }
 }
