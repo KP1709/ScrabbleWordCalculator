@@ -18,26 +18,26 @@ describe('<LetterCalculator />', () => {
 
     mount(<LetterCalculator />)
 
-    cy.getDataTest('word-form').as('word-input')
-    cy.getDataTest('submit-word-form-btn').should('exist')
+    cy.get("[data-test='word-form']").as('word-input')
+    cy.get("[data-test='submit-word-form-btn']").should('exist')
 
     cy.get('@word-input').type('gr8t')
     cy.intercept('GET', 'https://api.dictionaryapi.dev/api/v2/entries/en/gr8t', {
       statusCode: 404,
       body: { message: 'Not a valid word' }
     })
-    cy.getDataTest('submit-word-form-btn').click()
-    cy.getDataTest('invalid-entry-screen').should('be.visible')
+    cy.get("[data-test='submit-word-form-btn']").click()
+    cy.get("[data-test='invalid-entry-screen']").should('be.visible')
 
     cy.get('@word-input').type('abcdef')
-    cy.getDataTest('submit-word-form-btn').click()
+    cy.get("[data-test='submit-word-form-btn']").click()
     cy.wait('@UnknownWord')
-    cy.getDataTest('unknown-word-screen').should('be.visible')
+    cy.get("[data-test='unknown-word-screen']").should('be.visible')
 
     cy.get('@word-input').type('type')
-    cy.getDataTest('submit-word-form-btn').click()
+    cy.get("[data-test='submit-word-form-btn']").click()
     cy.wait('@ValidWord')
-    cy.getDataTest('valid-word-screen').should('be.visible')
+    cy.get("[data-test='valid-word-screen']").should('be.visible')
   })
 
   it('Testing valid word functionality', () => {
@@ -51,19 +51,19 @@ describe('<LetterCalculator />', () => {
     
     mount(<LetterCalculator />)
 
-    cy.getDataTest('word-form').as('word-input')
+    cy.get("[data-test='word-form']").as('word-input')
     cy.get('@word-input').type('react')
-    cy.getDataTest('submit-word-form-btn').click()
+    cy.get("[data-test='submit-word-form-btn']").click()
     cy.wait('@ValidWord')
-    cy.getDataTest('valid-word-screen').should('be.visible')
+    cy.get("[data-test='valid-word-screen']").should('be.visible')
 
-    cy.getDataTest('double-total-score-btn').click()
-    cy.getDataTest('double-total-score-btn').should('not.exist')
-    cy.getDataTest('total-word-score').should('contain', 14)
-    cy.getDataTest('reset-total-score-btn').click()
-    cy.getDataTest('triple-total-score-btn').click()
-    cy.getDataTest('total-word-score').should('contain', 21)
-    cy.getDataTest('reset-total-score-btn').click()
+    cy.get("[data-test='double-total-score-btn']").click()
+    cy.get("[data-test='double-total-score-btn']").should('not.exist')
+    cy.get("[data-test='total-word-score']").should('contain', 14)
+    cy.get("[data-test='reset-total-score-btn'").click()
+    cy.get("[data-test='triple-total-score-btn']").click()
+    cy.get("[data-test='total-word-score']").should('contain', 21)
+    cy.get("[data-test='reset-total-score-btn']").click()
   })
 
   it('Testing tile functionality', () => {
@@ -77,33 +77,33 @@ describe('<LetterCalculator />', () => {
 
     mount(<LetterCalculator />)
 
-    cy.getDataTest('word-form').as('word-input')
+    cy.get("[data-test='word-form']").as('word-input')
     cy.get('@word-input').type('react')
-    cy.getDataTest('submit-word-form-btn').click()
+    cy.get("[data-test='submit-word-form-btn']").click()
     cy.wait('@ValidWord')
-    cy.getDataTest('valid-word-screen').should('be.visible')
+    cy.get("[data-test='valid-word-screen']").should('be.visible')
 
-    cy.getDataTest('word-tile').click({ multiple: true })
-    cy.getDataTest('word-tile').click({ multiple: true })
-    cy.getDataTest('word-tile').click({ multiple: true })
-    cy.getDataTest('word-tile').click({ multiple: true })
-    cy.getDataTest('word-tile').each((tile: any) => {
+    cy.get("[data-test='word-tile']").click({ multiple: true })
+    cy.get("[data-test='word-tile']").click({ multiple: true })
+    cy.get("[data-test='word-tile']").click({ multiple: true })
+    cy.get("[data-test='word-tile']").click({ multiple: true })
+    cy.get("[data-test='word-tile']").each((tile: any) => {
       cy.get(tile).get('div h2').should('have.css', 'background-color', 'rgb(255, 255, 255)') // #ffffff
     })
 
-    cy.getDataTest('list-tile-E').click()
-    cy.getDataTest('list-tile-E').within(() => {
+    cy.get("[data-test='list-tile-E']").click()
+    cy.get("[data-test='list-tile-E']").within(() => {
       cy.get('h2').should('have.css', 'background-color', 'rgb(144, 224, 239)') // #90e0ef
       cy.get('h3').should('contain', 2)
     })
   
-    cy.getDataTest('list-tile-C').click()
-    cy.getDataTest('list-tile-C').click()
-    cy.getDataTest('list-tile-C').within(() => {
+    cy.get("[data-test='list-tile-C']").click()
+    cy.get("[data-test='list-tile-C']").click()
+    cy.get("[data-test='list-tile-C']").within(() => {
       cy.get('h2').should('have.css', 'background-color', 'rgb(0, 119, 182)') // #0077b6
       cy.get('h3').should('contain', 9)
     })
-    cy.getDataTest('total-word-score').should('contain', 14)
+    cy.get("[data-test='total-word-score']").should('contain', 14)
 
   })
 })
