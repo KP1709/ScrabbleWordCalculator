@@ -1,4 +1,4 @@
-import { mount } from 'cypress/react18'
+import { mount } from 'cypress/react'
 import LetterCalculator from '../../src/pages/letterCalculator'
 
 describe('<LetterCalculator />', () => {
