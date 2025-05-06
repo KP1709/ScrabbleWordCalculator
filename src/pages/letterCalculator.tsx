@@ -18,10 +18,10 @@ export type ContextType = {
 
 export const Context = createContext<ContextType | null>(null)
 
-export const useScrabbleContext = () : ContextType => {
+export const useScrabbleContext = (): ContextType => {
     const context = useContext(Context);
     if (!context) {
-        throw new Error ('useScrabbleContext must be available in Context')
+        throw new Error('useScrabbleContext must be available in Context')
     }
     return context
 }
@@ -37,15 +37,25 @@ export default function LetterCalculator() {
     const [isValidWord, setIsValidWord] = useState<boolean>(false) // Word lookup check
 
     useEffect(() => {
-        /** Check to see if word is in dictionary */
+        /** Check to see if word is in dictionary else will look into database */
         async function checkWord() {
             if (wordUsed === "") return null
             setIsAnalysing(true)
             try {
                 const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${wordUsed}`)
                 const data = await res.json()
-                if (Array.isArray(data)) setIsValidWord(true)
-                else setIsValidWord(false)
+                if (Array.isArray(data)) {
+                    setIsValidWord(true)
+                }
+                else if (!Array.isArray(data)) {
+                    const res = await fetch(`/.netlify/functions/supabase?word=${wordUsed}`, {
+                        method: "POST",
+                        body: JSON.stringify({ word: wordUsed }),
+                    })
+                    const data = await res.json()
+                    data.data[0] ? setIsValidWord(true) : setIsValidWord(false)
+                }
+                else { setIsValidWord(false) }
             }
             catch (err) { setIsValidWord(false) }
             setIsAnalysing(false)
