@@ -5,13 +5,13 @@
 React / Typescript / CSS / npm / Nodejs / HTML / APIs + Supabase / Netlify CLI + Serverless functions / Cypress (Testing)
 
 ## 🍼 Introduction
-Owning and playing the original version of Scrabble, I know it would sometimes be difficult to calculate a word's score. Therefore, I created my own version of a Scrabble calculator. The user enters a word and is able to see the word's score. Additionally the tool checks to see if the word is in the dictionary using a free dictionary API. Therefore enabling the user to test to see if a particular word exists.
+Owning and playing the original version of Scrabble, I know it would sometimes be difficult to calculate a word's score. Therefore, I created my own version of a Scrabble calculator. The user enters a word and is able to see the word's score. Additionally the tool checks to see if the word is in the dictionary using a free dictionary API. Therefore enabling the user to test to see if a particular word exists. The app is also connected to a database to search for words which are valid in Scrabble but are not in the dictionary API.
 
 ## 🛠️ Features
 - Check to see if user input is valid
   - Checks to see if word contains alphabetic characters only
   - Checks to see if word is in the dictionary (using free API)
-    - Database integrated to provide valid words missing from API
+  - Checks to see if word is in the Supabase database (if not in the API) 
 - Score for whole word is calculated
 - Tried to maintain accessibility throughout application
 - Unit tests for application in 'testing' branch
