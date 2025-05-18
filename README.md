@@ -35,6 +35,10 @@ Search for the word 'zarf' or 'bezique' - the first API will return a 404 but th
 - Dictionary API used - https://dictionaryapi.dev/
 - Learn React Portal in 12 minutes by building a modal - https://www.youtube.com/watch?v=LyLa7dU5tp8
 - Intro into Netlify Serverless functions - https://www.netlify.com/blog/intro-to-serverless-functions/
+ - Serverless function integration in React - https://www.freecodecamp.org/news/how-to-access-secret-api-keys-using-netlify-functions-in-a-react-app/
+ - Netlify and Supabase integration - https://www.netlify.com/integrations/supabase/
+ - Hiding API keys using Netlify - https://www.youtube.com/watch?v=m2Dr4L_Ab14
+ - Hiding API keys in Vite - https://devzibah.hashnode.dev/using-a-dotenv-file-to-store-and-use-api-keys-in-a-vite-built-react-app
 
 ## 🤖 AI Assistance
 To implement the double/triple tile score and the double/triple total word score feature, I asked V0 by Vercel to create code which implemented the logic I was after. The code was specified to be written in React but the AI chose to use Typescript. I integrated the code into the original code I wrote. 
