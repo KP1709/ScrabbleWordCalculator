@@ -51,6 +51,3 @@ To implement the double/triple tile score and the double/triple total word score
 - "Do this but includes buttons which can multiply the total by 2 and by 3"
 
 (Outcome and results will vary)
-
-## ➕ Features to add 
-- Check to see if the word has the correct number of letters (e.g. Can't allow words with two K's (e.g 'kick') )
