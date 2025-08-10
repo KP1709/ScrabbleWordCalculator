@@ -14,7 +14,6 @@ Owning and playing the original version of Scrabble, I know it would sometimes b
   - Checks to see if word is in the Supabase database (if not in the API) 
 - Score for whole word is calculated
 - Tried to maintain accessibility throughout application
-- Unit tests for application in 'testing' branch
 - Instructions available on the start screen as an open and closable modal
 - Can indicate which tiles have a double score or triple score and update the total word score 
 - Can indicate if the total word score doubles or triples
