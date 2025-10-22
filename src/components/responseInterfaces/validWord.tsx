@@ -1,11 +1,33 @@
 import Word from "../word"
-import { useScrabbleContext } from "../../pages/letterCalculator"
 import { LetterProperties } from "../../reusableTypes/LetterProperties"
+import { useEffect, useState } from "react"
 
-type ValidWordType = {wordToCheckArray: LetterProperties[]}
+type ValidWordType = {
+    wordToCheckArray: LetterProperties[],
+    setWordToCheckArray: React.Dispatch<React.SetStateAction<LetterProperties[]>>
+    submitWord: boolean
+}
 
-export default function ValidWord({wordToCheckArray}: ValidWordType) {
-    const { handleMultiply, handleReset, totalWordScoreMultiplier, setWordToCheckArray, totalWordScore } = useScrabbleContext()
+export default function ValidWord({ wordToCheckArray, setWordToCheckArray, submitWord }: ValidWordType) {
+    const [totalWordScore, setTotalWordScore] = useState(0)
+    const [totalWordScoreMultiplier, setTotalWordScoreMultiplier] = useState(1)
+    const [resetMultiplier, setResetMultiplier] = useState(false)
+
+    useEffect(() => {
+        const newTotal = wordToCheckArray.reduce((sum, tile) => sum + tile.score, 0)
+        setTotalWordScore(newTotal * totalWordScoreMultiplier)
+    }, [wordToCheckArray, totalWordScoreMultiplier])
+
+    useEffect(() => {
+        if (submitWord || resetMultiplier) {
+            setTotalWordScoreMultiplier(1)
+        }
+        setResetMultiplier(false)
+    }, [submitWord, resetMultiplier])
+
+    const handleMultiply = (factor: number) => {
+        setTotalWordScoreMultiplier(prevMultiplier => prevMultiplier * factor)
+    }
 
     // Code produced by V0 but has been modified to work with original code written
     /** Handles multiplying letter score on tile */
@@ -49,7 +71,7 @@ export default function ValidWord({wordToCheckArray}: ValidWordType) {
 
                 {totalWordScoreMultiplier !== 1 &&
                     <button className="multiplier__button" data-test='reset-total-score-btn'
-                        onClick={handleReset}>
+                        onClick={() => setResetMultiplier(true)}>
                         Reset score multiplier
                     </button>}
             </div>
