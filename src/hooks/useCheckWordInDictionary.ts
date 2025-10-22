@@ -32,8 +32,14 @@ export const useCheckWordInDictionary = ({ wordToCheck, setIsValidString, submit
                             method: "POST",
                             body: JSON.stringify({ word: wordToCheck }),
                         })
+
+                        if (res.status === 404) {
+                            setIsValidWord(false)
+                            return
+                        }
                         const data = await res.json()
                         data.data[0] ? setIsValidWord(true) : setIsValidWord(false)
+
                     } catch (err) {
                         setIsError(true); setIsSupabaseError(true); setIsApiError(true); setIsValidWord(false)
                     }
