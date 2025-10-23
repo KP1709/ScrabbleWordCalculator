@@ -7,6 +7,11 @@ React / Typescript / CSS / npm / Nodejs / HTML / APIs + Supabase / Netlify CLI +
 ## 🍼 Introduction
 Owning and playing the original version of Scrabble, I know it would sometimes be difficult to calculate a word's score. Therefore, I created my own version of a Scrabble calculator. The user enters a word and is able to see the word's score. Additionally the tool checks to see if the word is in the dictionary using a free dictionary API. Therefore enabling the user to test to see if a particular word exists. The app is also connected to a database to search for words which are valid in Scrabble but are not in the dictionary API.
 
+## ⚙️ Changes
+The commit 81ea887 was code clean-up for the entire project.  
+While the functionality is technically the same, the code now is more maintainable with improved readability.  
+The Cypress tests will need modifying.
+
 ## 🛠️ Features
 - Check to see if user input is valid
   - Checks to see if word contains alphabetic characters only
@@ -18,15 +23,16 @@ Owning and playing the original version of Scrabble, I know it would sometimes b
 - Can indicate which tiles have a double score or triple score and update the total word score 
 - Can indicate if the total word score doubles or triples
   -  Option to reset score without multiplier
+- Error handling if either the API or database is down 
 
 ## ⚡Supabase
 A Supabase database is connected by creating a Netlify serverless function. The word entered to search will pass by POST request to the Supabase client which will complete a GET request to check if the word exists in the database. The code has been set up so the database will only be searched if the word doesn't exist in the free dictionary API. The serverless function also contains error handling to provide a solid user experience. It's very unlikely for the database to be searched often.
 
-In the future I may create another web application (or in this app 🤔) which enables words to be added through a user interface + having users request for words which are missing in the tool but are valid to use.
-
 ### 🧪 Experiment
 The requests can be seen in action from the network response tab and developer console in the browser dev tools.  
 Search for the word 'zarf' or 'bezique' - the first API will return a 404 but the word exists in the Supabase database so it will return a 200.
+
+If database is paused or is throwing a non-404 error, then it will catch the error and suggest that the word should be search online instead.
 
 ## 📚 Resources
 - Understanding how to push and retain objects in an array - https://stackoverflow.com/questions/70941970/pushing-objects-in-an-array-only-returns-last-object-pushed-in-react
