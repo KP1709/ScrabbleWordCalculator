@@ -15,13 +15,14 @@ export default function LetterCalculator() {
     const [wordToCheck, setWordToCheck] = useState("")
     const [isValidString, setIsValidString] = useState<ValidString>("start")
     const [submitWord, setSubmitWord] = useState(false)
-    const { isError, isAnalysing, isApiError, isSupabaseError, isValidWord } = useCheckWordInDictionary({ wordToCheck, setIsValidString, submitWord, setSubmitWord })
+    const { isError, isAnalysing, isApiError, isSupabaseError, isValidWord } = useCheckWordInDictionary({ wordToCheck, submitWord, setSubmitWord })
     const { wordToCheckArray, setWordToCheckArray } = useLookupLettersFromWord(wordToCheck, submitWord)
 
     const handleSubmit = (e: { preventDefault: () => void }): void => {
         setWordToCheckArray([])
         e.preventDefault();
         if ((/^[A-Z]+$/i).test(wordToCheck)) {
+            setIsValidString("true")
             setSubmitWord(true)
         }
         else {

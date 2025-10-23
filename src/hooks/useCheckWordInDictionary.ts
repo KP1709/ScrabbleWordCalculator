@@ -2,12 +2,11 @@ import { useEffect, useState } from "react"
 
 type CheckInDictionaryType = {
     wordToCheck: string,
-    setIsValidString: (value: "true" | "false" | "start") => void
     submitWord: boolean,
     setSubmitWord: (value: boolean) => void,
 }
 
-export const useCheckWordInDictionary = ({ wordToCheck, setIsValidString, submitWord, setSubmitWord }: CheckInDictionaryType) => {
+export const useCheckWordInDictionary = ({ wordToCheck, submitWord, setSubmitWord }: CheckInDictionaryType) => {
     const [isSupabaseError, setIsSupabaseError] = useState<boolean>(false);
     const [isApiError, setIsApiError] = useState<boolean>(false);
     const [isAnalysing, setIsAnalysing] = useState(false)
@@ -18,7 +17,6 @@ export const useCheckWordInDictionary = ({ wordToCheck, setIsValidString, submit
         async function checkWord() {
             try {
                 setIsAnalysing(true)
-                setIsValidString('true')
                 setIsError(false)
 
                 const apiRes = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${wordToCheck}`)
