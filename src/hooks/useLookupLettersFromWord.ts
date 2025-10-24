@@ -9,6 +9,8 @@ export const useLookupLettersFromWord = (wordToCheck: string, submitWord: boolea
     useEffect(() => {
         const splitWordArray: string[] | void = wordToCheck.split("")
         if (submitWord) {
+            setWordToCheckArray([])
+
             splitWordArray.forEach(item => {
                 let newLetter: LetterProperties = {
                     id: uuid(),

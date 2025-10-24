@@ -19,7 +19,6 @@ export default function LetterCalculator() {
     const { wordToCheckArray, setWordToCheckArray } = useLookupLettersFromWord(wordToCheck, submitWord)
 
     const handleSubmit = (e: { preventDefault: () => void }): void => {
-        setWordToCheckArray([])
         e.preventDefault();
         if ((/^[A-Z]+$/i).test(wordToCheck)) {
             setIsValidString("true")
