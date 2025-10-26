@@ -1,7 +1,8 @@
-import Word from "../word"
 import { LetterProperties } from "../../reusableTypes/LetterProperties"
 import { useEffect, useState } from "react"
 import { useLookupLettersFromWord } from "../../hooks/useLookupLettersFromWord"
+import { v4 as uuid } from "uuid"
+import Tile from "../tile";
 
 type ValidWordType = {
     wordToCheck: string,
@@ -54,10 +55,20 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
 
     return (
         <div className="flex-centre" data-test="valid-word-screen">
-            <Word
-                wordToCheckArray={wordToCheckArray}
-                handleTileClick={handleTileClick}
-            />
+            <ul className="flex-centre">
+                {wordToCheckArray.map(char =>
+                    <li key={uuid()} className="flex-centre" data-test='word-tile'>
+                        <Tile
+                            id={char.id}
+                            letter={char.letter}
+                            score={char.score}
+                            onClick={() => { handleTileClick(char.id) }}
+                            action={char.action}
+                            colour={char.colour}
+                        />
+                    </li>
+                )}
+            </ul>
 
             <h3 id="score" data-test="total-word-score"> Total : {totalWordScore}</h3>
 
