@@ -1,29 +1,23 @@
-import { useEffect, useState } from "react"
 import { LetterProperties } from "../reusableTypes/LetterProperties"
 import { getLetterScore } from "../reusableFunctions/letterScore"
 import { v4 as uuid } from "uuid"
 
-export const useLookupLettersFromWord = (wordToCheck: string, submitWord: boolean) => {
-    const [wordToCheckArray, setWordToCheckArray] = useState<LetterProperties[]>([])
+export const useLookupLettersFromWord = (wordToCheck: string) => {
+    const wordLetterProperties = <LetterProperties[]>[]
+    const splitWordArray = wordToCheck.split("")
 
-    useEffect(() => {
-        const splitWordArray: string[] | void = wordToCheck.split("")
-        if (submitWord) {
-            setWordToCheckArray([])
-
-            splitWordArray.forEach(item => {
-                let newLetter: LetterProperties = {
-                    id: uuid(),
-                    letter: item.toUpperCase(),
-                    originalScore: getLetterScore(item), // Required to use for triple + doubling
-                    score: getLetterScore(item),
-                    action: 'restore',
-                    colour: '#ffffff'
-                }
-                setWordToCheckArray(prevLetters => [...prevLetters, newLetter])
-            })
+    splitWordArray.forEach(item => {
+        let newLetter: LetterProperties = {
+            id: uuid(),
+            letter: item.toUpperCase(),
+            originalScore: getLetterScore(item), // Required to use for triple + doubling
+            score: getLetterScore(item),
+            action: 'restore',
+            colour: '#ffffff'
         }
+        wordLetterProperties.push(...[newLetter])
+    })
 
-    }, [submitWord])
-    return { wordToCheckArray, setWordToCheckArray }
+    return wordLetterProperties
 }
+

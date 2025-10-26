@@ -6,7 +6,6 @@ import IsAnalysing from "../components/responseInterfaces/isAnalysing"
 import UnknownWord from "../components/responseInterfaces/unknownWord"
 import ValidWord from "../components/responseInterfaces/validWord"
 import Error from "../components/responseInterfaces/isError"
-import { useLookupLettersFromWord } from "../hooks/useLookupLettersFromWord"
 import InvalidEntry from "../components/responseInterfaces/invalidEntry"
 
 type ValidString = "true" | "false" | "start"
@@ -16,17 +15,15 @@ export default function LetterCalculator() {
     const [isValidString, setIsValidString] = useState<ValidString>("start")
     const [submitWord, setSubmitWord] = useState(false)
     const { isError, isAnalysing, isApiError, isSupabaseError, isValidWord } = useCheckWordInDictionary({ wordToCheck, submitWord, setSubmitWord })
-    const { wordToCheckArray, setWordToCheckArray } = useLookupLettersFromWord(wordToCheck, submitWord)
 
-    const handleSubmit = (e: { preventDefault: () => void }): void => {
+    const handleSubmit = (e: { preventDefault: () => void }) => {
         e.preventDefault();
         if ((/^[A-Z]+$/i).test(wordToCheck)) {
             setIsValidString("true")
             setSubmitWord(true)
+            return
         }
-        else {
-            setIsValidString("false")
-        }
+        setIsValidString("false")
     }
 
     return (
@@ -52,7 +49,7 @@ export default function LetterCalculator() {
             {isValidString === "true" && !isValidWord && isError && <Error isApiError={isApiError} isSupabaseError={isSupabaseError} />}
 
             {isValidString === "true" && isValidWord && !isError && !isAnalysing &&
-                <ValidWord wordToCheckArray={wordToCheckArray} setWordToCheckArray={setWordToCheckArray} submitWord={submitWord} />
+                <ValidWord wordToCheck={wordToCheck} submitWord={submitWord} />
             }
         </main>
     )

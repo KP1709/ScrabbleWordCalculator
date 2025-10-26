@@ -1,17 +1,22 @@
 import Word from "../word"
 import { LetterProperties } from "../../reusableTypes/LetterProperties"
 import { useEffect, useState } from "react"
+import { useLookupLettersFromWord } from "../../hooks/useLookupLettersFromWord"
 
 type ValidWordType = {
-    wordToCheckArray: LetterProperties[],
-    setWordToCheckArray: React.Dispatch<React.SetStateAction<LetterProperties[]>>
+    wordToCheck: string,
     submitWord: boolean
 }
 
-export default function ValidWord({ wordToCheckArray, setWordToCheckArray, submitWord }: ValidWordType) {
+export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
     const [totalWordScore, setTotalWordScore] = useState(0)
     const [totalWordScoreMultiplier, setTotalWordScoreMultiplier] = useState(1)
     const [resetMultiplier, setResetMultiplier] = useState(false)
+    const [wordToCheckArray, setWordToCheckArray] = useState<LetterProperties[]>([])
+
+    useEffect(() => {
+        setWordToCheckArray(useLookupLettersFromWord(wordToCheck))
+    }, [submitWord])
 
     useEffect(() => {
         const newTotal = wordToCheckArray.reduce((sum, tile) => sum + tile.score, 0)
