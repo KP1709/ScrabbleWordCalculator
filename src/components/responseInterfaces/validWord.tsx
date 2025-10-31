@@ -42,11 +42,11 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
             if (tile.id === id) {
                 switch (tile.action) {
                     case 'double':
-                        return { ...tile, score: tile.originalScore * 2, action: 'triple', colour: '#90e0ef' };
+                        return { ...tile, score: tile.originalScore * 3, action: 'triple', colour: '#0077b6' };
                     case 'triple':
-                        return { ...tile, score: tile.originalScore * 3, action: 'restore', colour: '#0077b6' };
+                        return { ...tile, score: tile.originalScore, action: 'restore', colour: '#ffffff' };
                     case 'restore':
-                        return { ...tile, score: tile.originalScore, action: 'double', colour: '#ffffff' };
+                        return { ...tile, score: tile.originalScore * 2, action: 'double', colour: '#90e0ef' };
                 }
             }
             return tile
