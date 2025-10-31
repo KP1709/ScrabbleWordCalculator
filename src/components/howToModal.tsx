@@ -19,7 +19,7 @@ export default function HowToModal({ open, onClose }: ModalProps) {
                 <p>If the word contains other characters than letters it will display 'Invalid entry'</p>
                 <p>If the word is not in the dictionary it will display 'Unknown Word'</p>
                 <p>If it contains letters and is definitely a word then the word, letter scores and total word score will be displayed</p>
-                <p>Tapping the tile will double the letter score, tapping again will triple the score, tapping once more will restore the letter's score</p>
+                <p>Tapping the tiles will cause letter scores to double, triple, set to 0 and reset back to its original value in this cycle</p>
                 <p>The multiplier buttons below will double or triple the word score</p>
             </div>
         </>,

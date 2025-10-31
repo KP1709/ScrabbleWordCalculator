@@ -1,19 +1,13 @@
+import { LetterProperties } from "../reusableTypes/LetterProperties"
 import "../styles/tile.css"
 
-type TileProp = {
-    id: string,
-    letter: string,
-    score: number,
-    onClick: () => void,
-    action: 'double' | 'triple' | 'restore',
-    colour: '#90e0ef' | '#0077b6' | '#ffffff'
-}
+type TileProp = LetterProperties & { onClick: () => void }
 
-export default function Tile({ letter, score, onClick, colour }: TileProp) {
+export default function Tile({ letter, score, onClick, colour, action }: TileProp) {
     return (
         <div onClick={onClick} data-test={`list-tile-${letter}`}
         >
-            <h2 style={{ backgroundColor: `${colour}` }}>{letter}</h2>
+            <h2 style={{ backgroundColor: colour, color: action === 'blank' ? '#fff' : '#000' }}>{letter}</h2>
             <h3>{score}</h3>
         </div>
     )
