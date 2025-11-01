@@ -31,11 +31,17 @@ The Cypress tests will need modifying.
 ## ⚡Supabase
 A Supabase database is connected by creating a Netlify serverless function. The word entered to search will pass by POST request to the Supabase client which will complete a GET request to check if the word exists in the database. The code has been set up so the database will only be searched if the word doesn't exist in the free dictionary API. The serverless function also contains error handling to provide a solid user experience. It's very unlikely for the database to be searched often.
 
-### 🧪 Experiment
-The requests can be seen in action from the network response tab and developer console in the browser dev tools.  
+## 🧪 Experiment
+#### Database
+For Supabase, requests can be seen in action from the network response tab and developer console in the browser dev tools.  
 Search for the word 'zarf' or 'bezique' - the first API will return a 404 but the word exists in the Supabase database so it will return a 200.
 
 If database is paused or is throwing a non-404 error, then it will catch the error and suggest that the word should be search online instead.
+
+#### Testing valid words but with restrictions
+The word 'knickknacks' exists in the dictionary but there are too many 'k' in the word so it cannot be used in the game. This will display the 'Max Tile Limit Exceeded' screen. 
+
+The word 'counterbalancing' exists in the dictionary but the word is more that 15 letters. This will display 'Invalid Entry' with a message about exceeding.
 
 ## 📚 Resources
 - Understanding how to push and retain objects in an array - https://stackoverflow.com/questions/70941970/pushing-objects-in-an-array-only-returns-last-object-pushed-in-react
