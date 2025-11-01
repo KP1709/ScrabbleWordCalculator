@@ -14,16 +14,25 @@ export default function LetterCalculator() {
     const [wordToCheck, setWordToCheck] = useState("")
     const [isValidString, setIsValidString] = useState<ValidString>("start")
     const [submitWord, setSubmitWord] = useState(false)
+    const [isTooLong, setIsTooLong] = useState(false)
     const { isError, isAnalysing, isApiError, isSupabaseError, isValidWord } = useCheckWordInDictionary({ wordToCheck, submitWord, setSubmitWord })
 
     const handleSubmit = (e: { preventDefault: () => void }) => {
         e.preventDefault();
-        if ((/^[A-Z]+$/i).test(wordToCheck)) {
+        if ((/^[A-Z]+$/i).test(wordToCheck) && wordToCheck.length <= 15) {
             setIsValidString("true")
+            setIsTooLong(false)
             setSubmitWord(true)
             return
         }
-        setIsValidString("false")
+        else if (!(/^[A-Z]+$/i).test(wordToCheck) && (wordToCheck.length <= 15)) {
+            setIsValidString("false")
+            setIsTooLong(false)
+            return
+        }
+        setIsValidString("true")
+        setIsTooLong(true)
+        return
     }
 
     return (
@@ -44,11 +53,11 @@ export default function LetterCalculator() {
 
             {isValidString === "start" && <StartScreen />}
             {isAnalysing && <IsAnalysing />}
-            {isValidString === "false" && <InvalidEntry />}
-            {isValidString === "true" && !isValidWord && !isError && <UnknownWord />}
+            {(isValidString === "false" || isTooLong) && <InvalidEntry isTooLong={isTooLong} />}
+            {isValidString === "true" && !isValidWord && !isError && !isTooLong && <UnknownWord />}
             {isValidString === "true" && !isValidWord && isError && <Error isApiError={isApiError} isSupabaseError={isSupabaseError} />}
 
-            {isValidString === "true" && isValidWord && !isError && !isAnalysing &&
+            {isValidString === "true" && isValidWord && !isError && !isAnalysing && !isTooLong &&
                 <ValidWord wordToCheck={wordToCheck} submitWord={submitWord} />
             }
         </main>
