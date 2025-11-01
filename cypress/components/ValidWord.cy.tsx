@@ -75,4 +75,9 @@ describe('<ValidWord  />', () => {
 
         cy.get("[data-test='total-word-score']").should('contain', 5)
     })
+
+    it('Testing for max tile limit exceeded', () => {
+        mount(<ValidWord submitWord={true} wordToCheck={'knickknacks'} />)
+        cy.get("[data-test='max-tile-limit-exceeded-screen']").should('exist')
+    })
 })
