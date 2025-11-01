@@ -1,5 +1,5 @@
 import { LetterProperties } from "../reusableTypes/LetterProperties"
-import { getLetterScore } from "../reusableFunctions/letterScore"
+import { getLetterScore } from "./letterScore"
 import { v4 as uuid } from "uuid"
 
 export const useLookupLettersFromWord = (wordToCheck: string) => {
