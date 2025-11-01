@@ -15,8 +15,10 @@ The Cypress tests will need modifying.
 ## 🛠️ Features
 - Check to see if user input is valid
   - Checks to see if word contains alphabetic characters only
+  - Checks to see if a word is less than 15 letters
   - Checks to see if word is in the dictionary (using free API)
   - Checks to see if word is in the Supabase database (if not in the API) 
+  - Check to see if word can be created based on number of tiles available
 - Score for whole word is calculated
 - Tried to maintain accessibility throughout application
 - Instructions available on the start screen as an open and closable modal
