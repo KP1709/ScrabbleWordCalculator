@@ -1,8 +1,10 @@
 import { LetterProperties } from "../../reusableTypes/LetterProperties"
 import { useEffect, useState } from "react"
-import { useLookupLettersFromWord } from "../../hooks/useLookupLettersFromWord"
+import { useLookupLettersFromWord } from "../../reusableFunctions/useLookupLettersFromWord"
 import { v4 as uuid } from "uuid"
 import Tile from "../tile";
+import { useCheckForExceedingTileNumber } from "../../reusableFunctions/useCheckExceedingTileNumber";
+import MaxTileLimitExceeded from "./maxTileLimitExceeded";
 
 type ValidWordType = {
     wordToCheck: string,
@@ -14,9 +16,13 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
     const [totalWordScoreMultiplier, setTotalWordScoreMultiplier] = useState(1)
     const [resetMultiplier, setResetMultiplier] = useState(false)
     const [wordToCheckArray, setWordToCheckArray] = useState<LetterProperties[]>([])
+    const [isAboveMaxTileAmount, setIsAboveMaxTileAmount] = useState(false)
 
     useEffect(() => {
-        setWordToCheckArray(useLookupLettersFromWord(wordToCheck))
+        setIsAboveMaxTileAmount(useCheckForExceedingTileNumber(wordToCheck))
+        if (!isAboveMaxTileAmount) {
+            setWordToCheckArray(useLookupLettersFromWord(wordToCheck))
+        }
     }, [submitWord])
 
     useEffect(() => {
@@ -72,7 +78,7 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
     }
 
     return (
-        <div className="flex-centre" data-test="valid-word-screen">
+        !isAboveMaxTileAmount ? <div className="flex-centre" data-test="valid-word-screen">
             <ul className="flex-centre">
                 {wordToCheckArray.map(char =>
                     <li key={uuid()} className="flex-centre" data-test='word-tile'>
@@ -109,7 +115,7 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
                         Reset score multiplier
                     </button>}
             </div>
-        </div>
+        </div> : <MaxTileLimitExceeded />
     )
 
 }
