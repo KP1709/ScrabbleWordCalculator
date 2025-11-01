@@ -21,6 +21,7 @@ The Cypress tests will need modifying.
 - Tried to maintain accessibility throughout application
 - Instructions available on the start screen as an open and closable modal
 - Can indicate which tiles have a double score or triple score and update the total word score 
+- Can indicate which tiles are blank, update the total word score and limit the number
 - Can indicate if the total word score doubles or triples
   -  Option to reset score without multiplier
 - Error handling if either the API or database is down 
