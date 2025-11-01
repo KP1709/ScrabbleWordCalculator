@@ -10,7 +10,7 @@ Owning and playing the original version of Scrabble, I know it would sometimes b
 ## ⚙️ Changes
 The commit 81ea887 was code clean-up for the entire project.  
 While the functionality is technically the same, the code now is more maintainable with improved readability.  
-The Cypress tests will need modifying.
+The Cypress component tests will need modifying and e2e testing maybe added as well.
 
 ## 🛠️ Features
 - Check to see if user input is valid
@@ -32,13 +32,13 @@ The Cypress tests will need modifying.
 A Supabase database is connected by creating a Netlify serverless function. The word entered to search will pass by POST request to the Supabase client which will complete a GET request to check if the word exists in the database. The code has been set up so the database will only be searched if the word doesn't exist in the free dictionary API. The serverless function also contains error handling to provide a solid user experience. It's very unlikely for the database to be searched often.
 
 ## 🧪 Experiment
-#### Database
+### Database
 For Supabase, requests can be seen in action from the network response tab and developer console in the browser dev tools.  
 Search for the word 'zarf' or 'bezique' - the first API will return a 404 but the word exists in the Supabase database so it will return a 200.
 
 If database is paused or is throwing a non-404 error, then it will catch the error and suggest that the word should be search online instead.
 
-#### Testing valid words but with restrictions
+### Testing valid words but with restrictions
 The word 'knickknacks' exists in the dictionary but there are too many 'k' in the word so it cannot be used in the game. This will display the 'Max Tile Limit Exceeded' screen. 
 
 The word 'counterbalancing' exists in the dictionary but the word is more that 15 letters. This will display 'Invalid Entry' with a message about exceeding.
