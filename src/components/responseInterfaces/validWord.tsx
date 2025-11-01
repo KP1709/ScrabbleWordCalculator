@@ -35,11 +35,12 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
         setTotalWordScoreMultiplier(prevMultiplier => prevMultiplier * factor)
     }
 
-    // Code produced by V0 but has been modified to work with original code written
     /** Handles multiplying letter score on tile */
     const handleTileClick = (id: string) => {
+        const hasMaxNumberOfBlanks = wordToCheckArray.filter(tile => tile.action === 'blank').length === 2
+
         setWordToCheckArray(prevValues => prevValues.map((tile) => {
-            if (tile.id === id) {
+            if (tile.id === id && !hasMaxNumberOfBlanks) {
                 switch (tile.action) {
                     case 'double':
                         return { ...tile, score: tile.originalScore * 3, action: 'triple', colour: '#0077b6' };
@@ -50,6 +51,21 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
                     case 'restore':
                         return { ...tile, score: tile.originalScore * 2, action: 'double', colour: '#90e0ef' };
                 }
+            }
+
+            if (tile.id === id && hasMaxNumberOfBlanks) {
+                switch (tile.action) {
+                    case 'double':
+                        return { ...tile, score: tile.originalScore * 3, action: 'triple', colour: '#0077b6' };
+                    case 'triple':
+                        return { ...tile, score: tile.originalScore, action: 'restore', colour: '#ffffff' };
+                    case 'restore':
+                        return { ...tile, score: tile.originalScore * 2, action: 'double', colour: '#90e0ef' };
+                }
+            }
+
+            if (tile.id === id && hasMaxNumberOfBlanks && tile.action === "blank") {
+                return { ...tile, score: tile.originalScore, action: 'restore', colour: tile.colour };
             }
             return tile
         }))
