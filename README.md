@@ -10,7 +10,8 @@ Owning and playing the original version of Scrabble, I know it would sometimes b
 ## ⚙️ Changes
 The commit 81ea887 was code clean-up for the entire project.  
 While the functionality is technically the same, the code now is more maintainable with improved readability.  
-The Cypress component tests will need modifying and e2e testing maybe added as well.
+The Cypress component tests will need modifying and e2e testing maybe added as well.  
+The CSS stylesheets will need to be modified to work with Cypress component testing properly.
 
 ## 🛠️ Features
 - Check to see if user input is valid
