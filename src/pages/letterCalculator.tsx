@@ -55,7 +55,7 @@ export default function LetterCalculator() {
             {isAnalysing && <IsAnalysing />}
             {(isValidString === "false" || isTooLong) && <InvalidEntry isTooLong={isTooLong} />}
             {isValidString === "true" && !isValidWord && !isError && !isTooLong && <UnknownWord />}
-            {isValidString === "true" && !isValidWord && isError && <Error isApiError={isApiError} isSupabaseError={isSupabaseError} />}
+            {isValidString === "true" && !isValidWord && isError && <Error wordToCheck={wordToCheck} isApiError={isApiError} isSupabaseError={isSupabaseError} />}
 
             {isValidString === "true" && isValidWord && !isError && !isAnalysing && !isTooLong &&
                 <ValidWord wordToCheck={wordToCheck} submitWord={submitWord} />
