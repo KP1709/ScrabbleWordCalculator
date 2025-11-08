@@ -1,6 +1,6 @@
 export default function InvalidEntry({ isTooLong }: { isTooLong: boolean }) {
     return (
-        <div className="flex-centre" data-test="invalid-entry-screen">
+        <div className="flex-centre-column" data-test="invalid-entry-screen">
             <h2>Invalid Entry</h2>
             {isTooLong && <p>Word is longer than 15 letters</p>}
             {!isTooLong && <p>Only use alphabetical characters</p>}

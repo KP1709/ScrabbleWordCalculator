@@ -37,7 +37,7 @@ export default function LetterCalculator() {
 
     return (
         <main>
-            <form onSubmit={handleSubmit} className="flex-centre">
+            <form onSubmit={handleSubmit} className="flex-centre-row">
                 <label htmlFor="word">Word:</label>
                 <input type="text"
                     className="form__input-text"

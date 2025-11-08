@@ -1,0 +1,12 @@
+svg {
+    margin-top: 10px;
+    width: 10%;
+}
+
+#multiplier__buttons {
+    gap: 10px;
+}
+
+#score {
+    font-size: 1.5rem;
+}

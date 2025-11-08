@@ -5,6 +5,7 @@ import { v4 as uuid } from "uuid"
 import Tile from "../tile";
 import { useCheckForExceedingTileNumber } from "../../reusableFunctions/useCheckExceedingTileNumber";
 import MaxTileLimitExceeded from "./maxTileLimitExceeded";
+import '../../styles/validWord.css'
 
 type ValidWordType = {
     wordToCheck: string,
@@ -78,8 +79,8 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
     }
 
     return (
-        !isAboveMaxTileAmount ? <div className="flex-centre" data-test="valid-word-screen">
-            <ul className="flex-centre">
+        !isAboveMaxTileAmount ? <div className="flex-centre-column" data-test="valid-word-screen">
+            <ul className="flex-centre-row">
                 {wordToCheckArray.map(char =>
                     <li key={uuid()} className="flex-centre" data-test='word-tile'>
                         <Tile
@@ -96,7 +97,7 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
 
             <h3 id="score" data-test="total-word-score"> Total : {totalWordScore}</h3>
 
-            <div id="multiplier__buttons" className="flex-centre">
+            <div id="multiplier__buttons" className="flex-centre-row">
                 {totalWordScoreMultiplier === 1 &&
                     <button className="multiplier__button" data-test='double-total-score-btn'
                         onClick={() => handleMultiply(2)}>

@@ -5,22 +5,26 @@ ul {
     flex-wrap: wrap;
     list-style: none;
     gap: 10px;
+}
 
-    li {
-        flex-direction: column;
-        padding: 0;
+ul li {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
 
-        h2{
-            border: 2px solid black;
-            border-radius: 3px;
-            width: 2em;
-            height: 2em;
-            cursor: pointer;
+ul h2 {
+    cursor: pointer;
+    border: 2px solid black;
+    border-radius: 3px;
+    width: 2em;
+    height: 2em;
 
-            /* Prevent highlighting when tapping on tile */
-            -webkit-user-select: none; /* Safari */
-            -ms-user-select: none; /* IE 10 and IE 11 */
-            user-select: none; /* Standard syntax */
-        }
-    }
+    /* Prevent highlighting when tapping on tile */
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
 }
