@@ -46,13 +46,15 @@ export const useCheckWordInDictionary = ({ wordToCheck, submitWord, setSubmitWor
             catch (err) {
                 setIsError(true); setIsApiError(true); setIsValidWord(false)
             }
+            finally {
+                setIsAnalysing(false)
+            }
         }
-        setIsAnalysing(false)
 
         if (submitWord) {
             checkWord()
+            setSubmitWord(false)
         }
-        setSubmitWord(false)
     }, [submitWord])
 
     return { isAnalysing, isApiError, isSupabaseError, isValidWord, isError, wordToCheck }
