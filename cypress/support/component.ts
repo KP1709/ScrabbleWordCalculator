@@ -20,6 +20,7 @@ import '../../src/styles/modal.css'
 import '../../src/styles/letterCalculator.css'
 import '../../src/styles/tile.css'
 import '../../src/styles/header.css'
+import '../../src/styles/validWord.css'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
