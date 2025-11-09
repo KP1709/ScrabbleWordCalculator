@@ -20,11 +20,10 @@ export const useCheckWordInDictionary = ({ wordToCheck, submitWord, setSubmitWor
                 setIsError(false)
 
                 const apiRes = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${wordToCheck}`)
-                const data = await apiRes.json()
                 if (apiRes.ok) {
                     setIsValidWord(true)
                 }
-                else if (!Array.isArray(data)) {
+                else if (apiRes.status === 404) {
                     try {
                         const res = await fetch(`/.netlify/functions/supabase?word=${wordToCheck}`, {
                             method: "POST",
