@@ -8,7 +8,7 @@ describe('Letter Calculator', () => {
   it('Testing screen functionality', () => {
     cy.intercept('GET', 'https://api.dictionaryapi.dev/api/v2/entries/en/type',
       (response: { reply: (arg0: { statusCode: number; body: { message: string } }) => void }) => {
-        if (Array.isArray(response)) response.reply({
+        response.reply({
           statusCode: 200,
           body: { message: 'Valid word' }
         })
@@ -22,12 +22,12 @@ describe('Letter Calculator', () => {
     cy.get("[data-test='submit-word-form-btn']").click()
     cy.get("[data-test='invalid-entry-screen']").should('be.visible')
 
-    cy.visit('/') // Clear the word - don't refresh
+    cy.visit('/')
     cy.get('@word-input').type('abcdef')
     cy.get("[data-test='submit-word-form-btn']").click()
     cy.get("[data-test='unknown-word-screen']").should('be.visible')
 
-    cy.visit('/') // Clear the word - don't refresh
+    cy.visit('/')
     cy.get('@word-input').type('type')
     cy.get("[data-test='submit-word-form-btn']").click()
     cy.wait('@ValidWord')
@@ -37,19 +37,19 @@ describe('Letter Calculator', () => {
   it('Testing valid word functionality', () => {
     cy.intercept('GET', 'https://api.dictionaryapi.dev/api/v2/entries/en/react',
       (response: { reply: (arg0: { statusCode: number; body: { message: string } }) => void }) => {
-        if (Array.isArray(response)) response.reply({
+        response.reply({
           statusCode: 200,
           body: { message: 'Valid word' }
         })
       }).as('ValidWord')
 
-    cy.visit('/') // Clear the word - don't refresh
+    cy.visit('/')
     cy.get("[data-test='word-form']").as('word-input')
     cy.get('@word-input').type('counterbalancing')
     cy.get("[data-test='submit-word-form-btn']").click()
     cy.get("[data-test='invalid-entry-screen']").should('be.visible')
 
-    cy.visit('/') // Clear the word - don't refresh
+    cy.visit('/')
     cy.get('@word-input').type('knickknacks')
     cy.get("[data-test='submit-word-form-btn']").click()
     cy.get("[data-test='max-tile-limit-exceeded-screen']").should('be.visible')
