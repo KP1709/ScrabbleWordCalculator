@@ -52,9 +52,9 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
                     case 'double':
                         return { ...tile, score: tile.originalScore * 3, action: 'triple', colour: '#0077b6' };
                     case 'triple':
-                        return { ...tile, score: 0, action: 'blank', colour: '#ffffff' };
+                        return { ...tile, score: 0, action: 'blank', colour: '#fcf1e1' };
                     case 'blank':
-                        return { ...tile, score: tile.originalScore, action: 'restore', colour: '#ffffff' };
+                        return { ...tile, score: tile.originalScore, action: 'restore', colour: '#fcf1e1' };
                     case 'restore':
                         return { ...tile, score: tile.originalScore * 2, action: 'double', colour: '#90e0ef' };
                 }
@@ -65,7 +65,7 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
                     case 'double':
                         return { ...tile, score: tile.originalScore * 3, action: 'triple', colour: '#0077b6' };
                     case 'triple':
-                        return { ...tile, score: tile.originalScore, action: 'restore', colour: '#ffffff' };
+                        return { ...tile, score: tile.originalScore, action: 'restore', colour: '#fcf1e1' };
                     case 'restore':
                         return { ...tile, score: tile.originalScore * 2, action: 'double', colour: '#90e0ef' };
                 }
