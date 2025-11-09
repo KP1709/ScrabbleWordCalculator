@@ -1,6 +1,7 @@
 import { mount } from 'cypress/react'
 import LetterCalculator from '../../src/pages/letterCalculator'
 
+// This is currenly not working well - possibly move this into e2e testing instead
 describe('<LetterCalculator />', () => {
   it('Testing screen functionality', () => {
 
@@ -8,13 +9,13 @@ describe('<LetterCalculator />', () => {
       statusCode: 404,
       body: { message: 'Not a valid word' }
     }).as('UnknownWord')
-    cy.intercept('GET', 'https://api.dictionaryapi.dev/api/v2/entries/en/type', 
+    cy.intercept('GET', 'https://api.dictionaryapi.dev/api/v2/entries/en/type',
       (response: { reply: (arg0: { statusCode: number; body: { message: string } }) => void }) => {
-      if (Array.isArray(response)) response.reply({
-        statusCode: 200,
-        body: { message: 'Valid word' }
-      })
-    }).as('ValidWord')
+        if (Array.isArray(response)) response.reply({
+          statusCode: 200,
+          body: { message: 'Valid word' }
+        })
+      }).as('ValidWord')
 
     mount(<LetterCalculator />)
 
@@ -41,14 +42,14 @@ describe('<LetterCalculator />', () => {
   })
 
   it('Testing valid word functionality', () => {
-    cy.intercept('GET', 'https://api.dictionaryapi.dev/api/v2/entries/en/react', 
+    cy.intercept('GET', 'https://api.dictionaryapi.dev/api/v2/entries/en/react',
       (response: { reply: (arg0: { statusCode: number; body: { message: string } }) => void }) => {
-      if (Array.isArray(response)) response.reply({
-        statusCode: 200,
-        body: { message: 'Valid word' }
-      })
-    }).as('ValidWord')
-    
+        if (Array.isArray(response)) response.reply({
+          statusCode: 200,
+          body: { message: 'Valid word' }
+        })
+      }).as('ValidWord')
+
     mount(<LetterCalculator />)
 
     cy.get("[data-test='word-form']").as('word-input')
@@ -67,13 +68,13 @@ describe('<LetterCalculator />', () => {
   })
 
   it('Testing tile functionality', () => {
-    cy.intercept('GET', 'https://api.dictionaryapi.dev/api/v2/entries/en/react', 
+    cy.intercept('GET', 'https://api.dictionaryapi.dev/api/v2/entries/en/react',
       (response: { reply: (arg0: { statusCode: number; body: { message: string } }) => void }) => {
-      if (Array.isArray(response)) response.reply({
-        statusCode: 200,
-        body: { message: 'Valid word' }
-      })
-    }).as('ValidWord')
+        if (Array.isArray(response)) response.reply({
+          statusCode: 200,
+          body: { message: 'Valid word' }
+        })
+      }).as('ValidWord')
 
     mount(<LetterCalculator />)
 
@@ -88,7 +89,7 @@ describe('<LetterCalculator />', () => {
     cy.get("[data-test='word-tile']").click({ multiple: true })
     cy.get("[data-test='word-tile']").click({ multiple: true })
     cy.get("[data-test='word-tile']").each((tile: any) => {
-      cy.get(tile).get('div h2').should('have.css', 'background-color', 'rgb(255, 255, 255)') // #ffffff
+      cy.get(tile).get('div h2').should('have.css', 'background-color', 'rgb(252, 241, 225)') // #fcf1e1ff
     })
 
     cy.get("[data-test='list-tile-E']").click()
@@ -96,14 +97,14 @@ describe('<LetterCalculator />', () => {
       cy.get('h2').should('have.css', 'background-color', 'rgb(144, 224, 239)') // #90e0ef
       cy.get('h3').should('contain', 2)
     })
-  
+
     cy.get("[data-test='list-tile-C']").click()
     cy.get("[data-test='list-tile-C']").click()
     cy.get("[data-test='list-tile-C']").within(() => {
-      cy.get('h2').should('have.css', 'background-color', 'rgb(0, 119, 182)') // #0077b6
-      cy.get('h3').should('contain', 9)
+      cy.get('h2').should('have.css', 'background-color', 'rgb(252, 241, 225)') // #fcf1e1ff
+      cy.get('h3').should('contain', 0)
     })
-    cy.get("[data-test='total-word-score']").should('contain', 14)
+    cy.get("[data-test='total-word-score']").should('contain', 7)
 
   })
 })

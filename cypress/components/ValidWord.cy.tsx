@@ -22,7 +22,7 @@ describe('<ValidWord  />', () => {
         cy.get("[data-test='word-tile']").click({ multiple: true })
         cy.get("[data-test='word-tile']").click({ multiple: true })
         cy.get("[data-test='word-tile']").each((tile: any) => {
-            cy.get(tile).get('div h2').should('have.css', 'background-color', 'rgb(255, 255, 255)') // #ffffff
+            cy.get(tile).get('div h2').should('have.css', 'background-color', 'rgb(252, 241, 225)') // #fcf1e1ff
         })
 
         cy.get("[data-test='list-tile-E']").click()
@@ -34,7 +34,7 @@ describe('<ValidWord  />', () => {
         cy.get("[data-test='list-tile-C']").click()
         cy.get("[data-test='list-tile-C']").click()
         cy.get("[data-test='list-tile-C']").within(() => {
-            cy.get('h2').should('have.css', 'background-color', 'rgb(255, 255, 255)') // #0077b6
+            cy.get('h2').should('have.css', 'background-color', 'rgb(252, 241, 225)') // #0077b6
             cy.get('h3').should('contain', 0)
         })
 
@@ -53,7 +53,7 @@ describe('<ValidWord  />', () => {
         cy.get("[data-test='list-tile-E']").click()
         cy.get("[data-test='list-tile-E']").click()
         cy.get("[data-test='list-tile-E']").within(() => {
-            cy.get('h2').should('have.css', 'background-color', 'rgb(255, 255, 255)') // #ffffff
+            cy.get('h2').should('have.css', 'background-color', 'rgb(252, 241, 225)') // #fcf1e1ff
             cy.get('h3').should('contain', 0)
         })
 
@@ -61,7 +61,7 @@ describe('<ValidWord  />', () => {
         cy.get("[data-test='list-tile-A']").click()
         cy.get("[data-test='list-tile-A']").click()
         cy.get("[data-test='list-tile-A']").within(() => {
-            cy.get('h2').should('have.css', 'background-color', 'rgb(255, 255, 255)') // #ffffff
+            cy.get('h2').should('have.css', 'background-color', 'rgb(252, 241, 225)') // #fcf1e1ff
             cy.get('h3').should('contain', 0)
         })
 
@@ -69,7 +69,7 @@ describe('<ValidWord  />', () => {
         cy.get("[data-test='list-tile-R']").click()
         cy.get("[data-test='list-tile-R']").click()
         cy.get("[data-test='list-tile-R']").within(() => {
-            cy.get('h2').should('have.css', 'background-color', 'rgb(255, 255, 255)') // #ffffff
+            cy.get('h2').should('have.css', 'background-color', 'rgb(252, 241, 225)') // #fcf1e1ff
             cy.get('h3').should('not.contain', 0)
         })
 
