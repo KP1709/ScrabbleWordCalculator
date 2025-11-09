@@ -5,13 +5,11 @@
 React / Typescript / CSS / npm / Nodejs / HTML / APIs + Supabase / Netlify CLI + Serverless functions / Cypress (Testing)
 
 ## 🍼 Introduction
-Owning and playing the original version of Scrabble, I know it would sometimes be difficult to calculate a word's score. Therefore, I created my own version of a Scrabble calculator. The user enters a word and is able to see the word's score. Additionally the tool checks to see if the word is in the dictionary using a free dictionary API. Therefore enabling the user to test to see if a particular word exists. The app is also connected to a database to search for words which are valid in Scrabble but are not in the dictionary API.
+Owning and playing the original version of Scrabble, I know it would sometimes be difficult to calculate a word's score. Therefore, I created my own version of a Scrabble calculator. The user enters a word and sees the word's score. Additionally the tool checks to see if the word is in the dictionary using a free dictionary API. Therefore enabling the user to test to see if a particular word exists. The app is also connected to a database to search for words which are valid in Scrabble but are not in the dictionary API.
 
 ## ⚙️ Changes
 The commit 81ea887 was code clean-up for the entire project.  
-While the functionality is technically the same, the code now is more maintainable with improved readability.  
-The Cypress component tests will need modifying and e2e testing maybe added as well.  
-The CSS stylesheets will need to be modified to work with Cypress component testing properly.
+While the functionality is technically the same, the code is now more maintainable with improved readability.  
 
 ## 🛠️ Features
 - Check to see if user input is valid
@@ -27,7 +25,8 @@ The CSS stylesheets will need to be modified to work with Cypress component test
 - Can indicate which tiles are blank, update the total word score and limit the number
 - Can indicate if the total word score doubles or triples
   -  Option to reset score without multiplier
-- Error handling if either the API or database is down 
+- Error handling if either the API or database is down
+- Instructions accessible at any point 
 
 ## ⚡Supabase
 A Supabase database is connected by creating a Netlify serverless function. The word entered to search will pass by POST request to the Supabase client which will complete a GET request to check if the word exists in the database. The code has been set up so the database will only be searched if the word doesn't exist in the free dictionary API. The serverless function also contains error handling to provide a solid user experience. It's very unlikely for the database to be searched often.
