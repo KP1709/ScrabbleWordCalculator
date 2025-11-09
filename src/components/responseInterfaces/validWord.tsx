@@ -6,6 +6,7 @@ import Tile from "../tile";
 import { useCheckForExceedingTileNumber } from "../../reusableFunctions/useCheckExceedingTileNumber";
 import MaxTileLimitExceeded from "./maxTileLimitExceeded";
 import '../../styles/validWord.css'
+import { getLetterNoTiles } from "../../reusableFunctions/letterNoTiles";
 
 type ValidWordType = {
     wordToCheck: string,
@@ -44,7 +45,7 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
 
     /** Handles multiplying letter score on tile */
     const handleTileClick = (id: string) => {
-        const hasMaxNumberOfBlanks = wordToCheckArray.filter(tile => tile.action === 'blank').length === 2
+        const hasMaxNumberOfBlanks = wordToCheckArray.filter(tile => tile.action === 'blank').length === getLetterNoTiles("")
 
         setWordToCheckArray(prevValues => prevValues.map((tile) => {
             if (tile.id === id && !hasMaxNumberOfBlanks) {
