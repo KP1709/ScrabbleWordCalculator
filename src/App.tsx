@@ -7,7 +7,7 @@ export default function App() {
   return (
     <ErrorBoundary>
       <Header />
-      <LetterCalculator/>
+      <LetterCalculator />
     </ErrorBoundary>
   )
 }
