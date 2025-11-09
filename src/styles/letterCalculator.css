@@ -17,6 +17,17 @@
     border-radius: 2px;
 }
 
+#instructions-btn {
+    width: 40px;
+    background-color: transparent;
+    border: 0;
+}
+
+.svg-response {
+    margin-top: 10px;
+    width: 10%;
+}
+
 main {
     padding: 10px;
 }
