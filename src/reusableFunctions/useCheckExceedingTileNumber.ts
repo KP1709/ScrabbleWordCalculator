@@ -16,7 +16,7 @@ export const useCheckForExceedingTileNumber = (wordToCheck: string) => {
     };
 
     countTiles(wordToCheck).map(item => {
-        if (getLetterNoTiles(item.letter) + 2 < item.count) {
+        if (getLetterNoTiles(item.letter) + getLetterNoTiles("") < item.count) {
             isExceedingTiles = true;
             return
         }
