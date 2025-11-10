@@ -34,7 +34,7 @@ describe('Letter Calculator', () => {
     cy.get("[data-test='valid-word-screen']").should('be.visible')
   })
 
-  it('Testing valid word functionality', () => {
+  it('Testing valid word from API functionality', () => {
     cy.intercept('GET', 'https://api.dictionaryapi.dev/api/v2/entries/en/react',
       (response: { reply: (arg0: { statusCode: number; body: { message: string } }) => void }) => {
         response.reply({
@@ -67,6 +67,37 @@ describe('Letter Calculator', () => {
     cy.get("[data-test='triple-total-score-btn']").click()
     cy.get("[data-test='total-word-score']").should('contain', 21)
     cy.get("[data-test='reset-total-score-btn']").click()
+  })
+
+  it('Testing valid word from extended check functionality', () => {
+    cy.intercept('GET', 'https://api.dictionaryapi.dev/api/v2/entries/en/zarf',
+      (response: { reply: (arg0: { statusCode: number; body: { message: string } }) => void }) => {
+        response.reply({
+          statusCode: 404,
+          body: { message: 'Word not in API' }
+        })
+      })
+      .as('WordNotInAPI')
+
+    cy.intercept('POST', '/.netlify/functions/supabase?word=zarf',
+      (response: { reply: (arg0: { statusCode: number; body: { data: any } }) => void }) => {
+        response.reply({
+          statusCode: 200,
+          body: { data: [{ "word": "zarf" }] }
+        })
+      }).as('WordInSupabase')
+
+    cy.visit('/')
+    cy.get("[data-test='word-form']").as('word-input')
+    cy.get('@word-input').type('zarf')
+    cy.get("[data-test='submit-word-form-btn']").click()
+    cy.wait('@WordNotInAPI').then((interception) => {
+      expect(interception?.response?.statusCode).to.eq(404);
+    })
+    cy.wait('@WordInSupabase').then((interception2) => {
+      expect(interception2?.response?.statusCode).to.eq(200);
+    })
+    cy.get("[data-test='valid-word-screen']").should('be.visible')
   })
 
   it('Testing tile functionality', () => {
@@ -109,7 +140,7 @@ describe('Letter Calculator', () => {
     cy.get("[data-test='total-word-score']").should('contain', 7)
   })
 
-  it('Testing extended word check', () => {
+  it('Testing extended word check if database is not running', () => {
     cy.intercept('GET', 'https://api.dictionaryapi.dev/api/v2/entries/en/zeel',
       (response: { reply: (arg0: { statusCode: number; body: { message: string } }) => void }) => {
         response.reply({
