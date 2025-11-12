@@ -61,12 +61,12 @@ describe('Letter Calculator', () => {
     cy.get("[data-test='valid-word-screen']").should('be.visible')
 
     cy.get("[data-test='double-total-score-btn']").click()
-    cy.get("[data-test='double-total-score-btn']").should('not.exist')
     cy.get("[data-test='total-word-score']").should('contain', 14)
-    cy.get("[data-test='reset-total-score-btn'").click()
+    cy.get("[data-test='double-total-score-btn']").click()
     cy.get("[data-test='triple-total-score-btn']").click()
     cy.get("[data-test='total-word-score']").should('contain', 21)
-    cy.get("[data-test='reset-total-score-btn']").click()
+    cy.get("[data-test='double-total-score-btn']").click()
+    cy.get("[data-test='total-word-score']").should('contain', 42)
   })
 
   it('Testing valid word from extended check functionality', () => {
