@@ -14,15 +14,12 @@ export default function HowToModal({ open, onClose }: ModalProps) {
             <div className="modal-overlay"></div>
             <div className="modal">
                 <button onClick={onClose}>Close</button>
-                <h2>How to use the calculator</h2>
-                <p>Enter a word in the text box and either press enter or the 'check' button</p>
-                <p>If the word contains other characters than letters it will display 'Invalid entry'</p>
-                <p>If the word contains more than 15 letters it will display 'Invalid entry'</p>
-                <p>If the word is not in the dictionary it will display 'Unknown Word'</p>
-                <p>If the word cannot be created based on the number of tiles it will display 'Max Tile Limit Exceeded'</p>
-                <p>If it contains letters and is definitely a word within the rules then the word, letter scores and total word score will be displayed</p>
-                <p>Tapping the tiles will cause letter scores to double, triple, set to 0 and reset back to its original value in this cycle</p>
-                <p>The multiplier buttons below will double or triple the word score</p>
+                <h2>Using the calculator</h2>
+                <p>Enter a word and either press enter or the 'check' button</p>
+                <p>If the word is within the Scrabble rules then it will be displayed along with the letter scores and total word score</p>
+                <p>Tapping the tiles will cause letter scores to double, triple, display blank and reset back to its original value in this cycle</p>
+                <p>The multiplier buttons below will double and/or triple the word score</p>
+                <p>The tile bonus button adds 50 points to the total word score and will show if the word is longer than seven letters</p>
             </div>
         </>,
         document.getElementById('portal-root')! // ! - Non-Null assertion operation
