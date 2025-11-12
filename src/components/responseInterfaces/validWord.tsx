@@ -15,7 +15,8 @@ type ValidWordType = {
 
 export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
     const [totalWordScore, setTotalWordScore] = useState(0)
-    const [totalWordScoreMultiplier, setTotalWordScoreMultiplier] = useState(1)
+    const [isDoubleWordScoreMultiplier, setIsDoubleWordScoreMultiplier] = useState(false)
+    const [isTripleWordScoreMultiplier, setIsTripleWordScoreMultiplier] = useState(false)
     const [resetMultiplier, setResetMultiplier] = useState(false)
     const [isSevenTilesUsed, setIsSevenTilesUsed] = useState(false)
     const [resetIsSevenTilesUsed, setResetIsSevenTilesUsed] = useState(false)
@@ -30,13 +31,18 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
     }, [submitWord])
 
     useEffect(() => {
+        let wordScoreMultiplier = 1;
+        if (isDoubleWordScoreMultiplier) wordScoreMultiplier *= 2;
+        if (isTripleWordScoreMultiplier) wordScoreMultiplier *= 3;
+
         const newTotal = wordToCheckArray.reduce((sum, tile) => sum + tile.score, 0)
-        setTotalWordScore(newTotal * totalWordScoreMultiplier + (isSevenTilesUsed ? 50 : 0))
-    }, [wordToCheckArray, totalWordScoreMultiplier, isSevenTilesUsed])
+        setTotalWordScore(newTotal * wordScoreMultiplier + (isSevenTilesUsed ? 50 : 0))
+    }, [wordToCheckArray, isDoubleWordScoreMultiplier, isTripleWordScoreMultiplier, isSevenTilesUsed])
 
     useEffect(() => {
         if (submitWord || resetMultiplier) {
-            setTotalWordScoreMultiplier(1)
+            setIsDoubleWordScoreMultiplier(false);
+            setIsTripleWordScoreMultiplier(false);
         }
         if (submitWord || resetIsSevenTilesUsed) {
             setIsSevenTilesUsed(false)
@@ -45,8 +51,12 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
         setResetIsSevenTilesUsed(false)
     }, [submitWord, resetMultiplier, resetIsSevenTilesUsed])
 
-    const handleMultiply = (factor: number) => {
-        setTotalWordScoreMultiplier(prevMultiplier => prevMultiplier * factor)
+    const handleDoubleToggle = () => {
+        setIsDoubleWordScoreMultiplier(!isDoubleWordScoreMultiplier);
+    }
+
+    const handleTripleToggle = () => {
+        setIsTripleWordScoreMultiplier(!isTripleWordScoreMultiplier);
     }
 
     /** Handles multiplying letter score on tile */
@@ -105,29 +115,17 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
             <h3 id="score" data-test="total-word-score"> Total : {totalWordScore}</h3>
 
             <div id="multiplier__buttons" className="flex-centre-row">
-                {totalWordScoreMultiplier === 1 &&
-                    <button className="multiplier__button" data-test='double-total-score-btn'
-                        onClick={() => handleMultiply(2)}>
-                        Double total score
-                    </button>}
+                <button className='multiplier__button'
+                    data-test='double-total-score-btn'
+                    onClick={handleDoubleToggle}>
+                    {isDoubleWordScoreMultiplier ? 'Double selected' : 'Double total score'}
+                </button>
 
-                {totalWordScoreMultiplier === 1 &&
-                    <button className="multiplier__button" data-test='triple-total-score-btn'
-                        onClick={() => handleMultiply(3)}>
-                        Triple total score
-                    </button>}
-
-                {totalWordScoreMultiplier === 1 &&
-                    <button className="multiplier__button" data-test='double-triple-total-score-btn'
-                        onClick={() => handleMultiply(6)}>
-                        Double-Triple total score
-                    </button>}
-
-                {totalWordScoreMultiplier !== 1 &&
-                    <button className="multiplier__button" data-test='reset-total-score-btn'
-                        onClick={() => setResetMultiplier(true)}>
-                        Reset score multiplier
-                    </button>}
+                <button className='multiplier__button'
+                    data-test='triple-total-score-btn'
+                    onClick={handleTripleToggle}>
+                    {isTripleWordScoreMultiplier ? 'Triple selected' : 'Triple total score'}
+                </button>
             </div>
 
             {wordToCheckArray.length >= 7 && <button className="multiplier__button" data-test='bonus-btn'
