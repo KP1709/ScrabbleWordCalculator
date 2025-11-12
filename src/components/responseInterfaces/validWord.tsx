@@ -117,6 +117,12 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
                         Triple total score
                     </button>}
 
+                {totalWordScoreMultiplier === 1 &&
+                    <button className="multiplier__button" data-test='double-triple-total-score-btn'
+                        onClick={() => handleMultiply(6)}>
+                        Double-Triple total score
+                    </button>}
+
                 {totalWordScoreMultiplier !== 1 &&
                     <button className="multiplier__button" data-test='reset-total-score-btn'
                         onClick={() => setResetMultiplier(true)}>
