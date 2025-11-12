@@ -23,6 +23,7 @@ While the functionality is technically the same, the code is now more maintainab
 - Instructions available on the start screen as an open and closable modal
 - Can indicate which tiles have a double score or triple score and update the total word score 
 - Can indicate which tiles are blank, update the total word score and limit the number
+- Can apply the 50 point bonus for words with seven letter tiles or longer
 - Can indicate if the total word score doubles or triples
   -  Option to reset score without multiplier
 - Error handling if either the API or database is down
