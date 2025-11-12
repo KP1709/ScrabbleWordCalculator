@@ -17,6 +17,8 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
     const [totalWordScore, setTotalWordScore] = useState(0)
     const [totalWordScoreMultiplier, setTotalWordScoreMultiplier] = useState(1)
     const [resetMultiplier, setResetMultiplier] = useState(false)
+    const [isSevenTilesUsed, setIsSevenTilesUsed] = useState(false)
+    const [resetIsSevenTilesUsed, setResetIsSevenTilesUsed] = useState(false)
     const [wordToCheckArray, setWordToCheckArray] = useState<LetterProperties[]>([])
     const [isAboveMaxTileAmount, setIsAboveMaxTileAmount] = useState(false)
 
@@ -29,15 +31,19 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
 
     useEffect(() => {
         const newTotal = wordToCheckArray.reduce((sum, tile) => sum + tile.score, 0)
-        setTotalWordScore(newTotal * totalWordScoreMultiplier)
-    }, [wordToCheckArray, totalWordScoreMultiplier])
+        setTotalWordScore(newTotal * totalWordScoreMultiplier + (isSevenTilesUsed ? 50 : 0))
+    }, [wordToCheckArray, totalWordScoreMultiplier, isSevenTilesUsed])
 
     useEffect(() => {
         if (submitWord || resetMultiplier) {
             setTotalWordScoreMultiplier(1)
         }
+        if (submitWord || resetIsSevenTilesUsed) {
+            setIsSevenTilesUsed(false)
+        }
         setResetMultiplier(false)
-    }, [submitWord, resetMultiplier])
+        setResetIsSevenTilesUsed(false)
+    }, [submitWord, resetMultiplier, resetIsSevenTilesUsed])
 
     const handleMultiply = (factor: number) => {
         setTotalWordScoreMultiplier(prevMultiplier => prevMultiplier * factor)
@@ -117,6 +123,12 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
                         Reset score multiplier
                     </button>}
             </div>
+
+            {wordToCheckArray.length >= 7 && <button className="multiplier__button" data-test='bonus-btn'
+                onClick={() => { setIsSevenTilesUsed(!isSevenTilesUsed) }}>
+                {!isSevenTilesUsed ? 'Add' : 'Remove'} seven tile bonus
+            </button>}
+
         </div> : <MaxTileLimitExceeded />
     )
 
