@@ -46,7 +46,7 @@ export default function LetterCalculator() {
                     name="word"
                     id="word"
                     data-test='word-form'
-                    value={wordToCheck}
+                    value={wordToCheck.toLowerCase()}
                     onChange={(e) => setWordToCheck(e.target.value)}
                     placeholder="scrabble"
                 />
