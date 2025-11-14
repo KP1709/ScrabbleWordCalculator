@@ -173,6 +173,26 @@ describe('Letter Calculator', () => {
     cy.wait('@WordNotInSupabase').then((interception2) => {
       expect(interception2?.response?.statusCode).to.eq(500);
     })
-    cy.get("[data-test='invalid-entry-screen']").should('be.visible')
+    cy.get("[data-test='error-screen']").should('be.visible')
+  })
+
+  it('Testing when valid word cannot be checked in API', () => {
+    cy.intercept('GET', 'https://api.dictionaryapi.dev/api/v2/entries/en/react',
+      (response: { reply: (arg0: { statusCode: number; body: { message: string } }) => void }) => {
+        response.reply({
+          statusCode: 500,
+          body: { message: 'Unable to check word' }
+        })
+      })
+      .as('WordCannotBeCheckedInAPI')
+
+    cy.visit('/')
+    cy.get("[data-test='word-form']").as('word-input')
+    cy.get('@word-input').type('react')
+    cy.get("[data-test='submit-word-form-btn']").click()
+    cy.wait('@WordCannotBeCheckedInAPI').then((interception) => {
+      expect(interception?.response?.statusCode).to.eq(500);
+    })
+    cy.get("[data-test='error-screen']").should('be.visible')
   })
 })
