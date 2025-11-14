@@ -55,6 +55,11 @@ describe('Letter Calculator', () => {
     cy.get("[data-test='max-tile-limit-exceeded-screen']").should('be.visible')
 
     cy.visit('/')
+    cy.get('@word-input').type('KnickKnaCks')
+    cy.get("[data-test='submit-word-form-btn']").click()
+    cy.get("[data-test='max-tile-limit-exceeded-screen']").should('be.visible')
+
+    cy.visit('/')
     cy.get('@word-input').type('react')
     cy.get("[data-test='submit-word-form-btn']").click()
     cy.wait('@ValidWord')
