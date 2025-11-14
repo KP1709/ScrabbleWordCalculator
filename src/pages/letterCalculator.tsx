@@ -17,7 +17,7 @@ export default function LetterCalculator() {
     const [submitWord, setSubmitWord] = useState(false)
     const [isTooLong, setIsTooLong] = useState(false)
     const [isHowToModalOpen, setIsHowToModalOpen] = useState(false)
-    const { isError, isAnalysing, isApiError, isSupabaseError, isValidWord } = useCheckWordInDictionary({ wordToCheck, submitWord, setSubmitWord })
+    const { isError, isAnalysing, isValidWord } = useCheckWordInDictionary({ wordToCheck, submitWord, setSubmitWord })
 
     const handleSubmit = (e: { preventDefault: () => void }) => {
         e.preventDefault();
@@ -66,7 +66,7 @@ export default function LetterCalculator() {
             {isAnalysing && <IsAnalysing />}
             {(isValidString === "false" || isTooLong) && <InvalidEntry isTooLong={isTooLong} />}
             {isValidString === "true" && !isValidWord && !isError && !isTooLong && !isAnalysing && <UnknownWord />}
-            {isValidString === "true" && !isValidWord && isError && !isAnalysing && <Error wordToCheck={wordToCheck} isApiError={isApiError} isSupabaseError={isSupabaseError} />}
+            {isValidString === "true" && !isValidWord && isError && !isAnalysing && <Error wordToCheck={wordToCheck} />}
 
             {isValidString === "true" && isValidWord && !isError && !isAnalysing && !isTooLong &&
                 <ValidWord wordToCheck={wordToCheck.toLowerCase()} submitWord={submitWord} />
