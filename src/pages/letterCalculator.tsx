@@ -46,7 +46,7 @@ export default function LetterCalculator() {
                     name="word"
                     id="word"
                     data-test='word-form'
-                    value={wordToCheck.toLowerCase()}
+                    value={wordToCheck}
                     onChange={(e) => setWordToCheck(e.target.value)}
                     placeholder="scrabble"
                 />
@@ -67,7 +67,7 @@ export default function LetterCalculator() {
             {isValidString === "true" && !isValidWord && isError && !isAnalysing && <Error wordToCheck={wordToCheck} isApiError={isApiError} isSupabaseError={isSupabaseError} />}
 
             {isValidString === "true" && isValidWord && !isError && !isAnalysing && !isTooLong &&
-                <ValidWord wordToCheck={wordToCheck} submitWord={submitWord} />
+                <ValidWord wordToCheck={wordToCheck.toLowerCase()} submitWord={submitWord} />
             }
         </main>
     )
