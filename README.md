@@ -43,6 +43,10 @@ The word 'knickknacks' exists in the dictionary but there are too many 'k' in th
 
 The word 'counterbalancing' exists in the dictionary but the word is more that 15 letters. This will display 'Invalid Entry' with a message about exceeding.
 
+## 🔬Analytics
+This web tool uses Simple Analytics. The tool doesn't use cookies so there is no privacy banner displayed.  
+Find out more - https://docs.simpleanalytics.com/introduction-to-legal 
+
 ## 📚 Resources
 - Understanding how to push and retain objects in an array - https://stackoverflow.com/questions/70941970/pushing-objects-in-an-array-only-returns-last-object-pushed-in-react
 - Using regex to test for alphabetic characters - https://stackoverflow.com/questions/6067592/regular-expression-to-match-only-alphabetic-characters
@@ -53,6 +57,7 @@ The word 'counterbalancing' exists in the dictionary but the word is more that 1
  - Netlify and Supabase integration - https://www.netlify.com/integrations/supabase/
  - Hiding API keys using Netlify - https://www.youtube.com/watch?v=m2Dr4L_Ab14
  - Hiding API keys in Vite - https://devzibah.hashnode.dev/using-a-dotenv-file-to-store-and-use-api-keys-in-a-vite-built-react-app
+ - Simple Analytics tool - https://www.simpleanalytics.com/
 
 ## 🤖 AI Assistance
 To implement the double/triple tile score and the double/triple total word score feature, I asked V0 by Vercel to create code which implemented the logic I was after. The code was specified to be written in React but the AI chose to use Typescript. I integrated the code into the original code I wrote. 
