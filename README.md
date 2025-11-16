@@ -43,7 +43,7 @@ The word 'knickknacks' exists in the dictionary but there are too many 'k' in th
 
 The word 'counterbalancing' exists in the dictionary but the word is more that 15 letters. This will display 'Invalid Entry' with a message about exceeding.
 
-## 🔬Analytics
+## 🔬 Analytics
 This web tool uses Simple Analytics. The tool doesn't use cookies so there is no privacy banner displayed.  
 Find out more - https://docs.simpleanalytics.com/introduction-to-legal 
 
