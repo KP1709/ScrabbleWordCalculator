@@ -38,7 +38,7 @@ export const useCheckWordInDictionary = ({ wordToCheck, submitWord, setSubmitWor
                 setIsAnalysing(false);
             }
 
-            if (shouldRunSupabase) {
+            if (shouldRunSupabase && sessionStorage.getItem("isExtendedCheck") === 'true') {
                 try {
                     setIsAnalysing(true);
                     const res = await fetch(`/.netlify/functions/supabase?word=${wordToCheck}`, {
@@ -60,8 +60,12 @@ export const useCheckWordInDictionary = ({ wordToCheck, submitWord, setSubmitWor
             }
         }
 
-        if (submitWord) {
+        if (submitWord && sessionStorage.getItem("isWordToBeChecked") === 'true') {
             checkWord()
+            setSubmitWord(false)
+        }
+        if (submitWord && sessionStorage.getItem("isWordToBeChecked") === 'false') {
+            setIsValidWord(true)
             setSubmitWord(false)
         }
     }, [submitWord])
