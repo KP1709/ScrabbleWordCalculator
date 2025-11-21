@@ -27,6 +27,7 @@ While the functionality is technically the same, the code is now more maintainab
 - Can indicate if the total word score doubles, triples or both
 - Error handling if either the API or database is down
 - Instructions accessible at any point 
+- Configure if word goes through dictionary check and extended check
 
 ## ⚡Supabase
 A Supabase database is connected by creating a Netlify serverless function. The word entered to search will pass by POST request to the Supabase client which will complete a GET request to check if the word exists in the database. The code has been set up so the database will only be searched if the word doesn't exist in the free dictionary API. The serverless function also contains error handling to provide a solid user experience. It's very unlikely for the database to be searched often.
