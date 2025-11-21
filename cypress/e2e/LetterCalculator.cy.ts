@@ -195,4 +195,29 @@ describe('Letter Calculator', () => {
     })
     cy.get("[data-test='error-screen']").should('be.visible')
   })
+
+  it('Testing word not going through dictionary and extended check', () => {
+    cy.visit('/')
+    cy.window().then((win) => {
+      win.sessionStorage.setItem('isWordToBeChecked', 'false');
+      win.sessionStorage.setItem('isExtendedCheck', 'false');
+    });
+    cy.get("[data-test='word-form']").as('word-input')
+    cy.get('@word-input').type('asdasdasd')
+    cy.get("[data-test='submit-word-form-btn']").click()
+    cy.get("[data-test='valid-word-screen']").should('be.visible')
+
+  })
+
+  it('Testing when words do not go through an extended check', () => {
+    cy.visit('/')
+    cy.window().then((win) => {
+      win.sessionStorage.setItem('isExtendedCheck', 'false');
+    });
+    cy.get("[data-test='word-form']").as('word-input')
+    cy.get('@word-input').type('zarf')
+    cy.get("[data-test='submit-word-form-btn']").click()
+    cy.get("[data-test='unknown-word-screen']").should('be.visible')
+  })
+
 })
