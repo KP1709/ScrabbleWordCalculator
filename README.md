@@ -60,6 +60,7 @@ Find out more - https://docs.simpleanalytics.com/introduction-to-legal
  - Hiding API keys using Netlify - https://www.youtube.com/watch?v=m2Dr4L_Ab14
  - Hiding API keys in Vite - https://devzibah.hashnode.dev/using-a-dotenv-file-to-store-and-use-api-keys-in-a-vite-built-react-app
  - Simple Analytics tool - https://www.simpleanalytics.com/
+ - Adding multiple themes in React (Noor Ul Usba) - https://javascript.plainenglish.io/easy-way-to-add-multiple-themes-in-react-app-ff45eeca67cb?gi=c7ddcebd3327
 
 ## 🤖 AI Assistance
 To implement the double/triple tile score and the double/triple total word score feature, I asked V0 by Vercel to create code which implemented the logic I was after. The code was specified to be written in React but the AI chose to use Typescript. I integrated the code into the original code I wrote. 
