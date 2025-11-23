@@ -1,0 +1,26 @@
+body[data-theme="water-theme"] {
+    --background-clr: #0b1f2a;
+    --main-text-clr: #fff;
+
+    --triple-tile-clr: #006f8a;
+    --double-tile-clr: #38bfe6;
+    --blank-tile-clr: #18333f;
+    --restore-tile-clr: var(--blank-tile-clr);
+
+    --primary-tile-text-clr: #e8fcff;
+    --secondary-tile-text-clr: var(--blank-tile-clr);
+
+    --svg-buttons-clr: #d9faff;
+    --svg-interface-clr: #d9faff;
+
+    --header-clr: #084c61;
+    --header-text-clr: #eaffff;
+
+    --modal-clr: #0f3a4a;
+    --modal-text-clr: #eaffff;
+
+    --tile-border-clr: #2c5964;
+    --search-border-clr: #236574;
+    --search-border-focus-clr: #44d0a6;
+    --search-border-hover-clr: #3a8fa3;
+}

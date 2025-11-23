@@ -1,3 +1,5 @@
+@import url("./app.css");
+
 #multiplier__buttons {
     gap: 10px;
     margin-bottom: 10px;
@@ -5,4 +7,5 @@
 
 #score {
     font-size: 1.5rem;
+    color: var(--main-text-clr);
 }

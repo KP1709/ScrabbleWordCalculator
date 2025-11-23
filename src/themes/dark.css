@@ -1,0 +1,25 @@
+body[data-theme="dark-theme"] {
+    --background-clr: #121212;
+    --main-text-clr: #f5f5f5;
+
+    --triple-tile-clr: #0096c7;
+    --double-tile-clr: #48cae4;
+    --blank-tile-clr: #2b2b2b;
+    --restore-tile-clr: var(--blank-tile-clr);
+    --primary-tile-text-clr: #ffffff;
+    --secondary-tile-text-clr: var(--blank-tile-clr);
+
+    --svg-buttons-clr: #ffffff;
+    --svg-interface-clr: #ffffff;
+
+    --header-clr: #162f22;
+    --header-text-clr: #e8ffe8;
+
+    --modal-clr: #1b3a2a;
+    --modal-text-clr: #ffffff;
+
+    --tile-border-clr: #e0e0e0;
+    --search-border-clr: #cccccc;
+    --search-border-focus-clr: #27a05b;
+    --search-border-hover-clr: #aaaaaa;
+}

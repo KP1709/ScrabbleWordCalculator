@@ -13,7 +13,7 @@ export const useLookupLettersFromWord = (wordToCheck: string) => {
             originalScore: getLetterScore(item), // Required to use for triple + doubling
             score: getLetterScore(item),
             action: 'restore',
-            colour: '#fcf1e1'
+            colour: 'restore-tile-colour'
         }
         wordLetterProperties.push(...[newLetter])
     })

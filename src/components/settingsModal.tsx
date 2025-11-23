@@ -18,6 +18,9 @@ export default function SettingsModal({ open, onClose }: ModalProps) {
         const extendedCheck = sessionStorage.getItem("isExtendedCheck");
         return extendedCheck === "true" ? true : false;
     });
+    const [, setRerender] = useState(0);
+
+    const currentTheme = sessionStorage.getItem("currentTheme")?.replace(/"/g, "") || "";
 
     const portalRoot = document.getElementById('portal-root');
     if (!portalRoot) return null;
@@ -34,7 +37,7 @@ export default function SettingsModal({ open, onClose }: ModalProps) {
                             type="checkbox"
                             id="wordCheckSetting"
                             checked={isWordToBeChecked}
-                            onChange={(e) => {
+                            onChange={e => {
                                 const checked = e.target.checked;
                                 setIsWordToBeChecked(checked);
                                 sessionStorage.setItem("isWordToBeChecked", JSON.stringify(checked));
@@ -44,14 +47,14 @@ export default function SettingsModal({ open, onClose }: ModalProps) {
                                 }
                             }}
                         />
-                        <label htmlFor="wordCheckSetting" style={{ color: 'white' }}>Check word against dictionary</label>
+                        <label htmlFor="wordCheckSetting">Check word against dictionary</label>
                     </span>
                     <span>
                         <input
                             type="checkbox"
                             id="extendedCheckSetting"
                             checked={isExtendedCheck}
-                            onChange={(e) => {
+                            onChange={e => {
                                 const checked = e.target.checked;
                                 setIsExtendedCheck(checked);
                                 sessionStorage.setItem("isExtendedCheck", JSON.stringify(checked));
@@ -61,7 +64,22 @@ export default function SettingsModal({ open, onClose }: ModalProps) {
                                 }
                             }}
                         />
-                        <label htmlFor="extendedCheckSetting" style={{ color: 'white' }}>Enable extended word check</label>
+                        <label htmlFor="extendedCheckSetting">Enable extended word check</label>
+                    </span>
+                    <span>
+                        <label htmlFor="themeSelection">Select theme:</label>
+                        <select name="themeSelection" id="themeSelection"
+                            value={currentTheme}
+                            onChange={(e) => {
+                                document.body.setAttribute("data-theme", e.target.value);
+                                sessionStorage.setItem("currentTheme", JSON.stringify(e.target.value));
+                                setRerender(n => n + 1); // Force re-render to update dropdown
+                            }}>
+                            <option value="light-theme">Light theme</option>
+                            <option value="dark-theme">Dark theme</option>
+                            <option value="water-theme">Water theme</option>
+                            <option value="pastel-earth-theme">Pastel Earth theme</option>
+                        </select>
                     </span>
                 </span>
             </div>
@@ -69,4 +87,3 @@ export default function SettingsModal({ open, onClose }: ModalProps) {
         portalRoot
     );
 }
-

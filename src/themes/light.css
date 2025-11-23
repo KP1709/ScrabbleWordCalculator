@@ -1,0 +1,26 @@
+:root {
+    --background-clr: #fff;
+    --main-text-clr: #000000;
+
+
+    --triple-tile-clr: #0077b6;
+    --double-tile-clr: #90e0ef;
+    --blank-tile-clr: #fcf1e1;
+    --restore-tile-clr: var(--blank-tile-clr);
+    --primary-tile-text-clr: #000;
+    --secondary-tile-text-clr: var(--blank-tile-clr);
+
+    --svg-buttons-clr: #000;
+    --svg-interface-clr: #000;
+
+    --header-clr: #225e3c;
+    --header-text-clr: #ffffff;
+
+    --modal-clr: #225e3c;
+    --modal-text-clr: #fff;
+
+    --tile-border-clr: #000;
+    --search-border-clr: #000;
+    --search-border-focus-clr: #27a05b;
+    --search-border-hover-clr: #808080;
+}

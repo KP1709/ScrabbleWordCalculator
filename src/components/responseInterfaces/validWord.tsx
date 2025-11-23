@@ -67,24 +67,24 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
             if (tile.id === id && !hasMaxNumberOfBlanks) {
                 switch (tile.action) {
                     case 'double':
-                        return { ...tile, score: tile.originalScore * 3, action: 'triple', colour: '#0077b6' };
+                        return { ...tile, score: tile.originalScore * 3, action: 'triple', colour: 'triple-tile-colour' };
                     case 'triple':
-                        return { ...tile, score: 0, action: 'blank', colour: '#fcf1e1' };
+                        return { ...tile, score: 0, action: 'blank', colour: 'blank-tile-colour' };
                     case 'blank':
-                        return { ...tile, score: tile.originalScore, action: 'restore', colour: '#fcf1e1' };
+                        return { ...tile, score: tile.originalScore, action: 'restore', colour: 'restore-tile-colour' };
                     case 'restore':
-                        return { ...tile, score: tile.originalScore * 2, action: 'double', colour: '#90e0ef' };
+                        return { ...tile, score: tile.originalScore * 2, action: 'double', colour: 'double-tile-colour' };
                 }
             }
 
             if (tile.id === id && hasMaxNumberOfBlanks) {
                 switch (tile.action) {
                     case 'double':
-                        return { ...tile, score: tile.originalScore * 3, action: 'triple', colour: '#0077b6' };
+                        return { ...tile, score: tile.originalScore * 3, action: 'triple', colour: 'triple-tile-colour' };
                     case 'triple':
-                        return { ...tile, score: tile.originalScore, action: 'restore', colour: '#fcf1e1' };
+                        return { ...tile, score: tile.originalScore, action: 'restore', colour: 'restore-tile-colour' };
                     case 'restore':
-                        return { ...tile, score: tile.originalScore * 2, action: 'double', colour: '#90e0ef' };
+                        return { ...tile, score: tile.originalScore * 2, action: 'double', colour: 'double-tile-colour' };
                 }
             }
 

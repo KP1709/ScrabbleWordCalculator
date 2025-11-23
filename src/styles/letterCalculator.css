@@ -5,7 +5,7 @@
 .multiplier__button {
     font-family: "Poppins", sans-serif;
     padding: 5px 5px;
-    border: 2px solid black;
+    border: 2px solid var(--search-border-clr);
     border-radius: 2px;
 }
 
@@ -15,6 +15,7 @@
     border: none;
     background-color: transparent;
     border-radius: 2px;
+    color: var(--main-text-clr);
 }
 
 #instructions-btn,
@@ -23,11 +24,18 @@
     background-color: transparent;
     border: 0;
     margin-left: 5px;
+    fill: var(--svg-buttons-clr)
+}
+
+.response-interface {
+    color: var(--main-text-clr);
+    text-align: center;
 }
 
 .svg-response {
     margin-top: 10px;
     width: 10%;
+    fill: var(--svg-interface-clr);
 }
 
 main {
@@ -44,24 +52,24 @@ form {
 
 label {
     margin-right: 10px;
+    color: var(--main-text-clr);
 }
 
 input[type="text"] {
     text-indent: 3px;
+    background-color: transparent;
+    color: var(--main-text-clr);
 }
 
 input[type="text"]:focus {
-    outline-color: hsl(146, 61%, 39%);
+    outline-color: var(--search-border-focus-clr);
 }
 
 input[type="text"]:hover {
-    border-color: hsl(0, 0%, 50%);
+    border-color: var(--search-border-hover-clr);
 }
 
 input[type="submit"] {
     background-color: transparent;
-}
-
-main>div {
-    text-align: center;
+    color: var(--main-text-clr);
 }

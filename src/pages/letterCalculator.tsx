@@ -24,6 +24,7 @@ export default function LetterCalculator() {
     useEffect(() => {
         sessionStorage.setItem("isExtendedCheck", JSON.stringify(true));
         sessionStorage.setItem("isWordToBeChecked", JSON.stringify(true));
+        sessionStorage.setItem("currentTheme", JSON.stringify('light-theme'));
     }, [])
 
     const handleSubmit = (e: { preventDefault: () => void }) => {

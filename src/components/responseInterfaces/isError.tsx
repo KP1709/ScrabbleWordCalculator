@@ -4,7 +4,7 @@ export default function Error({ wordToCheck }: { wordToCheck: string }) {
     const [word] = useState(wordToCheck)
 
     return (
-        <div className="flex-centre-column" data-test="error-screen">
+        <div className="flex-centre-column response-interface" data-test="error-screen">
             <h2>Error validating word - search online instead</h2>
             <a href={`https://www.google.com/search?q=${word}`} target="_blank">{word}&#128269;</a>
             <svg className='svg-response' aria-hidden='true' focusable='false' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
