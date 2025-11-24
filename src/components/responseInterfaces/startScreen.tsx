@@ -15,7 +15,7 @@ export default function StartScreen() {
                 <button className="start__instructions-button" onClick={() => setIsHowToModalOpen(true)}>View instructions</button>
                 <HowToModal open={isHowToModalOpen} onClose={() => setIsHowToModalOpen(false)} />
 
-                {breakpoint <= 400 && <button className="start__instructions-button" onClick={() => setIsSettingsModalOpen(true)}>Change settings</button>}
+                {breakpoint <= 450 && <button className="start__instructions-button" onClick={() => setIsSettingsModalOpen(true)}>Change settings</button>}
                 <SettingsModal open={isSettingsModalOpen} onClose={() => setIsSettingsModalOpen(false)} />
 
             </div>
