@@ -38,3 +38,35 @@
         border-radius: 2px;
     }
 }
+
+select {
+    appearance: base-select;
+    color: var(--modal-text-clr);
+}
+
+input[type="checkbox"] {
+    appearance: none;
+}
+
+input[type="checkbox"] {
+    position: relative;
+    width: 1.5em;
+    height: 1.5em;
+    border: 1px solid var(--modal-checkbox-clr);
+    vertical-align: -7px;
+    color: var(--modal-checkbox-clr);
+    margin-right: 10px;
+}
+
+input[type="checkbox"]::before {
+    content: "\2714";
+    position: absolute;
+    font-size: 1.2rem;
+    left: 1px;
+    top: -5px;
+    visibility: hidden;
+}
+
+input[type="checkbox"]:checked::before {
+    visibility: visible;
+}

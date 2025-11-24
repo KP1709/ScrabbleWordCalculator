@@ -18,6 +18,8 @@ body[data-theme="water-theme"] {
 
     --modal-clr: #0f3a4a;
     --modal-text-clr: #eaffff;
+    --modal-checkbox-clr: #fff;
+
 
     --tile-border-clr: #2c5964;
     --search-border-clr: #236574;

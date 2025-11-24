@@ -17,6 +17,7 @@ body[data-theme="dark-theme"] {
 
     --modal-clr: #1b3a2a;
     --modal-text-clr: #ffffff;
+    --modal-checkbox-clr: #fff;
 
     --tile-border-clr: #e0e0e0;
     --search-border-clr: #cccccc;
