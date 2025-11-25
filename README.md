@@ -27,7 +27,7 @@ While the functionality is technically the same, the code is now more maintainab
 - Can indicate if the total word score doubles, triples or both
 - Error handling if either the API or database is down
 - Instructions accessible at any point 
-- Configure if word goes through dictionary check and extended check
+- Configure if word goes through dictionary check and extended check - settings temporarily hidden
 - Change the application's appearance
 
 ## ⚡Supabase
