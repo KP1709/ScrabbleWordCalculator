@@ -1,0 +1,18 @@
+.mobile-bar {
+    margin-top: 30px;
+    gap: 20px;
+}
+
+.bar-button {
+    width: 100%;
+    background-color: transparent;
+    color: var(--main-text-clr);
+}
+
+.bar-button svg {
+    --size: 25px;
+    width: var(--size);
+    height: var(--size);
+    margin-right: 10px;
+    fill: var(--svg-buttons-clr)
+}
