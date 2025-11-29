@@ -9,6 +9,9 @@ body[data-theme="dark-theme"] {
     --primary-tile-text-clr: #ffffff;
     --secondary-tile-text-clr: var(--blank-tile-clr);
 
+    --link-clr: #48cae4;
+    --link-hover-clr: #0096c7;
+
     --svg-buttons-clr: #ffffff;
     --svg-interface-clr: #ffffff;
 

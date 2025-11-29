@@ -10,6 +10,9 @@
     --primary-tile-text-clr: #000;
     --secondary-tile-text-clr: var(--blank-tile-clr);
 
+    --link-clr: #0000ff;
+    --link-hover-clr: #808080;
+
     --svg-buttons-clr: #000;
     --svg-interface-clr: #000;
 

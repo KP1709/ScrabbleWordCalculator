@@ -9,6 +9,9 @@ body[data-theme="pastel-earth-theme"] {
     --primary-tile-text-clr: #4b3f36;
     --secondary-tile-text-clr: var(--blank-tile-clr);
 
+    --link-clr: #a79982;
+    --link-hover-clr: #cbb69c;
+
     --svg-buttons-clr: #4b3f36;
     --svg-interface-clr: #8c7b6b;
 

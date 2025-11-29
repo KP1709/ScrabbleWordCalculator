@@ -10,6 +10,9 @@ body[data-theme="water-theme"] {
     --primary-tile-text-clr: #004d4f;
     --secondary-tile-text-clr: var(--blank-tile-clr);
 
+    --link-clr: #00acc1;
+    --link-hover-clr: #1de9b6;
+
     --svg-buttons-clr: #4dd0e1;
     --svg-interface-clr: #4dd0e1;
 
