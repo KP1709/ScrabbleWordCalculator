@@ -25,6 +25,7 @@ export const useCheckWordInDictionary = ({ wordToCheck, submitWord, setSubmitWor
                     setIsValidWord(true);
                 } else if (apiRes.status === 404) {
                     shouldRunSupabase = true;
+                    setIsValidWord(false)
                 }
                 else if (!apiRes.ok && apiRes.status !== 404) {
                     // Must manually check and specify this 
