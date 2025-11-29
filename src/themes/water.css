@@ -1,28 +1,27 @@
 body[data-theme="water-theme"] {
-    --background-clr: #0b1f2a;
-    --main-text-clr: #fff;
+    --background-clr: #e0f7fa;
+    --main-text-clr: #000;
 
-    --triple-tile-clr: #006f8a;
-    --double-tile-clr: #38bfe6;
-    --blank-tile-clr: #18333f;
+    --triple-tile-clr: #00acc1;
+    --double-tile-clr: #80deea;
+    --blank-tile-clr: #b2ebf2;
     --restore-tile-clr: var(--blank-tile-clr);
 
-    --primary-tile-text-clr: #e8fcff;
+    --primary-tile-text-clr: #004d4f;
     --secondary-tile-text-clr: var(--blank-tile-clr);
 
-    --svg-buttons-clr: #d9faff;
-    --svg-interface-clr: #d9faff;
+    --svg-buttons-clr: #4dd0e1;
+    --svg-interface-clr: #4dd0e1;
 
-    --header-clr: #084c61;
-    --header-text-clr: #eaffff;
+    --header-clr: #006064;
+    --header-text-clr: #ffffff;
 
-    --modal-clr: #0f3a4a;
-    --modal-text-clr: #eaffff;
-    --modal-checkbox-clr: #fff;
+    --modal-clr: #00796b;
+    --modal-text-clr: #ffffff;
+    --modal-checkbox-clr: #ffffff;
 
-
-    --tile-border-clr: #2c5964;
-    --search-border-clr: #236574;
-    --search-border-focus-clr: #44d0a6;
-    --search-border-hover-clr: #3a8fa3;
+    --tile-border-clr: #00796b;
+    --search-border-clr: #004d40;
+    --search-border-focus-clr: #1de9b6;
+    --search-border-hover-clr: #00bfae;
 }
