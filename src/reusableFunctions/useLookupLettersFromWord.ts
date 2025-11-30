@@ -1,14 +1,13 @@
 import { LetterProperties } from "../reusableTypes/LetterProperties"
 import { getLetterScore } from "./letterScore"
-import { v4 as uuid } from "uuid"
 
 export const useLookupLettersFromWord = (wordToCheck: string) => {
     const wordLetterProperties = <LetterProperties[]>[]
     const splitWordArray = wordToCheck.split("")
 
-    splitWordArray.forEach(item => {
+    splitWordArray.forEach((item, index) => {
         let newLetter: LetterProperties = {
-            id: uuid(),
+            id: String(index),
             letter: item.toUpperCase(),
             originalScore: getLetterScore(item), // Required to use for triple + doubling
             score: getLetterScore(item),

@@ -1,7 +1,6 @@
 import { LetterProperties } from "../../reusableTypes/LetterProperties"
 import { useEffect, useState } from "react"
 import { useLookupLettersFromWord } from "../../reusableFunctions/useLookupLettersFromWord"
-import { v4 as uuid } from "uuid"
 import Tile from "../tile";
 import { useCheckForExceedingTileNumber } from "../../reusableFunctions/useCheckExceedingTileNumber";
 import MaxTileLimitExceeded from "./maxTileLimitExceeded";
@@ -99,7 +98,7 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
         !isAboveMaxTileAmount ? <div className="flex-centre-column" data-test="valid-word-screen">
             <ul className="flex-centre-row">
                 {wordToCheckArray.map(char =>
-                    <li key={uuid()} className="flex-centre" data-test='word-tile'>
+                    <li key={char.id} className="flex-centre" data-test='word-tile'>
                         <Tile
                             id={char.id}
                             letter={char.letter}
