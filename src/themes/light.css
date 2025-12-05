@@ -2,11 +2,13 @@
     --background-clr: #fff;
     --main-text-clr: #000000;
 
+    --multipler-btn-clr: #f4c8c8;
 
     --triple-tile-clr: #0077b6;
     --double-tile-clr: #90e0ef;
     --blank-tile-clr: #fcf1e1;
     --restore-tile-clr: var(--blank-tile-clr);
+
     --primary-tile-text-clr: #000;
     --secondary-tile-text-clr: var(--blank-tile-clr);
 

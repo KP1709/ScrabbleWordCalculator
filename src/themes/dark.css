@@ -2,10 +2,13 @@ body[data-theme="dark-theme"] {
     --background-clr: #121212;
     --main-text-clr: #f5f5f5;
 
+    --multipler-btn-clr: #2b2b2b;
+
     --triple-tile-clr: #0096c7;
     --double-tile-clr: #48cae4;
     --blank-tile-clr: #2b2b2b;
     --restore-tile-clr: var(--blank-tile-clr);
+
     --primary-tile-text-clr: #ffffff;
     --secondary-tile-text-clr: var(--blank-tile-clr);
 

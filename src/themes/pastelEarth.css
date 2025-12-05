@@ -2,10 +2,13 @@ body[data-theme="pastel-earth-theme"] {
     --background-clr: #fdf8f2;
     --main-text-clr: #4b3f36;
 
+    --multipler-btn-clr: #f5e8d0;
+
     --triple-tile-clr: #cbb69c;
     --double-tile-clr: #dcd3b2;
     --blank-tile-clr: #f5e8d0;
     --restore-tile-clr: var(--blank-tile-clr);
+
     --primary-tile-text-clr: #4b3f36;
     --secondary-tile-text-clr: var(--blank-tile-clr);
 

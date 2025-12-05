@@ -2,6 +2,8 @@ body[data-theme="water-theme"] {
     --background-clr: #e0f7fa;
     --main-text-clr: #000;
 
+    --multipler-btn-clr: #b2ebf2;
+
     --triple-tile-clr: #00acc1;
     --double-tile-clr: #80deea;
     --blank-tile-clr: #b2ebf2;

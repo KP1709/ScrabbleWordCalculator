@@ -9,3 +9,8 @@
     font-size: 1.5rem;
     color: var(--main-text-clr);
 }
+
+.multiplier__button {
+    background-color: var(--multipler-btn-clr);
+    color: var(--main-text-clr);
+}
