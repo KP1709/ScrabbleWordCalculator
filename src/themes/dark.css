@@ -16,6 +16,7 @@ body[data-theme="dark-theme"] {
     --link-hover-clr: #0096c7;
 
     --svg-buttons-clr: #ffffff;
+    --svg-buttons-hover-clr: #cccccc;
     --svg-interface-clr: #ffffff;
 
     --header-clr: #162f22;
