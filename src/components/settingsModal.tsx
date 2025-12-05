@@ -75,7 +75,7 @@ export default function SettingsModal({ open, onClose }: ModalProps) {
                                 sessionStorage.setItem("currentTheme", JSON.stringify(e.target.value));
                                 setRerender(n => n + 1); // Force re-render to update dropdown
                             }}>
-                            <option value="light-theme">Light theme</option>
+                            <option value="original-theme">Original theme</option>
                             <option value="dark-theme">Dark theme</option>
                             <option value="water-theme">Water theme</option>
                             <option value="pastel-earth-theme">Pastel Earth theme</option>
