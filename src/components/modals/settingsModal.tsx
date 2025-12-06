@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import "../../styles/modal.css"
+import { clearSearchHistory } from "../../reusableFunctions/searchHistorySave";
 
 type ModalProps = {
     open: boolean,
@@ -80,12 +81,18 @@ export default function SettingsModal({ open, onClose }: ModalProps) {
                                 const checked = e.target.checked;
                                 setIsStoreSearchHistory(checked);
                                 sessionStorage.setItem("isStoreSearchHistory", JSON.stringify(checked));
-                                if (!checked) {
-                                    sessionStorage.setItem("searchHistory", JSON.stringify([]));
-                                }
                             }}
                         />
-                        <label htmlFor="wordSearchHistoryChecking">Store words in search history (cleared if unchecked)</label>
+                        <label htmlFor="wordSearchHistoryChecking">Store words in search history</label>
+                    </span>
+                    <span>
+                        <label htmlFor="wordSearchHistoryChecking">Clear search history</label>
+                        <button
+                            id='wordSearchHistoryChecking'
+                            onClick={() => { setRerender(n => n + 1); clearSearchHistory() }}
+                            disabled={!isStoreSearchHistory || sessionStorage.getItem('searchHistory') === '[]'}>
+                            Clear
+                        </button>
                     </span>
                     <span>
                         <label htmlFor="themeSelection">Select theme:</label>

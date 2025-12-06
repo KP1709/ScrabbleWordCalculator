@@ -8,3 +8,7 @@ export const addWordToSearchHistory = (wordToAdd: string) => {
     const trimmedList = updatedWordList.slice(0, HISTORY_NO);
     sessionStorage.setItem("searchHistory", JSON.stringify(trimmedList));
 };
+
+export const clearSearchHistory = () => {
+    sessionStorage.setItem("searchHistory", JSON.stringify([]));
+}
