@@ -4,9 +4,14 @@
 }
 
 .bar-button {
-    width: 100%;
+    width: 50%;
+    max-width: 150px;
     background-color: transparent;
-    color: var(--main-text-clr);
+    color: var(--svg-buttons-clr);
+}
+
+.bar-button:hover {
+    color: var(--svg-buttons-hover-clr);
 }
 
 .bar-button svg {
@@ -15,4 +20,8 @@
     height: var(--size);
     margin-right: 10px;
     fill: var(--svg-buttons-clr)
+}
+
+.bar-button:hover svg {
+    fill: var(--svg-buttons-hover-clr)
 }

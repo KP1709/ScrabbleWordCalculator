@@ -9,31 +9,6 @@
     border-radius: 2px;
 }
 
-.start__instructions-button {
-    font-family: "Poppins", sans-serif;
-    padding: 5px 5px;
-    border: none;
-    background-color: transparent;
-    border-radius: 2px;
-    color: var(--main-text-clr);
-}
-
-#instructions-btn,
-#settings-btn,
-#history-btn {
-    width: 40px;
-    background-color: transparent;
-    border: 0;
-    margin-left: 5px;
-    fill: var(--svg-buttons-clr)
-}
-
-#instructions-btn:hover,
-#settings-btn:hover,
-#history-btn:hover {
-    fill: var(--svg-buttons-hover-clr);
-}
-
 .response-interface {
     color: var(--main-text-clr);
     text-align: center;
