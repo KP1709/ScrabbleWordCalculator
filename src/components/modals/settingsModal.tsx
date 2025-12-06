@@ -18,6 +18,11 @@ export default function SettingsModal({ open, onClose }: ModalProps) {
         const extendedCheck = sessionStorage.getItem("isExtendedCheck");
         return extendedCheck === "true" ? true : false;
     });
+
+    const [isStoreSearchHistory, setIsStoreSearchHistory] = useState(() => {
+        const searchHistory = sessionStorage.getItem("isStoreSearchHistory");
+        return searchHistory === "true" ? true : false;
+    })
     const [, setRerender] = useState(0);
 
     const currentTheme = sessionStorage.getItem("currentTheme")?.replace(/"/g, "") || "";
@@ -65,6 +70,22 @@ export default function SettingsModal({ open, onClose }: ModalProps) {
                             }}
                         />
                         <label htmlFor="extendedCheckSetting">Enable extended word check</label>
+                    </span>
+                    <span>
+                        <input
+                            type="checkbox"
+                            id="wordSearchHistoryChecking"
+                            checked={isStoreSearchHistory}
+                            onChange={e => {
+                                const checked = e.target.checked;
+                                setIsStoreSearchHistory(checked);
+                                sessionStorage.setItem("isStoreSearchHistory", JSON.stringify(checked));
+                                if (!checked) {
+                                    sessionStorage.setItem("searchHistory", JSON.stringify([]));
+                                }
+                            }}
+                        />
+                        <label htmlFor="wordSearchHistoryChecking">Store words in search history (cleared if unchecked)</label>
                     </span>
                     <span>
                         <label htmlFor="themeSelection">Select theme:</label>

@@ -27,7 +27,9 @@ export default function LetterCalculator() {
     useEffect(() => {
         sessionStorage.setItem("isExtendedCheck", JSON.stringify(true));
         sessionStorage.setItem("isWordToBeChecked", JSON.stringify(true));
+        sessionStorage.setItem("isStoreWordHistory", JSON.stringify(false))
         sessionStorage.setItem("currentTheme", JSON.stringify('light-theme'));
+        sessionStorage.setItem("searchHistory", JSON.stringify([]));
     }, [])
 
     const handleSubmit = (e: { preventDefault: () => void }) => {
@@ -68,7 +70,11 @@ export default function LetterCalculator() {
             </span>
             <HowToModal open={isHowToModalOpen} onClose={() => setIsHowToModalOpen(false)} />
             <SettingsModal open={isSettingsModalOpen} onClose={() => setIsSettingsModalOpen(false)} />
-            <HistoryModal open={isHistoryModalOpen} onClose={() => setIsHistoryModalOpen(false)} />
+            <HistoryModal
+                open={isHistoryModalOpen}
+                onClose={() => setIsHistoryModalOpen(false)}
+                setWordToCheck={setWordToCheck}
+            />
 
             {isValidString === "start" && <StartScreen />}
             {isAnalysing && <IsAnalysing />}

@@ -6,6 +6,7 @@ import { useCheckForExceedingTileNumber } from "../../reusableFunctions/useCheck
 import MaxTileLimitExceeded from "./maxTileLimitExceeded";
 import '../../styles/validWord.css'
 import { getLetterNoTiles } from "../../reusableFunctions/letterNoTiles";
+import { addWordToSearchHistory } from "../../reusableFunctions/searchHistorySave";
 
 type ValidWordType = {
     wordToCheck: string,
@@ -26,8 +27,9 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
         setIsAboveMaxTileAmount(useCheckForExceedingTileNumber(wordToCheck))
         if (!isAboveMaxTileAmount) {
             setWordToCheckArray(useLookupLettersFromWord(wordToCheck))
+            { sessionStorage.getItem('isStoreSearchHistory') === 'true' && addWordToSearchHistory(wordToCheck) }
         }
-    }, [submitWord])
+    }, [])
 
     useEffect(() => {
         let wordScoreMultiplier = 1;
@@ -96,7 +98,7 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
 
     return (
         !isAboveMaxTileAmount ? <div className="flex-centre-column" data-test="valid-word-screen">
-            <ul className="flex-centre-row">
+            <ul className="flex-centre-row tile-list">
                 {wordToCheckArray.map(char =>
                     <li key={char.id} className="flex-centre" data-test='word-tile'>
                         <Tile
