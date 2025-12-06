@@ -19,7 +19,8 @@
 }
 
 #instructions-btn,
-#settings-btn {
+#settings-btn,
+#history-btn {
     width: 40px;
     background-color: transparent;
     border: 0;
@@ -28,7 +29,8 @@
 }
 
 #instructions-btn:hover,
-#settings-btn:hover {
+#settings-btn:hover,
+#history-btn:hover {
     fill: var(--svg-buttons-hover-clr);
 }
 
