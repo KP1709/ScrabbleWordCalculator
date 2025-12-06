@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
-import "../styles/modal.css"
+import "../../styles/modal.css"
 
 type ModalProps = {
     open: boolean,

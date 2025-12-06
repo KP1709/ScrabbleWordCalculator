@@ -1,5 +1,5 @@
 import { useState } from "react";
-import HowToModal from "../howToModal";
+import HowToModal from "../modals/howToModal";
 import useBreakpoint from "../../hooks/useBreakpoint";
 
 export default function StartScreen() {
