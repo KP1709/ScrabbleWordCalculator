@@ -27,7 +27,7 @@ export default function LetterCalculator() {
     useEffect(() => {
         sessionStorage.setItem("isExtendedCheck", JSON.stringify(true));
         sessionStorage.setItem("isWordToBeChecked", JSON.stringify(true));
-        sessionStorage.setItem("isStoreWordHistory", JSON.stringify(false))
+        sessionStorage.setItem("isStoreSearchHistory", JSON.stringify(false))
         sessionStorage.setItem("currentTheme", JSON.stringify('light-theme'));
         sessionStorage.setItem("searchHistory", JSON.stringify([]));
     }, [])
