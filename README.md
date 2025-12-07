@@ -50,7 +50,7 @@ The word 'counterbalancing' exists in the dictionary but the word is more that 1
 ## 🕹️ Testing
 Component tests and end-to-end tests have been created using Cypress. Before commiting new code, the end-to-end tests will run and as long as all the tests pass, the commit will be created. Husky has been used so this pre-commit check is accessible.  
 This will run on every commit so if updating the README, for example, it can be bypassed by adding the flag '--no-verify' to the commit command.  
-(This will save me from committing code which I thought was working 😅) 
+(This will save me from committing code and breaking functionality which I thought was working 😅) 
 
 ## 🔬 Analytics
 This web tool uses Simple Analytics. The tool doesn't use cookies so there is no privacy banner displayed.  
