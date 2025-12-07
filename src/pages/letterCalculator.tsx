@@ -33,6 +33,9 @@ export default function LetterCalculator() {
         sessionStorage.setItem("currentTheme", JSON.stringify('light-theme'));
         sessionStorage.setItem("searchHistory", JSON.stringify([]));
 
+        // Set this initially so history gets stored unless changed 
+        sessionStorage.setItem("isStoreSearchHistory", JSON.stringify(true));
+
         // Set this initially to avoid possible null value in sessionStorage
         setIsStoreSearchHistory(true)
     }, [])
