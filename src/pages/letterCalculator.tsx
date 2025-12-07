@@ -15,19 +15,22 @@ import HistoryModal from "../components/modals/historyModal"
 type ValidString = "true" | "false" | "start"
 
 export default function LetterCalculator() {
-    const [wordToCheck, setWordToCheck] = useState("")
-    const [isValidString, setIsValidString] = useState<ValidString>("start")
-    const [submitWord, setSubmitWord] = useState(false)
-    const [isTooLong, setIsTooLong] = useState(false)
-    const [isHowToModalOpen, setIsHowToModalOpen] = useState(false)
-    const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false)
-    const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false)
-    const { isError, isAnalysing, isValidWord } = useCheckWordInDictionary({ wordToCheck, submitWord, setSubmitWord })
+    const [wordToCheck, setWordToCheck] = useState("");
+    const [isValidString, setIsValidString] = useState<ValidString>("start");
+    const [submitWord, setSubmitWord] = useState(false);
+    const [isTooLong, setIsTooLong] = useState(false);
+    const [isHowToModalOpen, setIsHowToModalOpen] = useState(false);
+    const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+    const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false);
+    const [isStoreSearchHistory, setIsStoreSearchHistory] = useState(() => {
+        const showSearchHistory = sessionStorage.getItem("isStoreSearchHistory");
+        return showSearchHistory === "true" ? true : false;
+    });
+    const { isError, isAnalysing, isValidWord } = useCheckWordInDictionary({ wordToCheck, submitWord, setSubmitWord });
 
     useEffect(() => {
         sessionStorage.setItem("isExtendedCheck", JSON.stringify(true));
         sessionStorage.setItem("isWordToBeChecked", JSON.stringify(true));
-        sessionStorage.setItem("isStoreSearchHistory", JSON.stringify(true))
         sessionStorage.setItem("currentTheme", JSON.stringify('light-theme'));
         sessionStorage.setItem("searchHistory", JSON.stringify([]));
     }, [])
@@ -69,7 +72,12 @@ export default function LetterCalculator() {
 
             </span>
             <HowToModal open={isHowToModalOpen} onClose={() => setIsHowToModalOpen(false)} />
-            <SettingsModal open={isSettingsModalOpen} onClose={() => setIsSettingsModalOpen(false)} />
+            <SettingsModal
+                open={isSettingsModalOpen}
+                onClose={() => setIsSettingsModalOpen(false)}
+                isStoreSearchHistory={isStoreSearchHistory}
+                setIsStoreSearchHistory={setIsStoreSearchHistory}
+            />
             <HistoryModal
                 open={isHistoryModalOpen}
                 onClose={() => setIsHistoryModalOpen(false)}
@@ -89,6 +97,7 @@ export default function LetterCalculator() {
                 setIsHistoryModalOpen={setIsHistoryModalOpen}
                 setIsHowToModalOpen={setIsHowToModalOpen}
                 setIsSettingsModalOpen={setIsSettingsModalOpen}
+                isStoreSearchHistory={isStoreSearchHistory}
             />
         </main>
     )

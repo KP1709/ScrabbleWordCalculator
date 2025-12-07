@@ -5,10 +5,12 @@ import { clearSearchHistory } from "../../reusableFunctions/searchHistorySave";
 
 type ModalProps = {
     open: boolean,
-    onClose: () => void
+    onClose: () => void,
+    isStoreSearchHistory: boolean,
+    setIsStoreSearchHistory: (value: boolean) => void
 }
 
-export default function SettingsModal({ open, onClose }: ModalProps) {
+export default function SettingsModal({ open, onClose, isStoreSearchHistory, setIsStoreSearchHistory }: ModalProps) {
     if (!open) return null;
 
     const [isWordToBeChecked, setIsWordToBeChecked] = useState(() => {
@@ -19,11 +21,6 @@ export default function SettingsModal({ open, onClose }: ModalProps) {
         const extendedCheck = sessionStorage.getItem("isExtendedCheck");
         return extendedCheck === "true" ? true : false;
     });
-
-    const [isStoreSearchHistory, setIsStoreSearchHistory] = useState(() => {
-        const searchHistory = sessionStorage.getItem("isStoreSearchHistory");
-        return searchHistory === "true" ? true : false;
-    })
     const [, setRerender] = useState(0);
 
     const currentTheme = sessionStorage.getItem("currentTheme")?.replace(/"/g, "") || "";
@@ -86,9 +83,9 @@ export default function SettingsModal({ open, onClose }: ModalProps) {
                         <label htmlFor="wordSearchHistoryChecking">Store words in search history</label>
                     </span>
                     <span>
-                        <label htmlFor="wordSearchHistoryChecking">Clear search history</label>
+                        <label htmlFor="clearSearchHistory">Clear search history</label>
                         <button
-                            id='wordSearchHistoryChecking'
+                            id='clearSearchHistory'
                             onClick={() => { setRerender(n => n + 1); clearSearchHistory() }}
                             disabled={!isStoreSearchHistory || sessionStorage.getItem('searchHistory') === '[]'}>
                             Clear
