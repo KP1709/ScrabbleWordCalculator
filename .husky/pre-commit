@@ -1,0 +1,12 @@
+echo "Running Cypress tests before commit..."
+
+pnpx cypress run
+RESULT=$?
+
+if [ $RESULT -ne 0 ]; then
+  echo "❌ Cypress tests failed. Commit aborted."
+  exit 1
+fi
+
+echo "✅ All Cypress tests passed. Proceeding with commit."
+exit 0
