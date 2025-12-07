@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "../styles/letterCalculator.css"
 import { useCheckWordInDictionary } from "../hooks/useCheckWordInDictionary"
 import StartScreen from "../components/responseInterfaces/startScreen"
@@ -24,11 +24,13 @@ export default function LetterCalculator() {
     const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false)
     const { isError, isAnalysing, isValidWord } = useCheckWordInDictionary({ wordToCheck, submitWord, setSubmitWord })
 
-    sessionStorage.setItem("isExtendedCheck", JSON.stringify(true));
-    sessionStorage.setItem("isWordToBeChecked", JSON.stringify(true));
-    sessionStorage.setItem("isStoreSearchHistory", JSON.stringify(true))
-    sessionStorage.setItem("currentTheme", JSON.stringify('light-theme'));
-    sessionStorage.setItem("searchHistory", JSON.stringify([]));
+    useEffect(() => {
+        sessionStorage.setItem("isExtendedCheck", JSON.stringify(true));
+        sessionStorage.setItem("isWordToBeChecked", JSON.stringify(true));
+        sessionStorage.setItem("isStoreSearchHistory", JSON.stringify(true))
+        sessionStorage.setItem("currentTheme", JSON.stringify('light-theme'));
+        sessionStorage.setItem("searchHistory", JSON.stringify([]));
+    }, [])
 
     const handleSubmit = (e: { preventDefault: () => void }) => {
         e.preventDefault();
