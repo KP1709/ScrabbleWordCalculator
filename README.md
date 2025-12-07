@@ -2,7 +2,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/88b1162f-6ee5-437e-a3bc-a3ba498c33ae/deploy-status)](https://app.netlify.com/sites/kareenapatel-scrabblewordcalculator/deploys) ![Supabase Status](https://img.shields.io/badge/Supabase-paused-bfbfbf)
 
 ## ⌨️ Tech stack
-React / Typescript / CSS / pnpm / APIs + Supabase / Netlify CLI + Serverless functions / Cypress (Testing)
+React / Typescript / CSS / pnpm / APIs + Supabase / Netlify CLI + Serverless functions / Cypress (Testing) / Husky (Git Hooks)
 
 ## 🍼 Introduction
 Owning and playing the original version of Scrabble, I know it would sometimes be difficult to calculate a word's score. Therefore, I created my own version of a Scrabble calculator. The user enters a word and sees the word's score. Additionally the tool checks to see if the word is in the dictionary using a free dictionary API. Therefore enabling the user to test to see if a particular word exists. The app is also connected to a database to search for words which are valid in Scrabble but are not in the dictionary API.
@@ -46,6 +46,11 @@ If database is paused or is throwing a non-404 error, then it will catch the err
 The word 'knickknacks' exists in the dictionary but there are too many 'k' in the word so it cannot be used in the game. This will display the 'Max Tile Limit Exceeded' screen. 
 
 The word 'counterbalancing' exists in the dictionary but the word is more that 15 letters. This will display 'Invalid Entry' with a message about exceeding.
+
+## 🕹️ Testing
+Component tests and end-to-end tests have been created using Cypress. Before commiting new code, the end-to-end tests will run and as long as all the tests pass, the commit will be created. Husky has been used so this pre-commit check is accessible.  
+This will run on every commit so if updating the README, for example, it can be bypassed by adding the flag '--no-verify' to the commit command.  
+(This will save me from committing code which I thought was working 😅) 
 
 ## 🔬 Analytics
 This web tool uses Simple Analytics. The tool doesn't use cookies so there is no privacy banner displayed.  
