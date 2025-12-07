@@ -67,6 +67,7 @@ export const useCheckWordInDictionary = ({ wordToCheck, submitWord, setSubmitWor
         }
         if (submitWord && sessionStorage.getItem("isWordToBeChecked") === 'false') {
             setIsValidWord(true)
+            setIsError(false)
             setSubmitWord(false)
         }
     }, [submitWord])
