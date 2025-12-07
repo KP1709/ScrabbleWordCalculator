@@ -19,14 +19,13 @@ export default function LetterCalculator() {
     const [isValidString, setIsValidString] = useState<ValidString>("start");
     const [submitWord, setSubmitWord] = useState(false);
     const [isTooLong, setIsTooLong] = useState(false);
-    const [isHowToModalOpen, setIsHowToModalOpen] = useState(false);
-    const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
-    const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false);
+    const [modalVisibility, setModalVisibility] = useState({ howTo: false, settings: false, history: false });
+    const { isError, isAnalysing, isValidWord } = useCheckWordInDictionary({ wordToCheck, submitWord, setSubmitWord });
+
     const [isStoreSearchHistory, setIsStoreSearchHistory] = useState(() => {
         const showSearchHistory = sessionStorage.getItem("isStoreSearchHistory");
         return showSearchHistory === "true" ? true : false;
     });
-    const { isError, isAnalysing, isValidWord } = useCheckWordInDictionary({ wordToCheck, submitWord, setSubmitWord });
 
     useEffect(() => {
         sessionStorage.setItem("isExtendedCheck", JSON.stringify(true));
@@ -71,16 +70,19 @@ export default function LetterCalculator() {
                 </form>
 
             </span>
-            <HowToModal open={isHowToModalOpen} onClose={() => setIsHowToModalOpen(false)} />
+            <HowToModal
+                open={modalVisibility.howTo}
+                onClose={() => setModalVisibility((modal) => ({ ...modal, howTo: false }))}
+            />
             <SettingsModal
-                open={isSettingsModalOpen}
-                onClose={() => setIsSettingsModalOpen(false)}
+                open={modalVisibility.settings}
+                onClose={() => setModalVisibility((modal) => ({ ...modal, settings: false }))}
                 isStoreSearchHistory={isStoreSearchHistory}
                 setIsStoreSearchHistory={setIsStoreSearchHistory}
             />
             <HistoryModal
-                open={isHistoryModalOpen}
-                onClose={() => setIsHistoryModalOpen(false)}
+                open={modalVisibility.history}
+                onClose={() => setModalVisibility((modal) => ({ ...modal, history: false }))}
                 setWordToCheck={setWordToCheck}
             />
 
@@ -94,9 +96,7 @@ export default function LetterCalculator() {
                 <ValidWord wordToCheck={wordToCheck.toLowerCase()} submitWord={submitWord} />
             }
             <MobileBar
-                setIsHistoryModalOpen={setIsHistoryModalOpen}
-                setIsHowToModalOpen={setIsHowToModalOpen}
-                setIsSettingsModalOpen={setIsSettingsModalOpen}
+                setModalVisibility={setModalVisibility}
                 isStoreSearchHistory={isStoreSearchHistory}
             />
         </main>
