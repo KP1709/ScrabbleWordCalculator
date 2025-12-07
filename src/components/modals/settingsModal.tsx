@@ -47,6 +47,8 @@ export default function SettingsModal({ open, onClose, isStoreSearchHistory, set
                                 if (!checked) {
                                     setIsExtendedCheck(false);
                                     sessionStorage.setItem("isExtendedCheck", JSON.stringify(false));
+                                    setIsStoreSearchHistory(false)
+                                    sessionStorage.setItem("isStoreSearchHistory", JSON.stringify(false));
                                 }
                             }}
                         />
@@ -78,6 +80,10 @@ export default function SettingsModal({ open, onClose, isStoreSearchHistory, set
                                 const checked = e.target.checked;
                                 setIsStoreSearchHistory(checked);
                                 sessionStorage.setItem("isStoreSearchHistory", JSON.stringify(checked));
+                                if (checked && !isWordToBeChecked) {
+                                    setIsWordToBeChecked(true);
+                                    sessionStorage.setItem("isWordToBeChecked", JSON.stringify(true));
+                                }
                             }}
                         />
                         <label htmlFor="wordSearchHistoryChecking">Store words in search history</label>
