@@ -32,6 +32,9 @@ export default function LetterCalculator() {
         sessionStorage.setItem("isWordToBeChecked", JSON.stringify(true));
         sessionStorage.setItem("currentTheme", JSON.stringify('light-theme'));
         sessionStorage.setItem("searchHistory", JSON.stringify([]));
+
+        // Set this initially to avoid possible null value in sessionStorage
+        setIsStoreSearchHistory(true)
     }, [])
 
     const handleSubmit = (e: { preventDefault: () => void }) => {
