@@ -23,7 +23,7 @@ export default function HistoryModal({ open, onClose, setWordToCheck }: ModalPro
                 ) : (
                     <ul className='modal-list'>
                         {searchHistory.map((word: string, index: number) => (
-                            <li key={index} onClick={() => { setWordToCheck(word) }}>{word}</li>
+                            <li key={index} onClick={() => { setWordToCheck(word); onClose() }}>{word}</li>
                         ))}
                     </ul>
                 )}
