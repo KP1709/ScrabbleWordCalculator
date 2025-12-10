@@ -28,6 +28,44 @@ export default function SettingsModal({ open, onClose, isStoreSearchHistory, set
     const portalRoot = document.getElementById('portal-root');
     if (!portalRoot) return null;
 
+    const handleWordCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const checked = e.target.checked;
+        setIsWordToBeChecked(checked);
+        sessionStorage.setItem("isWordToBeChecked", JSON.stringify(checked));
+        if (!checked) {
+            setIsExtendedCheck(false);
+            sessionStorage.setItem("isExtendedCheck", JSON.stringify(false));
+            setIsStoreSearchHistory(false)
+            sessionStorage.setItem("isStoreSearchHistory", JSON.stringify(false));
+        }
+    }
+
+    const handleExtendedWordCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const checked = e.target.checked;
+        setIsExtendedCheck(checked);
+        sessionStorage.setItem("isExtendedCheck", JSON.stringify(checked));
+        if (checked && !isWordToBeChecked) {
+            setIsWordToBeChecked(true);
+            sessionStorage.setItem("isWordToBeChecked", JSON.stringify(true));
+        }
+    }
+
+    const handleSearchHistory = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const checked = e.target.checked;
+        setIsStoreSearchHistory(checked);
+        sessionStorage.setItem("isStoreSearchHistory", JSON.stringify(checked));
+        if (checked && !isWordToBeChecked) {
+            setIsWordToBeChecked(true);
+            sessionStorage.setItem("isWordToBeChecked", JSON.stringify(true));
+        }
+    }
+
+    const handleThemeSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        document.body.setAttribute("data-theme", e.target.value);
+        sessionStorage.setItem("currentTheme", JSON.stringify(e.target.value));
+        setRerender(n => n + 1); // Force re-render to update dropdown
+    }
+
     return createPortal(
         <>
             <div className="modal-overlay"></div>
@@ -40,17 +78,7 @@ export default function SettingsModal({ open, onClose, isStoreSearchHistory, set
                             type="checkbox"
                             id="wordCheckSetting"
                             checked={isWordToBeChecked}
-                            onChange={e => {
-                                const checked = e.target.checked;
-                                setIsWordToBeChecked(checked);
-                                sessionStorage.setItem("isWordToBeChecked", JSON.stringify(checked));
-                                if (!checked) {
-                                    setIsExtendedCheck(false);
-                                    sessionStorage.setItem("isExtendedCheck", JSON.stringify(false));
-                                    setIsStoreSearchHistory(false)
-                                    sessionStorage.setItem("isStoreSearchHistory", JSON.stringify(false));
-                                }
-                            }}
+                            onChange={handleWordCheck}
                         />
                         <label htmlFor="wordCheckSetting">Check word against dictionary</label>
                     </span>
@@ -59,15 +87,7 @@ export default function SettingsModal({ open, onClose, isStoreSearchHistory, set
                             type="checkbox"
                             id="extendedCheckSetting"
                             checked={isExtendedCheck}
-                            onChange={e => {
-                                const checked = e.target.checked;
-                                setIsExtendedCheck(checked);
-                                sessionStorage.setItem("isExtendedCheck", JSON.stringify(checked));
-                                if (checked && !isWordToBeChecked) {
-                                    setIsWordToBeChecked(true);
-                                    sessionStorage.setItem("isWordToBeChecked", JSON.stringify(true));
-                                }
-                            }}
+                            onChange={handleExtendedWordCheck}
                         />
                         <label htmlFor="extendedCheckSetting">Enable extended word check</label>
                     </span>
@@ -76,15 +96,7 @@ export default function SettingsModal({ open, onClose, isStoreSearchHistory, set
                             type="checkbox"
                             id="wordSearchHistoryChecking"
                             checked={isStoreSearchHistory}
-                            onChange={e => {
-                                const checked = e.target.checked;
-                                setIsStoreSearchHistory(checked);
-                                sessionStorage.setItem("isStoreSearchHistory", JSON.stringify(checked));
-                                if (checked && !isWordToBeChecked) {
-                                    setIsWordToBeChecked(true);
-                                    sessionStorage.setItem("isWordToBeChecked", JSON.stringify(true));
-                                }
-                            }}
+                            onChange={handleSearchHistory}
                         />
                         <label htmlFor="wordSearchHistoryChecking">Store words in search history</label>
                     </span>
@@ -101,11 +113,7 @@ export default function SettingsModal({ open, onClose, isStoreSearchHistory, set
                         <label htmlFor="themeSelection">Select theme:</label>
                         <select name="themeSelection" id="themeSelection"
                             value={currentTheme}
-                            onChange={(e) => {
-                                document.body.setAttribute("data-theme", e.target.value);
-                                sessionStorage.setItem("currentTheme", JSON.stringify(e.target.value));
-                                setRerender(n => n + 1); // Force re-render to update dropdown
-                            }}>
+                            onChange={handleThemeSelection}>
                             <option value="original-theme">Original theme</option>
                             <option value="dark-theme">Dark theme</option>
                             <option value="water-theme">Water theme</option>
@@ -118,3 +126,4 @@ export default function SettingsModal({ open, onClose, isStoreSearchHistory, set
         portalRoot
     );
 }
+
