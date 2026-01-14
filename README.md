@@ -25,6 +25,7 @@ While the functionality is technically the same, the code is now more maintainab
 - Can indicate which tiles are blank, update the total word score and limit the number
 - Can apply the 50 point bonus for words with seven letter tiles or longer
 - Can indicate if the total word score doubles, triples or both
+- Can reset multipliers and bonuses added to letters and/or whole word
 - Error handling if either the API or database is down
 - Instructions accessible at any point 
 - Configure if word goes through dictionary check and extended check
