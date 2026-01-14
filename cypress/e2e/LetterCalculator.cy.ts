@@ -220,4 +220,36 @@ describe('Letter Calculator', () => {
     cy.get("[data-test='unknown-word-screen']").should('be.visible')
   })
 
+  it('Testing when word + tile bonus are reset', () => {
+    cy.intercept('GET', 'https://api.dictionaryapi.dev/api/v2/entries/en/reacting',
+      (response: { reply: (arg0: { statusCode: number; body: { message: string } }) => void }) => {
+        response.reply({
+          statusCode: 200,
+          body: { message: 'Valid word' }
+        })
+      }).as('ValidWord')
+    cy.visit('/')
+
+    cy.get("[data-test='word-form']").as('word-input')
+    cy.get('@word-input').type('reacting')
+    cy.get("[data-test='submit-word-form-btn']").click()
+    cy.wait('@ValidWord')
+    cy.get("[data-test='valid-word-screen']").should('be.visible')
+
+    cy.get("[data-test='list-tile-R']").click()
+    cy.get("[data-test='list-tile-R']").click()
+    cy.get("[data-test='list-tile-R']").click()
+    cy.get("[data-test='list-tile-R']").click()
+    cy.get("[data-test='list-tile-E']").click()
+    cy.get("[data-test='list-tile-C']").click()
+    cy.get("[data-test='list-tile-T']").click()
+    cy.get("[data-test='list-tile-T']").click()
+    cy.get("[data-test='list-tile-I']").click()
+    cy.get("[data-test='double-total-score-btn']").click()
+    cy.get("[data-test='bonus-btn']").click()
+    cy.get("[data-test='total-word-score']").should('contain', 86)
+    cy.get("[data-test='reset-btn']").click()
+    cy.get("[data-test='total-word-score']").should('contain', 11)
+  })
+
 })

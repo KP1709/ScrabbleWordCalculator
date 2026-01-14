@@ -25,6 +25,7 @@ export default function HowToModal({ open, onClose }: ModalProps) {
                 <p>Tapping the tiles will cause letter scores to double, triple, display blank and reset back to its original value in this cycle</p>
                 <p>The multiplier buttons below will double and/or triple the word score</p>
                 <p>The tile bonus button adds 50 points to the total word score and will show if the word is longer than seven letters</p>
+                <p>The reset button will reset all multipliers and tile changes to the word</p>
             </div>
         </>,
         document.getElementById('portal-root')! // ! - Non-Null assertion operation

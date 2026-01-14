@@ -22,12 +22,13 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
     const [resetIsSevenTilesUsed, setResetIsSevenTilesUsed] = useState(false)
     const [wordToCheckArray, setWordToCheckArray] = useState<LetterProperties[]>([])
     const [isAboveMaxTileAmount, setIsAboveMaxTileAmount] = useState(false)
+    const [resetAll, setResetAll] = useState(false)
 
     useEffect(() => {
         setIsAboveMaxTileAmount(checkForExceedingTileNumber(wordToCheck))
         if (!isAboveMaxTileAmount) {
             setWordToCheckArray(lookupLettersFromWord(wordToCheck))
-            { sessionStorage.getItem('isStoreSearchHistory') === 'true' && addWordToSearchHistory(wordToCheck) }
+            sessionStorage.getItem('isStoreSearchHistory') === 'true' && addWordToSearchHistory(wordToCheck)
         }
     }, [])
 
@@ -41,16 +42,20 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
     }, [wordToCheckArray, isDoubleWordScoreMultiplier, isTripleWordScoreMultiplier, isSevenTilesUsed])
 
     useEffect(() => {
-        if (submitWord || resetMultiplier) {
+        if (submitWord || resetMultiplier || resetAll) {
             setIsDoubleWordScoreMultiplier(false);
             setIsTripleWordScoreMultiplier(false);
         }
-        if (submitWord || resetIsSevenTilesUsed) {
+        if (submitWord || resetIsSevenTilesUsed || resetAll) {
             setIsSevenTilesUsed(false)
+        }
+        if (resetAll) {
+            setWordToCheckArray(lookupLettersFromWord(wordToCheck))
         }
         setResetMultiplier(false)
         setResetIsSevenTilesUsed(false)
-    }, [submitWord, resetMultiplier, resetIsSevenTilesUsed])
+        setResetAll(false)
+    }, [submitWord, resetMultiplier, resetIsSevenTilesUsed, resetAll])
 
     const handleDoubleToggle = () => {
         setIsDoubleWordScoreMultiplier(!isDoubleWordScoreMultiplier);
@@ -128,11 +133,17 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
                     {isTripleWordScoreMultiplier ? 'Triple selected' : 'Triple total score'}
                 </button>
             </div>
+            <div id="multiplier__buttons" className="flex-centre-row">
+                {wordToCheckArray.length >= 7 && <button className="multiplier__button" data-test='bonus-btn'
+                    onClick={() => { setIsSevenTilesUsed(!isSevenTilesUsed) }}>
+                    {!isSevenTilesUsed ? 'Add' : 'Remove'} seven tile bonus
+                </button>}
 
-            {wordToCheckArray.length >= 7 && <button className="multiplier__button" data-test='bonus-btn'
-                onClick={() => { setIsSevenTilesUsed(!isSevenTilesUsed) }}>
-                {!isSevenTilesUsed ? 'Add' : 'Remove'} seven tile bonus
-            </button>}
+                <button className="multiplier__button" data-test='reset-btn'
+                    onClick={() => { setResetAll(!resetAll) }}>
+                    Reset all
+                </button>
+            </div>
         </div> : <MaxTileLimitExceeded />
     )
 
