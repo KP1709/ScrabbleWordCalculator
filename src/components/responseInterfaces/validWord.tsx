@@ -1,8 +1,8 @@
 import { LetterProperties } from "../../reusableTypes/LetterProperties"
 import { useEffect, useState } from "react"
-import { useLookupLettersFromWord } from "../../reusableFunctions/useLookupLettersFromWord"
+import { lookupLettersFromWord } from "../../reusableFunctions/lookupLettersFromWord"
 import Tile from "../tile";
-import { useCheckForExceedingTileNumber } from "../../reusableFunctions/useCheckExceedingTileNumber";
+import { checkForExceedingTileNumber } from "../../reusableFunctions/checkExceedingTileNumber";
 import MaxTileLimitExceeded from "./maxTileLimitExceeded";
 import '../../styles/validWord.css'
 import { getLetterNoTiles } from "../../reusableFunctions/letterNoTiles";
@@ -24,9 +24,9 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
     const [isAboveMaxTileAmount, setIsAboveMaxTileAmount] = useState(false)
 
     useEffect(() => {
-        setIsAboveMaxTileAmount(useCheckForExceedingTileNumber(wordToCheck))
+        setIsAboveMaxTileAmount(checkForExceedingTileNumber(wordToCheck))
         if (!isAboveMaxTileAmount) {
-            setWordToCheckArray(useLookupLettersFromWord(wordToCheck))
+            setWordToCheckArray(lookupLettersFromWord(wordToCheck))
             { sessionStorage.getItem('isStoreSearchHistory') === 'true' && addWordToSearchHistory(wordToCheck) }
         }
     }, [])

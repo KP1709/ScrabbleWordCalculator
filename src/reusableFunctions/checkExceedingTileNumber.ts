@@ -1,6 +1,6 @@
 import { getLetterNoTiles } from "./letterNoTiles";
 
-export const useCheckForExceedingTileNumber = (wordToCheck: string) => {
+export const checkForExceedingTileNumber = (wordToCheck: string) => {
     let isExceedingTiles = false;
 
     const countTiles = (s: string) => {

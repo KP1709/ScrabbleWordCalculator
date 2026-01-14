@@ -1,7 +1,7 @@
 import { LetterProperties } from "../reusableTypes/LetterProperties"
 import { getLetterScore } from "./letterScore"
 
-export const useLookupLettersFromWord = (wordToCheck: string) => {
+export const lookupLettersFromWord = (wordToCheck: string) => {
     const wordLetterProperties = <LetterProperties[]>[]
     const splitWordArray = wordToCheck.split("")
 
