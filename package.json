@@ -11,7 +11,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.90.0",
+    "@supabase/supabase-js": "^2.91.1",
     "cypress": "^14.5.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
