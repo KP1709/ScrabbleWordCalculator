@@ -54,6 +54,7 @@ button.close-button {
 select {
     appearance: base-select;
     color: var(--modal-text-clr);
+    background-color: var(--modal-clr);
 }
 
 input[type="checkbox"] {
