@@ -95,7 +95,7 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
             }
 
             if (tile.id === id && hasMaxNumberOfBlanks && tile.action === "blank") {
-                return { ...tile, score: tile.originalScore, action: 'restore', colour: tile.colour };
+                return { ...tile, score: tile.originalScore, action: 'restore', colour: 'restore-tile-colour' };
             }
             return tile
         }))
