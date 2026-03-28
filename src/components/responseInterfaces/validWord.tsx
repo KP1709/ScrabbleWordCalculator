@@ -1,45 +1,47 @@
-import { LetterProperties } from "../../reusableTypes/LetterProperties"
-import { useEffect, useState } from "react"
-import { lookupLettersFromWord } from "../../reusableFunctions/lookupLettersFromWord"
+import { LetterProperties } from "../../reusableTypes/LetterProperties";
+import { useEffect, useState } from "react";
+import { lookupLettersFromWord } from "../../reusableFunctions/lookupLettersFromWord";
 import Tile from "../tile";
 import { checkForExceedingTileNumber } from "../../reusableFunctions/checkExceedingTileNumber";
 import MaxTileLimitExceeded from "./maxTileLimitExceeded";
-import '../../styles/validWord.css'
+import '../../styles/validWord.css';
 import { getLetterNoTiles } from "../../reusableFunctions/letterNoTiles";
 import { addWordToSearchHistory } from "../../reusableFunctions/searchHistorySave";
+import { useSettings } from "../../hooks/useSettings";
 
 type ValidWordType = {
     wordToCheck: string,
-    submitWord: boolean
-}
+    submitWord: boolean;
+};
 
 export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
-    const [totalWordScore, setTotalWordScore] = useState(0)
-    const [isDoubleWordScoreMultiplier, setIsDoubleWordScoreMultiplier] = useState(false)
-    const [isTripleWordScoreMultiplier, setIsTripleWordScoreMultiplier] = useState(false)
-    const [resetMultiplier, setResetMultiplier] = useState(false)
-    const [isSevenTilesUsed, setIsSevenTilesUsed] = useState(false)
-    const [resetIsSevenTilesUsed, setResetIsSevenTilesUsed] = useState(false)
-    const [wordToCheckArray, setWordToCheckArray] = useState<LetterProperties[]>([])
-    const [isAboveMaxTileAmount, setIsAboveMaxTileAmount] = useState(false)
-    const [resetAll, setResetAll] = useState(false)
+    const { isStoreSearchHistory } = useSettings();
+    const [totalWordScore, setTotalWordScore] = useState(0);
+    const [isDoubleWordScoreMultiplier, setIsDoubleWordScoreMultiplier] = useState(false);
+    const [isTripleWordScoreMultiplier, setIsTripleWordScoreMultiplier] = useState(false);
+    const [resetMultiplier, setResetMultiplier] = useState(false);
+    const [isSevenTilesUsed, setIsSevenTilesUsed] = useState(false);
+    const [resetIsSevenTilesUsed, setResetIsSevenTilesUsed] = useState(false);
+    const [wordToCheckArray, setWordToCheckArray] = useState<LetterProperties[]>([]);
+    const [isAboveMaxTileAmount, setIsAboveMaxTileAmount] = useState(false);
+    const [resetAll, setResetAll] = useState(false);
 
     useEffect(() => {
-        setIsAboveMaxTileAmount(checkForExceedingTileNumber(wordToCheck))
+        setIsAboveMaxTileAmount(checkForExceedingTileNumber(wordToCheck));
         if (!isAboveMaxTileAmount) {
-            setWordToCheckArray(lookupLettersFromWord(wordToCheck))
-            sessionStorage.getItem('isStoreSearchHistory') === 'true' && addWordToSearchHistory(wordToCheck)
+            setWordToCheckArray(lookupLettersFromWord(wordToCheck));
+            isStoreSearchHistory && addWordToSearchHistory(wordToCheck);
         }
-    }, [])
+    }, []);
 
     useEffect(() => {
         let wordScoreMultiplier = 1;
         if (isDoubleWordScoreMultiplier) wordScoreMultiplier *= 2;
         if (isTripleWordScoreMultiplier) wordScoreMultiplier *= 3;
 
-        const newTotal = wordToCheckArray.reduce((sum, tile) => sum + tile.score, 0)
-        setTotalWordScore(newTotal * wordScoreMultiplier + (isSevenTilesUsed ? 50 : 0))
-    }, [wordToCheckArray, isDoubleWordScoreMultiplier, isTripleWordScoreMultiplier, isSevenTilesUsed])
+        const newTotal = wordToCheckArray.reduce((sum, tile) => sum + tile.score, 0);
+        setTotalWordScore(newTotal * wordScoreMultiplier + (isSevenTilesUsed ? 50 : 0));
+    }, [wordToCheckArray, isDoubleWordScoreMultiplier, isTripleWordScoreMultiplier, isSevenTilesUsed]);
 
     useEffect(() => {
         if (submitWord || resetMultiplier || resetAll) {
@@ -47,27 +49,27 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
             setIsTripleWordScoreMultiplier(false);
         }
         if (submitWord || resetIsSevenTilesUsed || resetAll) {
-            setIsSevenTilesUsed(false)
+            setIsSevenTilesUsed(false);
         }
         if (resetAll) {
-            setWordToCheckArray(lookupLettersFromWord(wordToCheck))
+            setWordToCheckArray(lookupLettersFromWord(wordToCheck));
         }
-        setResetMultiplier(false)
-        setResetIsSevenTilesUsed(false)
-        setResetAll(false)
-    }, [submitWord, resetMultiplier, resetIsSevenTilesUsed, resetAll])
+        setResetMultiplier(false);
+        setResetIsSevenTilesUsed(false);
+        setResetAll(false);
+    }, [submitWord, resetMultiplier, resetIsSevenTilesUsed, resetAll]);
 
     const handleDoubleToggle = () => {
         setIsDoubleWordScoreMultiplier(!isDoubleWordScoreMultiplier);
-    }
+    };
 
     const handleTripleToggle = () => {
         setIsTripleWordScoreMultiplier(!isTripleWordScoreMultiplier);
-    }
+    };
 
     /** Handles multiplying letter score on tile */
     const handleTileClick = (id: string) => {
-        const hasMaxNumberOfBlanks = wordToCheckArray.filter(tile => tile.action === 'blank').length === getLetterNoTiles("")
+        const hasMaxNumberOfBlanks = wordToCheckArray.filter(tile => tile.action === 'blank').length === getLetterNoTiles("");
 
         setWordToCheckArray(prevValues => prevValues.map((tile) => {
             if (tile.id === id && !hasMaxNumberOfBlanks) {
@@ -97,9 +99,9 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
             if (tile.id === id && hasMaxNumberOfBlanks && tile.action === "blank") {
                 return { ...tile, score: tile.originalScore, action: 'restore', colour: 'restore-tile-colour' };
             }
-            return tile
-        }))
-    }
+            return tile;
+        }));
+    };
 
     return (
         !isAboveMaxTileAmount ? <div className="flex-centre-column" data-test="valid-word-screen">
@@ -135,16 +137,16 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
             </div>
             <div id="multiplier__buttons" className="flex-centre-row">
                 {wordToCheckArray.length >= 7 && <button className="multiplier__button" data-test='bonus-btn'
-                    onClick={() => { setIsSevenTilesUsed(!isSevenTilesUsed) }}>
+                    onClick={() => { setIsSevenTilesUsed(!isSevenTilesUsed); }}>
                     {!isSevenTilesUsed ? 'Add' : 'Remove'} seven tile bonus
                 </button>}
 
                 <button className="multiplier__button" data-test='reset-btn'
-                    onClick={() => { setResetAll(!resetAll) }}>
+                    onClick={() => { setResetAll(!resetAll); }}>
                     Reset all
                 </button>
             </div>
         </div> : <MaxTileLimitExceeded />
-    )
+    );
 
 }
