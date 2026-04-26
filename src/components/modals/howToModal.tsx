@@ -1,13 +1,13 @@
 import { createPortal } from "react-dom";
-import "../../styles/modal.css"
+import "../../styles/modal.css";
 
 type ModalProps = {
     open: boolean,
-    onClose: () => void
-}
+    onClose: () => void;
+};
 
-export default function HowToModal({ open, onClose }: ModalProps) {
-    if (!open) return null
+const HowToModal = ({ open, onClose }: ModalProps) => {
+    if (!open) return null;
 
     return createPortal(
         <>
@@ -29,7 +29,8 @@ export default function HowToModal({ open, onClose }: ModalProps) {
             </div>
         </>,
         document.getElementById('portal-root')! // ! - Non-Null assertion operation
-    )
+    );
+};
 
-}
+export default HowToModal;
 

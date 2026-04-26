@@ -10,7 +10,14 @@ type ModalProps = {
     setIsStoreSearchHistory: (value: boolean) => void;
 };
 
-export default function SettingsModal({ open, onClose, isStoreSearchHistory, setIsStoreSearchHistory }: ModalProps) {
+const OPTIONS = [
+    { value: "original-theme", label: "Original theme" },
+    { value: "dark-theme", label: "Dark theme" },
+    { value: "water-theme", label: "Water theme" },
+    { value: "pastel-earth-theme", label: "Pastel Earth theme" }
+];
+
+const SettingsModal = ({ open, onClose, isStoreSearchHistory, setIsStoreSearchHistory }: ModalProps) => {
     if (!open) return null;
 
     const {
@@ -83,10 +90,9 @@ export default function SettingsModal({ open, onClose, isStoreSearchHistory, set
                         <select name="themeSelection" id="themeSelection"
                             value={currentTheme}
                             onChange={e => handleThemeSelection(e.target.value)}>
-                            <option value="original-theme">Original theme</option>
-                            <option value="dark-theme">Dark theme</option>
-                            <option value="water-theme">Water theme</option>
-                            <option value="pastel-earth-theme">Pastel Earth theme</option>
+                            {OPTIONS.map(option => (
+                                <option key={option.value} value={option.value}>{option.label}</option>
+                            ))}
                         </select>
                     </span>
                 </span>
@@ -94,5 +100,7 @@ export default function SettingsModal({ open, onClose, isStoreSearchHistory, set
         </>,
         portalRoot
     );
-}
+};
+
+export default SettingsModal;
 

@@ -4,8 +4,8 @@
 type letterProperties = {
     letter: string,
     score: number,
-    maxAmount: number
-}
+    maxAmount: number;
+};
 
 export const letters: letterProperties[] = [
     { "letter": "A", "score": 1, "maxAmount": 9 },
@@ -35,4 +35,4 @@ export const letters: letterProperties[] = [
     { "letter": "Y", "score": 4, "maxAmount": 2 },
     { "letter": "Z", "score": 10, "maxAmount": 1 },
     { "letter": "", "score": 0, "maxAmount": 2 }
-]
+];

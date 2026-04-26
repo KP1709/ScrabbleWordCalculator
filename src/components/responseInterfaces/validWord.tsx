@@ -103,19 +103,17 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
         }));
     };
 
+    if (isAboveMaxTileAmount) return <MaxTileLimitExceeded />;
+
     return (
-        !isAboveMaxTileAmount ? <div className="flex-centre-column" data-test="valid-word-screen">
+        <div className="flex-centre-column" data-test="valid-word-screen">
             <ul className="flex-centre-row tile-list">
                 {wordToCheckArray.map(char =>
                     <li key={char.id} className="flex-centre" data-test='word-tile'>
                         <Tile
-                            id={char.id}
-                            letter={char.letter}
-                            score={char.score}
+                            {...char}
                             onClick={() => { handleTileClick(char.id); }}
-                            action={char.action}
-                            colour={char.colour}
-                            originalScore={char.originalScore} />
+                        />
                     </li>
                 )}
             </ul>
@@ -146,7 +144,7 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
                     Reset all
                 </button>
             </div>
-        </div> : <MaxTileLimitExceeded />
+        </div>
     );
 
 }

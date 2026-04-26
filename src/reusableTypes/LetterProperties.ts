@@ -1,8 +1,10 @@
+type LetterActionType = 'double' | 'triple' | 'restore' | 'blank';
+
 export type LetterProperties = {
     id: string,
     letter: string,
     score: number,
     originalScore: number,
-    action: 'double' | 'triple' | 'restore' | 'blank',
-    colour: string
-}
+    action: LetterActionType,
+    colour: string;
+};

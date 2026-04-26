@@ -1,9 +1,11 @@
-import "../styles/header.css"
+import "../styles/header.css";
 
-export default function Header() {
+const Header = () => {
     return (
         <header className="flex-centre-row">
             <h1>Scrabble Word Calculator</h1>
         </header>
-    )
-}
+    );
+};
+
+export default Header;

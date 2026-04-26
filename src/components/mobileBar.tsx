@@ -1,9 +1,9 @@
-import '../styles/mobileBar.css'
+import '../styles/mobileBar.css';
 
 type MobileBarProps = {
     isStoreSearchHistory: boolean;
-    setModalVisibility: React.Dispatch<React.SetStateAction<{ howTo: boolean; settings: boolean; history: boolean; }>>
-}
+    setModalVisibility: React.Dispatch<React.SetStateAction<{ howTo: boolean; settings: boolean; history: boolean; }>>;
+};
 
 const MobileBar = ({ setModalVisibility, isStoreSearchHistory }: MobileBarProps) => {
     return (
@@ -31,7 +31,7 @@ const MobileBar = ({ setModalVisibility, isStoreSearchHistory }: MobileBarProps)
                 History
             </button>}
         </span>
-    )
-}
+    );
+};
 
-export default MobileBar
+export default MobileBar;

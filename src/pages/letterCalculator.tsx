@@ -1,18 +1,20 @@
-import { useEffect, useState } from "react"
-import "../styles/letterCalculator.css"
-import { useCheckWordInDictionary } from "../hooks/useCheckWordInDictionary"
-import StartScreen from "../components/responseInterfaces/startScreen"
-import IsAnalysing from "../components/responseInterfaces/isAnalysing"
-import UnknownWord from "../components/responseInterfaces/unknownWord"
-import ValidWord from "../components/responseInterfaces/validWord"
-import Error from "../components/responseInterfaces/isError"
-import InvalidEntry from "../components/responseInterfaces/invalidEntry"
-import HowToModal from "../components/modals/howToModal"
-import SettingsModal from "../components/modals/settingsModal"
-import MobileBar from "../components/mobileBar"
-import HistoryModal from "../components/modals/historyModal"
+import { useEffect, useState } from "react";
+import "../styles/letterCalculator.css";
+import { useCheckWordInDictionary } from "../hooks/useCheckWordInDictionary";
+import StartScreen from "../components/responseInterfaces/startScreen";
+import IsAnalysing from "../components/responseInterfaces/isAnalysing";
+import UnknownWord from "../components/responseInterfaces/unknownWord";
+import ValidWord from "../components/responseInterfaces/validWord";
+import Error from "../components/responseInterfaces/isError";
+import InvalidEntry from "../components/responseInterfaces/invalidEntry";
+import HowToModal from "../components/modals/howToModal";
+import SettingsModal from "../components/modals/settingsModal";
+import MobileBar from "../components/mobileBar";
+import HistoryModal from "../components/modals/historyModal";
 
-type ValidString = "true" | "false" | "start"
+type ValidString = "true" | "false" | "start";
+
+const MAX_TILE_AMOUNT = 15;
 
 export default function LetterCalculator() {
     const [wordToCheck, setWordToCheck] = useState("");
@@ -22,10 +24,7 @@ export default function LetterCalculator() {
     const [modalVisibility, setModalVisibility] = useState({ howTo: false, settings: false, history: false });
     const { isError, isAnalysing, isValidWord } = useCheckWordInDictionary({ wordToCheck, submitWord, setSubmitWord });
 
-    const [isStoreSearchHistory, setIsStoreSearchHistory] = useState(() => {
-        const showSearchHistory = sessionStorage.getItem("isStoreSearchHistory");
-        return showSearchHistory === "true" ? true : false;
-    });
+    const [isStoreSearchHistory, setIsStoreSearchHistory] = useState(() => !!sessionStorage.getItem("isStoreSearchHistory"));
 
     useEffect(() => {
         sessionStorage.setItem("isExtendedCheck", JSON.stringify(true));
@@ -37,26 +36,26 @@ export default function LetterCalculator() {
         sessionStorage.setItem("isStoreSearchHistory", JSON.stringify(true));
 
         // Set this initially to avoid possible null value in sessionStorage
-        setIsStoreSearchHistory(true)
-    }, [])
+        setIsStoreSearchHistory(true);
+    }, []);
 
-    const handleSubmit = (e: { preventDefault: () => void }) => {
+    const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        if ((/^[A-Z]+$/i).test(wordToCheck) && wordToCheck.length <= 15) {
-            setIsValidString("true")
-            setIsTooLong(false)
-            setSubmitWord(true)
-            return
+        if (!(wordToCheck.length <= MAX_TILE_AMOUNT)) {
+            setIsValidString("true");
+            setIsTooLong(true);
+            return;
         }
-        else if (!(/^[A-Z]+$/i).test(wordToCheck) && (wordToCheck.length <= 15)) {
-            setIsValidString("false")
-            setIsTooLong(false)
-            return
+        if ((/^[A-Z]+$/i).test(wordToCheck)) {
+            setIsValidString("true");
+            setIsTooLong(false);
+            setSubmitWord(true);
+            return;
         }
-        setIsValidString("true")
-        setIsTooLong(true)
-        return
-    }
+        setIsValidString("false");
+        setIsTooLong(false);
+        return;
+    };
 
     return (
         <main>
@@ -72,7 +71,13 @@ export default function LetterCalculator() {
                         onChange={(e) => setWordToCheck(e.target.value)}
                         placeholder="scrabble"
                     />
-                    <input type="submit" value="Check" data-test='submit-word-form-btn' className="form__input-button" title='Submit word for check' />
+                    <input
+                        type="submit"
+                        value="Check"
+                        data-test='submit-word-form-btn'
+                        className="form__input-button"
+                        title='Submit word for check'
+                    />
                 </form>
 
             </span>
@@ -106,5 +111,5 @@ export default function LetterCalculator() {
                 isStoreSearchHistory={isStoreSearchHistory}
             />
         </main>
-    )
+    );
 }

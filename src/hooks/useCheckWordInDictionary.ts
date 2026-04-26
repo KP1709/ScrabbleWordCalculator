@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
 type CheckInDictionaryType = {
     wordToCheck: string,
     submitWord: boolean,
     setSubmitWord: (value: boolean) => void,
-}
+};
 
 export const useCheckWordInDictionary = ({ wordToCheck, submitWord, setSubmitWord }: CheckInDictionaryType) => {
-    const [isAnalysing, setIsAnalysing] = useState(false)
-    const [isValidWord, setIsValidWord] = useState(false)
-    const [isError, setIsError] = useState(false)
+    const [isAnalysing, setIsAnalysing] = useState(false);
+    const [isValidWord, setIsValidWord] = useState(false);
+    const [isError, setIsError] = useState(false);
 
     useEffect(() => {
         async function checkWord() {
@@ -25,7 +25,7 @@ export const useCheckWordInDictionary = ({ wordToCheck, submitWord, setSubmitWor
                     setIsValidWord(true);
                 } else if (apiRes.status === 404) {
                     shouldRunSupabase = true;
-                    setIsValidWord(false)
+                    setIsValidWord(false);
                 }
                 else if (!apiRes.ok && apiRes.status !== 404) {
                     // Must manually check and specify this 
@@ -62,15 +62,15 @@ export const useCheckWordInDictionary = ({ wordToCheck, submitWord, setSubmitWor
         }
 
         if (submitWord && sessionStorage.getItem("isWordToBeChecked") === 'true') {
-            checkWord()
-            setSubmitWord(false)
+            checkWord();
+            setSubmitWord(false);
         }
         if (submitWord && sessionStorage.getItem("isWordToBeChecked") === 'false') {
-            setIsValidWord(true)
-            setIsError(false)
-            setSubmitWord(false)
+            setIsValidWord(true);
+            setIsError(false);
+            setSubmitWord(false);
         }
-    }, [submitWord])
+    }, [submitWord]);
 
-    return { isAnalysing, isValidWord, isError, wordToCheck }
-}
+    return { isAnalysing, isValidWord, isError, wordToCheck };
+};
