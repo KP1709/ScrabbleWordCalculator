@@ -11,6 +11,7 @@ import HowToModal from "../components/modals/howToModal";
 import SettingsModal from "../components/modals/settingsModal";
 import MobileBar from "../components/mobileBar";
 import HistoryModal from "../components/modals/historyModal";
+import { useSettings } from "../hooks/useSettings";
 
 type ValidString = "true" | "false" | "start";
 
@@ -23,17 +24,29 @@ export default function LetterCalculator() {
     const [isTooLong, setIsTooLong] = useState(false);
     const [modalVisibility, setModalVisibility] = useState({ howTo: false, settings: false, history: false });
     const { isError, isAnalysing, isValidWord } = useCheckWordInDictionary({ wordToCheck, submitWord, setSubmitWord });
+    const { handleThemeSelection } = useSettings();
 
     const [isStoreSearchHistory, setIsStoreSearchHistory] = useState(() => !!sessionStorage.getItem("isStoreSearchHistory"));
 
     useEffect(() => {
-        sessionStorage.setItem("isExtendedCheck", JSON.stringify(true));
-        sessionStorage.setItem("isWordToBeChecked", JSON.stringify(true));
-        sessionStorage.setItem("currentTheme", JSON.stringify('light-theme'));
-        sessionStorage.setItem("searchHistory", JSON.stringify([]));
+        if (!sessionStorage.getItem("isWordToBeChecked")) {
+            sessionStorage.setItem("isWordToBeChecked", 'true');
+        }
+        if (!sessionStorage.getItem("isExtendedCheck")) {
+            sessionStorage.setItem("isExtendedCheck", 'true');
+        }
+        if (!sessionStorage.getItem("currentTheme")) {
+            sessionStorage.setItem("currentTheme", 'light-theme');
+        } else {
+            handleThemeSelection(sessionStorage.getItem("currentTheme")?.replace(/"/g, "") || 'light-theme');
+        }
+
+        if (!sessionStorage.getItem("searchHistory")) {
+            sessionStorage.setItem("searchHistory", JSON.stringify([]));
+        }
 
         // Set this initially so history gets stored unless changed 
-        sessionStorage.setItem("isStoreSearchHistory", JSON.stringify(true));
+        sessionStorage.setItem("isStoreSearchHistory", 'true');
 
         // Set this initially to avoid possible null value in sessionStorage
         setIsStoreSearchHistory(true);
