@@ -1,48 +1,48 @@
+
 import { useState } from "react";
 
+const getSettingValue = (key: string, defaultValue = false) => {
+    return sessionStorage.getItem(key) === "true" ? true : defaultValue;
+};
+
+const setSettingValue = (key: string, value: boolean) => {
+    sessionStorage.setItem(key, JSON.stringify(value));
+};
+
 export function useSettings() {
-    const [isWordToBeChecked, setIsWordToBeChecked] = useState(() => {
-        const wordCheck = sessionStorage.getItem("isWordToBeChecked");
-        return wordCheck === "true" ? true : false;
-    });
-    const [isExtendedCheck, setIsExtendedCheck] = useState(() => {
-        const extendedCheck = sessionStorage.getItem("isExtendedCheck");
-        return extendedCheck === "true" ? true : false;
-    });
-    const [isStoreSearchHistory, setIsStoreSearchHistory] = useState(() => {
-        const storeSearchHistory = sessionStorage.getItem("isStoreSearchHistory");
-        return storeSearchHistory === "true" ? true : false;
-    });
+    const [isWordToBeChecked, setIsWordToBeChecked] = useState(() => getSettingValue("isWordToBeChecked"));
+    const [isExtendedCheck, setIsExtendedCheck] = useState(() => getSettingValue("isExtendedCheck"));
+    const [isStoreSearchHistory, setIsStoreSearchHistory] = useState(() => getSettingValue("isStoreSearchHistory"));
     const [rerender, setRerender] = useState(0);
 
     const currentTheme = sessionStorage.getItem("currentTheme")?.replace(/"/g, "") || "";
 
     const handleWordCheck = (checked: boolean) => {
         setIsWordToBeChecked(checked);
-        sessionStorage.setItem("isWordToBeChecked", JSON.stringify(checked));
+        setSettingValue("isWordToBeChecked", checked);
         if (!checked) {
             setIsExtendedCheck(false);
-            sessionStorage.setItem("isExtendedCheck", JSON.stringify(false));
+            setSettingValue("isExtendedCheck", false);
             setIsStoreSearchHistory(false);
-            sessionStorage.setItem("isStoreSearchHistory", JSON.stringify(false));
+            setSettingValue("isStoreSearchHistory", false);
         }
     };
 
     const handleExtendedWordCheck = (checked: boolean) => {
         setIsExtendedCheck(checked);
-        sessionStorage.setItem("isExtendedCheck", JSON.stringify(checked));
+        setSettingValue("isExtendedCheck", checked);
         if (checked && !isWordToBeChecked) {
             setIsWordToBeChecked(true);
-            sessionStorage.setItem("isWordToBeChecked", JSON.stringify(true));
+            setSettingValue("isWordToBeChecked", true);
         }
     };
 
     const handleSearchHistory = (checked: boolean) => {
         setIsStoreSearchHistory(checked);
-        sessionStorage.setItem("isStoreSearchHistory", JSON.stringify(checked));
+        setSettingValue("isStoreSearchHistory", checked);
         if (checked && !isWordToBeChecked) {
             setIsWordToBeChecked(true);
-            sessionStorage.setItem("isWordToBeChecked", JSON.stringify(true));
+            setSettingValue("isWordToBeChecked", true);
         }
     };
 

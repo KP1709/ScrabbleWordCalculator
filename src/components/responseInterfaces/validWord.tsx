@@ -9,6 +9,7 @@ import { getLetterNoTiles } from "../../reusableFunctions/letterNoTiles";
 import { addWordToSearchHistory } from "../../reusableFunctions/searchHistorySave";
 import { useSettings } from "../../hooks/useSettings";
 
+
 type ValidWordType = {
     wordToCheck: string,
     submitWord: boolean;
@@ -32,7 +33,7 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
             setWordToCheckArray(lookupLettersFromWord(wordToCheck));
             isStoreSearchHistory && addWordToSearchHistory(wordToCheck);
         }
-    }, []);
+    }, [submitWord]);
 
     useEffect(() => {
         let wordScoreMultiplier = 1;
