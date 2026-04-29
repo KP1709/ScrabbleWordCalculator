@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import "../styles/letterCalculator.css";
 import { useCheckWordInDictionary } from "../hooks/useCheckWordInDictionary";
+import { useSettings } from "../hooks/useSettings";
+import "../styles/letterCalculator.css";
 import StartScreen from "../components/responseInterfaces/startScreen";
 import IsAnalysing from "../components/responseInterfaces/isAnalysing";
 import UnknownWord from "../components/responseInterfaces/unknownWord";
@@ -11,9 +12,10 @@ import HowToModal from "../components/modals/howToModal";
 import SettingsModal from "../components/modals/settingsModal";
 import MobileBar from "../components/mobileBar";
 import HistoryModal from "../components/modals/historyModal";
-import { useSettings } from "../hooks/useSettings";
 
 type ValidString = "true" | "false" | "start";
+
+type InterfaceType = 'start' | 'analysing' | 'invalidEntry' | 'unknownWord' | 'validWord' | 'error';
 
 const MAX_TILE_AMOUNT = 15;
 
@@ -23,10 +25,11 @@ export default function LetterCalculator() {
     const [submitWord, setSubmitWord] = useState(false);
     const [isTooLong, setIsTooLong] = useState(false);
     const [modalVisibility, setModalVisibility] = useState({ howTo: false, settings: false, history: false });
-    const { isError, isAnalysing, isValidWord } = useCheckWordInDictionary({ wordToCheck, submitWord, setSubmitWord });
-    const { handleThemeSelection } = useSettings();
-
     const [isStoreSearchHistory, setIsStoreSearchHistory] = useState(() => !!sessionStorage.getItem("isStoreSearchHistory"));
+
+    const { handleThemeSelection } = useSettings();
+    const { isError, isAnalysing, isValidWord } = useCheckWordInDictionary({ wordToCheck, submitWord, setSubmitWord });
+
 
     useEffect(() => {
         if (!sessionStorage.getItem("isWordToBeChecked")) {
@@ -51,6 +54,25 @@ export default function LetterCalculator() {
         // Set this initially to avoid possible null value in sessionStorage
         setIsStoreSearchHistory(true);
     }, []);
+
+    const interfaceToShow: Record<InterfaceType, boolean> = {
+        start: isValidString === "start",
+        analysing: isAnalysing,
+        invalidEntry: isValidString === "false" || isTooLong,
+        unknownWord: isValidString === "true" && !isValidWord && !isError && !isTooLong && !isAnalysing,
+        validWord: isValidString === "true" && isValidWord && !isError && !isAnalysing && !isTooLong,
+        error: isValidString === "true" && !isValidWord && isError && !isAnalysing && !isTooLong,
+    };
+
+    const InterfaceScreen = () => {
+        if (interfaceToShow['start']) return <StartScreen />;
+        if (interfaceToShow['analysing']) return <IsAnalysing />;
+        if (interfaceToShow['invalidEntry']) return <InvalidEntry isTooLong={isTooLong} />;
+        if (interfaceToShow['unknownWord']) return <UnknownWord />;
+        if (interfaceToShow['validWord']) return <ValidWord wordToCheck={wordToCheck.toLowerCase()} submitWord={submitWord} />;
+        if (interfaceToShow['error']) return <Error wordToCheck={wordToCheck} />;
+        return null;
+    };
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
@@ -109,15 +131,8 @@ export default function LetterCalculator() {
                 setWordToCheck={setWordToCheck}
             />
 
-            {isValidString === "start" && <StartScreen />}
-            {isAnalysing && <IsAnalysing />}
-            {(isValidString === "false" || isTooLong) && <InvalidEntry isTooLong={isTooLong} />}
-            {isValidString === "true" && !isValidWord && !isError && !isTooLong && !isAnalysing && <UnknownWord />}
-            {isValidString === "true" && !isValidWord && isError && !isAnalysing && <Error wordToCheck={wordToCheck} />}
+            <InterfaceScreen />
 
-            {isValidString === "true" && isValidWord && !isError && !isAnalysing && !isTooLong &&
-                <ValidWord wordToCheck={wordToCheck.toLowerCase()} submitWord={submitWord} />
-            }
             <MobileBar
                 setModalVisibility={setModalVisibility}
                 isStoreSearchHistory={isStoreSearchHistory}
