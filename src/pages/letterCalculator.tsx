@@ -67,7 +67,6 @@ export default function LetterCalculator() {
         }
         setIsValidString("false");
         setIsTooLong(false);
-        return;
     };
 
     return (
