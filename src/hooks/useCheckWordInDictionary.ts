@@ -61,11 +61,12 @@ export const useCheckWordInDictionary = ({ wordToCheck, submitWord, setSubmitWor
             }
         }
 
-        if (submitWord && sessionStorage.getItem("isWordToBeChecked") === 'true') {
+        if (!submitWord) return;
+        else if (sessionStorage.getItem("isWordToBeChecked") === 'true') {
             checkWord();
             setSubmitWord(false);
         }
-        if (submitWord && sessionStorage.getItem("isWordToBeChecked") === 'false') {
+        else {
             setIsValidWord(true);
             setIsError(false);
             setSubmitWord(false);
