@@ -1,5 +1,22 @@
+import { createContext, useContext, useState, ReactNode } from "react";
 
-import { useState } from "react";
+type SettingsContextType = {
+    isWordToBeChecked: boolean;
+    isExtendedCheck: boolean;
+    isStoreSearchHistory: boolean;
+    setIsWordToBeChecked: (value: boolean) => void;
+    setIsExtendedCheck: (value: boolean) => void;
+    setIsStoreSearchHistory: (checked: boolean) => void;
+    rerender: number;
+    setRerender: React.Dispatch<React.SetStateAction<number>>;
+    currentTheme: string;
+    handleWordCheck: (checked: boolean) => void;
+    handleExtendedWordCheck: (checked: boolean) => void;
+    handleSearchHistory: (checked: boolean) => void;
+    handleThemeSelection: (theme: string) => void;
+};
+
+const SettingsContext = createContext<SettingsContextType | undefined>(undefined);
 
 const getSettingValue = (key: string, defaultValue = false) => {
     return sessionStorage.getItem(key) === "true" ? true : defaultValue;
@@ -9,7 +26,7 @@ const setSettingValue = (key: string, value: boolean) => {
     sessionStorage.setItem(key, JSON.stringify(value));
 };
 
-export function useSettings() {
+export function SettingsProvider({ children }: { children: ReactNode; }) {
     const [isWordToBeChecked, setIsWordToBeChecked] = useState(() => getSettingValue("isWordToBeChecked"));
     const [isExtendedCheck, setIsExtendedCheck] = useState(() => getSettingValue("isExtendedCheck"));
     const [isStoreSearchHistory, setIsStoreSearchHistory] = useState(() => getSettingValue("isStoreSearchHistory"));
@@ -52,16 +69,33 @@ export function useSettings() {
         setRerender(n => n + 1); // Force re-render to update dropdown
     };
 
-    return {
-        isWordToBeChecked,
-        isExtendedCheck,
-        isStoreSearchHistory,
-        rerender,
-        setRerender,
-        currentTheme,
-        handleWordCheck,
-        handleExtendedWordCheck,
-        handleSearchHistory,
-        handleThemeSelection
-    };
+    return (
+        <SettingsContext.Provider
+            value={{
+                isWordToBeChecked,
+                isExtendedCheck,
+                isStoreSearchHistory,
+                setIsWordToBeChecked,
+                setIsExtendedCheck,
+                setIsStoreSearchHistory,
+                rerender,
+                setRerender,
+                currentTheme,
+                handleWordCheck,
+                handleExtendedWordCheck,
+                handleSearchHistory,
+                handleThemeSelection,
+            }}
+        >
+            {children}
+        </SettingsContext.Provider>
+    );
+}
+
+export function useSettings() {
+    const context = useContext(SettingsContext);
+    if (context === undefined) {
+        throw new Error("useSettings must be used within a SettingsProvider");
+    }
+    return context;
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../styles/letterCalculator.css";
 import { useCheckWordInDictionary } from "../hooks/useCheckWordInDictionary";
 import StartScreen from "../components/responseInterfaces/startScreen";
@@ -23,34 +23,9 @@ export default function LetterCalculator() {
     const [submitWord, setSubmitWord] = useState(false);
     const [isTooLong, setIsTooLong] = useState(false);
     const [modalVisibility, setModalVisibility] = useState({ howTo: false, settings: false, history: false });
+
     const { isError, isAnalysing, isValidWord } = useCheckWordInDictionary({ wordToCheck, submitWord, setSubmitWord });
-    const { handleThemeSelection } = useSettings();
-
-    const [isStoreSearchHistory, setIsStoreSearchHistory] = useState(() => !!sessionStorage.getItem("isStoreSearchHistory"));
-
-    useEffect(() => {
-        if (!sessionStorage.getItem("isWordToBeChecked")) {
-            sessionStorage.setItem("isWordToBeChecked", 'true');
-        }
-        if (!sessionStorage.getItem("isExtendedCheck")) {
-            sessionStorage.setItem("isExtendedCheck", 'true');
-        }
-        if (!sessionStorage.getItem("currentTheme")) {
-            sessionStorage.setItem("currentTheme", 'light-theme');
-        } else {
-            handleThemeSelection(sessionStorage.getItem("currentTheme")?.replace(/"/g, "") || 'light-theme');
-        }
-
-        if (!sessionStorage.getItem("searchHistory")) {
-            sessionStorage.setItem("searchHistory", JSON.stringify([]));
-        }
-
-        // Set this initially so history gets stored unless changed 
-        sessionStorage.setItem("isStoreSearchHistory", 'true');
-
-        // Set this initially to avoid possible null value in sessionStorage
-        setIsStoreSearchHistory(true);
-    }, []);
+    const { isStoreSearchHistory, setIsStoreSearchHistory } = useSettings();
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
