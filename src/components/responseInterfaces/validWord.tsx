@@ -14,31 +14,56 @@ type ValidWordType = {
     submitWord: boolean;
 };
 
+type ScoreModifierButtonsType = {
+    dataTest: string;
+    onClick: () => void;
+    buttonText: string;
+};
+
+const ScoreModifierButtons = ({ dataTest, onClick, buttonText }: ScoreModifierButtonsType) => {
+    return (
+        <button
+            className='multiplier__button'
+            data-test={dataTest}
+            onClick={onClick}>
+            {buttonText}
+        </button>
+    );
+};
+
 export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
     const { isStoreSearchHistory } = useSettings();
     const [totalWordScore, setTotalWordScore] = useState(0);
-    const [isDoubleWordScoreMultiplier, setIsDoubleWordScoreMultiplier] = useState(false);
-    const [isTripleWordScoreMultiplier, setIsTripleWordScoreMultiplier] = useState(false);
-    const [isSevenTilesUsed, setIsSevenTilesUsed] = useState(false);
     const [wordToCheckArray, setWordToCheckArray] = useState<LetterProperties[]>([]);
     const [isAboveMaxTileAmount, setIsAboveMaxTileAmount] = useState(false);
+    const [scoreModifiers, setScoreModifiers] = useState({
+        double: false,
+        triple: false,
+        sevenTileBonus: false,
+    });
 
     const handleDoubleToggle = () => {
-        setIsDoubleWordScoreMultiplier(!isDoubleWordScoreMultiplier);
+        setScoreModifiers(prev => {
+            return { ...prev, double: !prev.double };
+        });
     };
 
     const handleTripleToggle = () => {
-        setIsTripleWordScoreMultiplier(!isTripleWordScoreMultiplier);
+        setScoreModifiers(prev => {
+            return { ...prev, triple: !prev.triple };
+        });
     };
 
     const handleSevenTileBonus = () => {
-        setIsSevenTilesUsed(!isSevenTilesUsed);
+        setScoreModifiers(prev => {
+            return { ...prev, sevenTileBonus: !prev.sevenTileBonus };
+        });
     };
 
     const handleReset = () => {
-        setIsDoubleWordScoreMultiplier(false);
-        setIsTripleWordScoreMultiplier(false);
-        setIsSevenTilesUsed(false);
+        setScoreModifiers(prev => {
+            return { ...prev, double: false, triple: false, sevenTileBonus: false };
+        });
         setWordToCheckArray(lookupLettersFromWord(wordToCheck));
     };
 
@@ -53,15 +78,13 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
 
     useEffect(() => {
         let wordScoreMultiplier = 1;
-        if (isDoubleWordScoreMultiplier) wordScoreMultiplier *= 2;
-        if (isTripleWordScoreMultiplier) wordScoreMultiplier *= 3;
+        if (scoreModifiers.double) wordScoreMultiplier *= 2;
+        if (scoreModifiers.triple) wordScoreMultiplier *= 3;
 
         const newTotal = wordToCheckArray.reduce((sum, tile) => sum + tile.score, 0);
-        setTotalWordScore(newTotal * wordScoreMultiplier + (isSevenTilesUsed ? 50 : 0));
-    }, [wordToCheckArray, isDoubleWordScoreMultiplier, isTripleWordScoreMultiplier, isSevenTilesUsed]);
+        setTotalWordScore(newTotal * wordScoreMultiplier + (scoreModifiers.sevenTileBonus ? 50 : 0));
+    }, [wordToCheckArray, scoreModifiers]);
 
-
-    /** Handles multiplying letter score on tile */
     const handleTileClick = (id: string) => {
         const hasMaxNumberOfBlanks = wordToCheckArray.filter(tile => tile.action === 'blank').length === getLetterNoTiles("");
 
@@ -115,28 +138,27 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
             <h3 id="score" data-test="total-word-score"> Total : {totalWordScore}</h3>
 
             <div id="multiplier__buttons" className="flex-centre-row">
-                <button className='multiplier__button'
-                    data-test='double-total-score-btn'
-                    onClick={handleDoubleToggle}>
-                    {isDoubleWordScoreMultiplier ? 'Double selected' : 'Double total score'}
-                </button>
-
-                <button className='multiplier__button'
-                    data-test='triple-total-score-btn'
-                    onClick={handleTripleToggle}>
-                    {isTripleWordScoreMultiplier ? 'Triple selected' : 'Triple total score'}
-                </button>
+                <ScoreModifierButtons
+                    dataTest='double-total-score-btn'
+                    onClick={handleDoubleToggle}
+                    buttonText={scoreModifiers.double ? 'Double selected' : 'Double total score'}
+                />
+                <ScoreModifierButtons dataTest='triple-total-score-btn'
+                    onClick={handleTripleToggle}
+                    buttonText={scoreModifiers.triple ? 'Triple selected' : 'Triple total score'}
+                />
             </div>
             <div id="multiplier__buttons" className="flex-centre-row">
-                {wordToCheckArray.length >= 7 && <button className="multiplier__button" data-test='bonus-btn'
-                    onClick={handleSevenTileBonus}>
-                    {!isSevenTilesUsed ? 'Add' : 'Remove'} seven tile bonus
-                </button>}
-
-                <button className="multiplier__button" data-test='reset-btn'
-                    onClick={handleReset}>
-                    Reset all
-                </button>
+                {wordToCheckArray.length >= 7 &&
+                    <ScoreModifierButtons dataTest='bonus-btn'
+                        onClick={handleSevenTileBonus}
+                        buttonText={scoreModifiers.sevenTileBonus ? 'Remove seven tile bonus' : 'Add seven tile bonus'}
+                    />
+                }
+                <ScoreModifierButtons dataTest='reset-btn'
+                    onClick={handleReset}
+                    buttonText='Reset all'
+                />
             </div>
         </div>
     );
