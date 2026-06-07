@@ -20,6 +20,11 @@ body {
     background: var(--background-clr);
 }
 
+*:focus-visible {
+    outline: 3px solid var(--search-border-focus-clr);
+    outline-offset: 2px;
+}
+
 .flex-centre-row {
     display: flex;
     align-items: center;
