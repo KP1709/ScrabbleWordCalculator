@@ -69,17 +69,17 @@ export default function LetterCalculator() {
 
             </span>
             <HowToModal
-                open={modalVisibility.howTo}
+                isOpen={modalVisibility.howTo}
                 onClose={() => setModalVisibility((modal) => ({ ...modal, howTo: false }))}
             />
             <SettingsModal
-                open={modalVisibility.settings}
+                isOpen={modalVisibility.settings}
                 onClose={() => setModalVisibility((modal) => ({ ...modal, settings: false }))}
                 isStoreSearchHistory={isStoreSearchHistory}
                 setIsStoreSearchHistory={setIsStoreSearchHistory}
             />
             <HistoryModal
-                open={modalVisibility.history}
+                isOpen={modalVisibility.history}
                 onClose={() => setModalVisibility((modal) => ({ ...modal, history: false }))}
                 setWordToCheck={setWordToCheck}
             />
