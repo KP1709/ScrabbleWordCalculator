@@ -5,7 +5,7 @@
 React / Typescript / CSS / pnpm / APIs + Supabase / Netlify CLI + Serverless functions / Cypress (Testing) / Husky (Git Hooks)
 
 ## 🍼 Introduction
-Owning and playing the original version of Scrabble, I know it would sometimes be difficult to calculate a word's score. Therefore, I created my own version of a Scrabble calculator. The user enters a word and sees the word's score. Additionally the tool checks to see if the word is in the dictionary using a free dictionary API. Therefore enabling the user to test to see if a particular word exists. The app is also connected to a database to search for words which are valid in Scrabble but are not in the dictionary API.
+Owning and playing the original version of Scrabble, I know it would sometimes be difficult to calculate a word's score. Therefore, I created my own version of a Scrabble calculator. When a word is entered, it checks to see if the word is valid and displays the word's score. Bonuses and multiplies can be added to calculate the correct score.
 
 ## ⚙️ Changes
 The commit 81ea887 was code clean-up for the entire project.  
@@ -16,7 +16,7 @@ While the functionality is technically the same, the code is now more maintainab
   - Checks to see if word contains alphabetic characters only
   - Checks to see if a word is less than 15 letters
   - Checks to see if word is in the dictionary (using free API)
-  - Checks to see if word is in the Supabase database (if not in the API) 
+  - Checks to see if word is in Wiktionary (if not in the API) 
   - Check to see if word can be created based on number of tiles available
 - Score for whole word is calculated
 - Tried to maintain accessibility throughout application
@@ -33,16 +33,10 @@ While the functionality is technically the same, the code is now more maintainab
 - Store search history for valid words
   - Configure if search history is on or off and clear history if on
 
-## ⚡Supabase
-A Supabase database is connected by creating a Netlify serverless function. The word entered to search will pass by POST request to the Supabase client which will complete a GET request to check if the word exists in the database. The code has been set up so the database will only be searched if the word doesn't exist in the free dictionary API. The serverless function also contains error handling to provide a solid user experience. It's very unlikely for the database to be searched often.
+## ⚡ Supabase --> Wiktionary
+Originally a Supabase database was connected and was used with Netlify serverless functions. This has been removed and has been replaced by using Wiktionary and web scrapping so it's easier to manage. However this will only be used if the word didn't exist in the free dictionary API.
 
 ## 🧪 Experiment
-### Database
-For Supabase, requests can be seen in action from the network response tab and developer console in the browser dev tools.  
-Search for the word 'zarf' or 'bezique' - the first API will return a 404 but the word exists in the Supabase database so it will return a 200.
-
-If database is paused or is throwing a non-404 error, then it will catch the error and suggest that the word should be search online instead.
-
 ### Testing valid words but with restrictions
 The word 'knickknacks' exists in the dictionary but there are too many 'k' in the word so it cannot be used in the game. This will display the 'Max Tile Limit Exceeded' screen. 
 
@@ -62,22 +56,13 @@ Find out more - https://docs.simpleanalytics.com/introduction-to-legal
 - Using regex to test for alphabetic characters - https://stackoverflow.com/questions/6067592/regular-expression-to-match-only-alphabetic-characters
 - Dictionary API used - https://dictionaryapi.dev/
 - Learn React Portal in 12 minutes by building a modal - https://www.youtube.com/watch?v=LyLa7dU5tp8
+- Simple Analytics tool - https://www.simpleanalytics.com/
+- Adding multiple themes in React (Noor Ul Usba) - https://javascript.plainenglish.io/easy-way-to-add-multiple-themes-in-react-app-ff45eeca67cb?gi=c7ddcebd3327
+
+## 🗄️ Archive
+### 📚 Netlify Function Resources
 - Intro into Netlify Serverless functions - https://www.netlify.com/blog/intro-to-serverless-functions/
- - Serverless function integration in React - https://www.freecodecamp.org/news/how-to-access-secret-api-keys-using-netlify-functions-in-a-react-app/
- - Netlify and Supabase integration - https://www.netlify.com/integrations/supabase/
- - Hiding API keys using Netlify - https://www.youtube.com/watch?v=m2Dr4L_Ab14
- - Hiding API keys in Vite - https://devzibah.hashnode.dev/using-a-dotenv-file-to-store-and-use-api-keys-in-a-vite-built-react-app
- - Simple Analytics tool - https://www.simpleanalytics.com/
- - Adding multiple themes in React (Noor Ul Usba) - https://javascript.plainenglish.io/easy-way-to-add-multiple-themes-in-react-app-ff45eeca67cb?gi=c7ddcebd3327
-
-## 🤖 AI Assistance
-To implement the double/triple tile score and the double/triple total word score feature, I asked V0 by Vercel to create code which implemented the logic I was after. The code was specified to be written in React but the AI chose to use Typescript. I integrated the code into the original code I wrote. 
-
-### Prompts asked in order:
-- "Create a button in react which toggles between doubling and halving the number"
-- "Do this but enable the button to cycle through the original value, doubling and tripling"
-- "Do this for multiple buttons"
-- "Do this but add together the total value from the buttons"
-- "Do this but includes buttons which can multiply the total by 2 and by 3"
-
-(Outcome and results will vary)
+- Serverless function integration in React - https://www.freecodecamp.org/news/how-to-access-secret-api-keys-using-netlify-functions-in-a-react-app/
+- Netlify and Supabase integration - https://www.netlify.com/integrations/supabase/
+- Hiding API keys using Netlify - https://www.youtube.com/watch?v=m2Dr4L_Ab14
+- Hiding API keys in Vite - https://devzibah.hashnode.dev/using-a-dotenv-file-to-store-and-use-api-keys-in-a-vite-built-react-app

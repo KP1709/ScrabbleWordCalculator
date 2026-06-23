@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { checkWordExists } from "./useCheckWordInAdvancedDictionary";
 
 type CheckInDictionaryType = {
     wordToCheck: string,
@@ -17,47 +18,40 @@ export const useCheckWordInDictionary = ({ wordToCheck, submitWord, setSubmitWor
             setIsError(false);
 
             let apiRes;
-            let shouldRunSupabase = false;
+            let shouldRunExtendedCheck = false;
 
             try {
                 apiRes = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${wordToCheck}`);
                 if (apiRes.ok) {
                     setIsValidWord(true);
                 } else if (apiRes.status === 404) {
-                    shouldRunSupabase = true;
-                    setIsValidWord(false);
-                }
-                else if (!apiRes.ok && apiRes.status !== 404) {
-                    // Must manually check and specify this 
-                    setIsError(true);
+                    shouldRunExtendedCheck = true;
                     setIsValidWord(false);
                 }
             } catch (err) {
                 setIsError(true);
                 setIsValidWord(false);
+                shouldRunExtendedCheck = true;
             } finally {
                 setIsAnalysing(false);
             }
 
-            if (shouldRunSupabase && sessionStorage.getItem("isExtendedCheck") === 'true') {
+            const isExtendedCheckEnabled = sessionStorage.getItem("isExtendedCheck") === 'true';
+
+            if (shouldRunExtendedCheck && isExtendedCheckEnabled) {
+                setIsAnalysing(true);
                 try {
-                    setIsAnalysing(true);
-                    const res = await fetch(`/.netlify/functions/supabase?word=${wordToCheck}`, {
-                        method: "POST",
-                        body: JSON.stringify({ word: wordToCheck }),
-                    });
-                    if (res.status === 404) {
-                        setIsValidWord(false);
-                        return;
-                    }
-                    const data = await res.json();
-                    data.data[0] ? setIsValidWord(true) : setIsValidWord(false);
+                    const result = await checkWordExists(wordToCheck);
+                    setIsValidWord(!!result);
                 } catch (err) {
                     setIsError(true);
                     setIsValidWord(false);
                 } finally {
                     setIsAnalysing(false);
                 }
+            } else if (!shouldRunExtendedCheck && !isExtendedCheckEnabled) {
+                setIsError(true);
+                setIsValidWord(false);
             }
         }
 
@@ -65,12 +59,12 @@ export const useCheckWordInDictionary = ({ wordToCheck, submitWord, setSubmitWor
         else if (sessionStorage.getItem("isWordToBeChecked") === 'true') {
             checkWord();
             setSubmitWord(false);
+            return;
         }
-        else {
-            setIsValidWord(true);
-            setIsError(false);
-            setSubmitWord(false);
-        }
+        setIsValidWord(true);
+        setIsError(false);
+        setSubmitWord(false);
+
     }, [submitWord]);
 
     return { isAnalysing, isValidWord, isError, wordToCheck };
