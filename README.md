@@ -2,24 +2,24 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/88b1162f-6ee5-437e-a3bc-a3ba498c33ae/deploy-status)](https://app.netlify.com/sites/kareenapatel-scrabblewordcalculator/deploys) ![Supabase Status](https://img.shields.io/badge/Supabase-paused-bfbfbf)
 
 ## ⌨️ Tech stack
-React / Typescript / CSS / pnpm / APIs + Supabase / Netlify CLI + Serverless functions / Cypress (Testing) / Husky (Git Hooks)
+React / Typescript / CSS / pnpm / APIs / Cypress (Testing) / Husky (Git Hooks)
 
 ## 🍼 Introduction
-Owning and playing the original version of Scrabble, I know it would sometimes be difficult to calculate a word's score. Therefore, I created my own version of a Scrabble calculator. When a word is entered, it checks to see if the word is valid and displays the word's score. Bonuses and multiplies can be added to calculate the correct score.
+Playing the original version of Scrabble, I know it can sometimes be difficult to calculate a word's score. Therefore, I created my own version of a Scrabble calculator. When a word is entered, it checks if the word is valid and displays its score. Bonuses and multipliers can be added to calculate the correct score.
 
 ## ⚙️ Changes
 The commit 81ea887 was code clean-up for the entire project.  
-While the functionality is technically the same, the code is now more maintainable with improved readability.  
+While the functionality is technically the same, the code is now more maintainable and readable.  
 
 ## 🛠️ Features
 - Check to see if user input is valid
-  - Checks to see if word contains alphabetic characters only
+  - Checks to see if word contains only alphabetic characters
   - Checks to see if a word is less than 15 letters
   - Checks to see if word is in the dictionary (using free API)
   - Checks to see if word is in Wiktionary (if not in the API) 
   - Check to see if word can be created based on number of tiles available
 - Score for whole word is calculated
-- Tried to maintain accessibility throughout application
+- Tried to maintain accessibility throughout the application
 - Instructions available on the start screen as an open and closable modal
 - Can indicate which tiles have a double score or triple score and update the total word score 
 - Can indicate which tiles are blank, update the total word score and limit the number
@@ -34,21 +34,21 @@ While the functionality is technically the same, the code is now more maintainab
   - Configure if search history is on or off and clear history if on
 
 ## ⚡ Supabase --> Wiktionary
-Originally a Supabase database was connected and was used with Netlify serverless functions. This has been removed and has been replaced by using Wiktionary and web scrapping so it's easier to manage. However this will only be used if the word didn't exist in the free dictionary API.
+Originally, a Supabase database was connected and was used with Netlify serverless functions. This has been removed and replaced with Wiktionary (web scraping), so it's easier to manage. However, this will only be used if the word didn't exist in the free dictionary API.
 
 ## 🧪 Experiment
 ### Testing valid words but with restrictions
-The word 'knickknacks' exists in the dictionary but there are too many 'k' in the word so it cannot be used in the game. This will display the 'Max Tile Limit Exceeded' screen. 
+The word 'knickknacks' exists in the dictionary, but there are too many 'k' in the word, so it cannot be used in the game. This will display the 'Max Tile Limit Exceeded' screen. 
 
-The word 'counterbalancing' exists in the dictionary but the word is more that 15 letters. This will display 'Invalid Entry' with a message about exceeding.
+The word 'counterbalancing' exists in the dictionary, but the word is more than 15 letters. This will display 'Invalid Entry' with a message about exceeding the tile limit.
 
 ## 🕹️ Testing
-Component tests and end-to-end tests have been created using Cypress. Before commiting new code, the end-to-end tests will run and as long as all the tests pass, the commit will be created. Husky has been used so this pre-commit check is accessible.  
-This will run on every commit so if updating the README, for example, it can be bypassed by adding the flag '--no-verify' to the commit command.  
+Component tests and end-to-end tests have been created using Cypress. Before committing new code, the end-to-end tests will run. As long as all the tests pass, the commit will be created. Husky has been used so this pre-commit check is accessible.  
+This will run on every commit, so if updating the README, for example, it can be bypassed by adding the flag '--no-verify' to the commit command.  
 (This will save me from committing code and breaking functionality which I thought was working 😅) 
 
 ## 🔬 Analytics
-This web tool uses Simple Analytics. The tool doesn't use cookies so there is no privacy banner displayed.  
+This web tool uses Simple Analytics. The tool doesn't use cookies, so no privacy banner is displayed.  
 Find out more - https://docs.simpleanalytics.com/introduction-to-legal 
 
 ## 📚 Resources
