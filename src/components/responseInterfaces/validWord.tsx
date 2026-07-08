@@ -42,28 +42,12 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
         sevenTileBonus: false,
     });
 
-    const handleDoubleToggle = () => {
-        setScoreModifiers(prev => {
-            return { ...prev, double: !prev.double };
-        });
-    };
-
-    const handleTripleToggle = () => {
-        setScoreModifiers(prev => {
-            return { ...prev, triple: !prev.triple };
-        });
-    };
-
-    const handleSevenTileBonus = () => {
-        setScoreModifiers(prev => {
-            return { ...prev, sevenTileBonus: !prev.sevenTileBonus };
-        });
-    };
+    const handleDoubleToggle = () => setScoreModifiers(prev => ({ ...prev, double: !prev.double }));
+    const handleTripleToggle = () => setScoreModifiers(prev => ({ ...prev, triple: !prev.triple }));
+    const handleSevenTileBonus = () => setScoreModifiers(prev => ({ ...prev, sevenTileBonus: !prev.sevenTileBonus }));
 
     const handleReset = () => {
-        setScoreModifiers(prev => {
-            return { ...prev, double: false, triple: false, sevenTileBonus: false };
-        });
+        setScoreModifiers(prev => ({ ...prev, double: false, triple: false, sevenTileBonus: false }));
         setWordToCheckArray(lookupLettersFromWord(wordToCheck));
     };
 
