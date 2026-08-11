@@ -6,16 +6,12 @@ import "./styles/app.css";
 import { useEffect } from "react";
 
 export default function App() {
-  const { setIsStoreSearchHistory, setIsWordToBeChecked, setIsExtendedCheck, handleThemeSelection } = useSettings();
+  const { setIsStoreSearchHistory, setIsWordToBeChecked, handleThemeSelection } = useSettings();
 
   useEffect(() => {
     if (!sessionStorage.getItem("isWordToBeChecked")) {
       setIsWordToBeChecked(true);
       sessionStorage.setItem("isWordToBeChecked", 'true');
-    }
-    if (!sessionStorage.getItem("isExtendedCheck")) {
-      setIsExtendedCheck(true);
-      sessionStorage.setItem("isExtendedCheck", 'true');
     }
     if (!sessionStorage.getItem("searchHistory")) {
       sessionStorage.setItem("searchHistory", JSON.stringify([]));

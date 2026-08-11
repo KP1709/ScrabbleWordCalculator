@@ -14,11 +14,9 @@ const OPTIONS = [
 const SettingsModal = ({ isOpen, onClose, isStoreSearchHistory, setIsStoreSearchHistory }: SettingsModalType) => {
     const {
         isWordToBeChecked,
-        isExtendedCheck,
         setRerender,
         currentTheme,
         handleWordCheck,
-        handleExtendedWordCheck,
         handleSearchHistory,
         handleThemeSelection
     } = useSettings();
@@ -38,15 +36,6 @@ const SettingsModal = ({ isOpen, onClose, isStoreSearchHistory, setIsStoreSearch
                         onChange={e => handleWordCheck(e.target.checked)}
                     />
                     <label htmlFor="wordCheckSetting">Check word against dictionary</label>
-                </span>
-                <span>
-                    <input
-                        type="checkbox"
-                        id="extendedCheckSetting"
-                        checked={isExtendedCheck}
-                        onChange={e => handleExtendedWordCheck(e.target.checked)}
-                    />
-                    <label htmlFor="extendedCheckSetting">Enable extended word check</label>
                 </span>
                 <span>
                     <input

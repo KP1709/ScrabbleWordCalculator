@@ -1,16 +1,20 @@
 /// <reference types="cypress" />
 
+import { successfulResponseWiki_react } from "../responses/successfulResponseWiki-react";
+import { successfulResponseWiki_reacting } from "../responses/successfulResponseWiki-reacting";
+import { successfulResponseWiki_type } from "../responses/successfulResponseWiki-type";
+
 describe('Letter Calculator', () => {
     it('Visits site', () => {
         cy.visit('/');
     });
 
     it('Test screens displayed', () => {
-        cy.intercept('GET', 'https://api.dictionaryapi.dev/api/v2/entries/en/type',
-            (response: { reply: (arg0: { statusCode: number; body: { message: string; }; }) => void; }) => {
+        cy.intercept('GET', 'https://en.wiktionary.org/w/api.php?action=parse&page=type&prop=sections&format=json&origin=*',
+            (response: { reply: (arg0: { statusCode: number; body: any; }) => void; }) => {
                 response.reply({
                     statusCode: 200,
-                    body: { message: 'Valid word' }
+                    body: successfulResponseWiki_type
                 });
             }).as('ValidWord');
 
@@ -57,11 +61,11 @@ describe('Letter Calculator', () => {
     });
 
     it('Test score multipliers', () => {
-        cy.intercept('GET', 'https://api.dictionaryapi.dev/api/v2/entries/en/react',
-            (response: { reply: (arg0: { statusCode: number; body: { message: string; }; }) => void; }) => {
+        cy.intercept('GET', 'https://en.wiktionary.org/w/api.php?action=parse&page=react&prop=sections&format=json&origin=*',
+            (response: { reply: (arg0: { statusCode: number; body: any; }) => void; }) => {
                 response.reply({
                     statusCode: 200,
-                    body: { message: 'Valid word' }
+                    body: successfulResponseWiki_react
                 });
             }).as('ValidWord');
 
@@ -82,11 +86,11 @@ describe('Letter Calculator', () => {
     });
 
     it('Test tile tap functionality', () => {
-        cy.intercept('GET', 'https://api.dictionaryapi.dev/api/v2/entries/en/react',
-            (response: { reply: (arg0: { statusCode: number; body: { message: string; }; }) => void; }) => {
+        cy.intercept('GET', 'https://en.wiktionary.org/w/api.php?action=parse&page=react&prop=sections&format=json&origin=*',
+            (response: { reply: (arg0: { statusCode: number; body: any; }) => void; }) => {
                 response.reply({
                     statusCode: 200,
-                    body: { message: 'Valid word' }
+                    body: successfulResponseWiki_react
                 });
             }).as('ValidWord');
 
@@ -122,13 +126,14 @@ describe('Letter Calculator', () => {
     });
 
     it('Test word bonus and tile bonus reset', () => {
-        cy.intercept('GET', 'https://api.dictionaryapi.dev/api/v2/entries/en/reacting',
-            (response: { reply: (arg0: { statusCode: number; body: { message: string; }; }) => void; }) => {
+        cy.intercept('GET', 'https://en.wiktionary.org/w/api.php?action=parse&page=reacting&prop=sections&format=json&origin=*',
+            (response: { reply: (arg0: { statusCode: number; body: any; }) => void; }) => {
                 response.reply({
                     statusCode: 200,
-                    body: { message: 'Valid word' }
+                    body: successfulResponseWiki_reacting
                 });
             }).as('ValidWord');
+
         cy.visit('/');
 
         cy.get("[data-test='word-form']").as('word-input');

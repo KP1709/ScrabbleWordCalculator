@@ -15,8 +15,7 @@ While the functionality is technically the same, the code is now more maintainab
 - Check to see if user input is valid
   - Checks to see if word contains only alphabetic characters
   - Checks to see if a word is less than 15 letters
-  - Checks to see if word is in the dictionary (using free API)
-  - Checks to see if word is in Wiktionary (if not in the API) 
+  - Checks to see if word is in the dictionary (using Wiktionary)
   - Check to see if word can be created based on number of tiles available
 - Score for whole word is calculated
 - Tried to maintain accessibility throughout the application
@@ -28,13 +27,13 @@ While the functionality is technically the same, the code is now more maintainab
 - Can reset multipliers and bonuses added to letters and/or whole word
 - Error handling if either the API or database is down
 - Instructions accessible at any point 
-- Configure if word goes through dictionary check and extended check
+- Configure if word goes through dictionary check
 - Change the application's appearance
 - Store search history for valid words
   - Configure if search history is on or off and clear history if on
 
 ## ⚡ Supabase --> Wiktionary
-Originally, a Supabase database was connected and was used with Netlify serverless functions. This has been removed and replaced with Wiktionary (web scraping), so it's easier to manage. However, this will only be used if the word didn't exist in the free dictionary API.
+Originally, a Supabase database was connected and was used with Netlify serverless functions. This has been removed and replaced with Wiktionary (web scraping), so it's easier to manage. Originally a free api was used, now Wiktionary is for the main check 
 
 ## 🧪 Experiment
 ### Testing valid words but with restrictions
@@ -54,7 +53,6 @@ Find out more - https://docs.simpleanalytics.com/introduction-to-legal
 ## 📚 Resources
 - Understanding how to push and retain objects in an array - https://stackoverflow.com/questions/70941970/pushing-objects-in-an-array-only-returns-last-object-pushed-in-react
 - Using regex to test for alphabetic characters - https://stackoverflow.com/questions/6067592/regular-expression-to-match-only-alphabetic-characters
-- Dictionary API used - https://dictionaryapi.dev/
 - Learn React Portal in 12 minutes by building a modal - https://www.youtube.com/watch?v=LyLa7dU5tp8
 - Simple Analytics tool - https://www.simpleanalytics.com/
 - Adding multiple themes in React (Noor Ul Usba) - https://javascript.plainenglish.io/easy-way-to-add-multiple-themes-in-react-app-ff45eeca67cb?gi=c7ddcebd3327
@@ -66,3 +64,6 @@ Find out more - https://docs.simpleanalytics.com/introduction-to-legal
 - Netlify and Supabase integration - https://www.netlify.com/integrations/supabase/
 - Hiding API keys using Netlify - https://www.youtube.com/watch?v=m2Dr4L_Ab14
 - Hiding API keys in Vite - https://devzibah.hashnode.dev/using-a-dotenv-file-to-store-and-use-api-keys-in-a-vite-built-react-app
+
+### 🔧 APIs
+- Dictionary API used - https://dictionaryapi.dev/

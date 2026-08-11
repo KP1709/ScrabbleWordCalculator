@@ -17,41 +17,14 @@ export const useCheckWordInDictionary = ({ wordToCheck, submitWord, setSubmitWor
             setIsAnalysing(true);
             setIsError(false);
 
-            let apiRes;
-            let shouldRunExtendedCheck = false;
-
             try {
-                apiRes = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${wordToCheck}`);
-                if (apiRes.ok) {
-                    setIsValidWord(true);
-                } else if (apiRes.status === 404) {
-                    shouldRunExtendedCheck = true;
-                    setIsValidWord(false);
-                }
+                const result = await checkWordExists(wordToCheck.toLowerCase());
+                setIsValidWord(result);
             } catch (err) {
                 setIsError(true);
                 setIsValidWord(false);
-                shouldRunExtendedCheck = true;
             } finally {
                 setIsAnalysing(false);
-            }
-
-            const isExtendedCheckEnabled = sessionStorage.getItem("isExtendedCheck") === 'true';
-
-            if (shouldRunExtendedCheck && isExtendedCheckEnabled) {
-                setIsAnalysing(true);
-                try {
-                    const result = await checkWordExists(wordToCheck);
-                    setIsValidWord(!!result);
-                } catch (err) {
-                    setIsError(true);
-                    setIsValidWord(false);
-                } finally {
-                    setIsAnalysing(false);
-                }
-            } else if (!shouldRunExtendedCheck && !isExtendedCheckEnabled) {
-                setIsError(true);
-                setIsValidWord(false);
             }
         }
 

@@ -1,4 +1,4 @@
-export const successfulResponseWiki = {
+export const successfulResponseWiki_zarf = {
   "warnings": {
     "main": {
       "*": "Subscribe to the mediawiki-api-announce mailing list at <https://lists.wikimedia.org/postorius/lists/mediawiki-api-announce.lists.wikimedia.org/> for notice of API deprecations and breaking changes. Use [[Special:ApiFeatureUsage]] to see usage of deprecated features by your application."
