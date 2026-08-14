@@ -2,8 +2,6 @@ import { LetterProperties } from "../../reusableTypes/LetterProperties";
 import { useEffect, useState } from "react";
 import { lookupLettersFromWord } from "../../reusableFunctions/lookupLettersFromWord";
 import Tile from "../tile";
-import { checkForExceedingTileNumber } from "../../reusableFunctions/checkExceedingTileNumber";
-import MaxTileLimitExceeded from "./maxTileLimitExceeded";
 import '../../styles/validWord.css';
 import { getLetterNoTiles } from "../../reusableFunctions/letterNoTiles";
 import { addWordToSearchHistory } from "../../reusableFunctions/searchHistorySave";
@@ -11,7 +9,6 @@ import { useSettings } from "../../hooks/useSettings";
 
 type ValidWordType = {
     wordToCheck: string,
-    submitWord: boolean;
 };
 
 type ScoreModifierButtonsType = {
@@ -31,11 +28,10 @@ const ScoreModifierButtons = ({ dataTest, onClick, buttonText }: ScoreModifierBu
     );
 };
 
-export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
+const ValidWord = ({ wordToCheck }: ValidWordType) => {
     const { isStoreSearchHistory } = useSettings();
     const [totalWordScore, setTotalWordScore] = useState(0);
     const [wordToCheckArray, setWordToCheckArray] = useState<LetterProperties[]>([]);
-    const [isAboveMaxTileAmount, setIsAboveMaxTileAmount] = useState(false);
     const [scoreModifiers, setScoreModifiers] = useState({
         double: false,
         triple: false,
@@ -53,12 +49,8 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
 
     useEffect(() => {
         handleReset();
-        setIsAboveMaxTileAmount(checkForExceedingTileNumber(wordToCheck));
-        if (!isAboveMaxTileAmount) {
-            setWordToCheckArray(lookupLettersFromWord(wordToCheck));
-            isStoreSearchHistory && addWordToSearchHistory(wordToCheck);
-        }
-    }, [submitWord]);
+        isStoreSearchHistory && addWordToSearchHistory(wordToCheck);
+    }, []);
 
     useEffect(() => {
         let wordScoreMultiplier = 1;
@@ -104,8 +96,6 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
         }));
     };
 
-    if (isAboveMaxTileAmount) return <MaxTileLimitExceeded />;
-
     return (
         <div className="flex-centre-column" data-test="valid-word-screen">
             <ul className="flex-centre-row tile-list">
@@ -147,4 +137,6 @@ export default function ValidWord({ submitWord, wordToCheck }: ValidWordType) {
         </div>
     );
 
-}
+};
+
+export default ValidWord;

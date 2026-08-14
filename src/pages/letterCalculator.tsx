@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "../styles/letterCalculator.css";
-import { useCheckWordInDictionary } from "../hooks/useCheckWordInDictionary";
+import checkOutcome, { Outcome } from "../hooks/useCheckOutcome";
 import StartScreen from "../components/responseInterfaces/startScreen";
 import IsAnalysing from "../components/responseInterfaces/isAnalysing";
 import UnknownWord from "../components/responseInterfaces/unknownWord";
@@ -11,37 +11,24 @@ import HowToModal from "../components/modals/howToModal";
 import SettingsModal from "../components/modals/settingsModal";
 import MobileBar from "../components/mobileBar";
 import HistoryModal from "../components/modals/historyModal";
+import MaxTileLimitExceeded from "../components/responseInterfaces/maxTileLimitExceeded";
 import { useSettings } from "../hooks/useSettings";
-
-type ValidString = "true" | "false" | "start";
-
-const MAX_TILE_AMOUNT = 15;
 
 export default function LetterCalculator() {
     const [wordToCheck, setWordToCheck] = useState("");
-    const [isValidString, setIsValidString] = useState<ValidString>("start");
-    const [submitWord, setSubmitWord] = useState(false);
-    const [isTooLong, setIsTooLong] = useState(false);
+    const [outcome, setOutcome] = useState<Outcome>('start');
     const [modalVisibility, setModalVisibility] = useState({ howTo: false, settings: false, history: false });
 
-    const { isError, isAnalysing, isValidWord } = useCheckWordInDictionary({ wordToCheck, submitWord, setSubmitWord });
     const { isStoreSearchHistory, setIsStoreSearchHistory } = useSettings();
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        if (!(wordToCheck.length <= MAX_TILE_AMOUNT)) {
-            setIsValidString("true");
-            setIsTooLong(true);
-            return;
-        }
-        if ((/^[A-Z]+$/i).test(wordToCheck)) {
-            setIsValidString("true");
-            setIsTooLong(false);
-            setSubmitWord(true);
-            return;
-        }
-        setIsValidString("false");
-        setIsTooLong(false);
+        setOutcome('analysing');
+
+        (async () => {
+            const result = await checkOutcome(wordToCheck);
+            setOutcome(result);
+        })();
     };
 
     return (
@@ -84,15 +71,13 @@ export default function LetterCalculator() {
                 setWordToCheck={setWordToCheck}
             />
 
-            {isValidString === "start" && <StartScreen />}
-            {isAnalysing && <IsAnalysing />}
-            {(isValidString === "false" || isTooLong) && <InvalidEntry isTooLong={isTooLong} />}
-            {isValidString === "true" && !isValidWord && !isError && !isTooLong && !isAnalysing && <UnknownWord />}
-            {isValidString === "true" && !isValidWord && isError && !isAnalysing && <Error wordToCheck={wordToCheck} />}
-
-            {isValidString === "true" && isValidWord && !isError && !isAnalysing && !isTooLong &&
-                <ValidWord wordToCheck={wordToCheck.toLowerCase()} submitWord={submitWord} />
-            }
+            {outcome === 'start' && <StartScreen />}
+            {outcome === 'analysing' && <IsAnalysing />}
+            {(outcome === 'invalid' || outcome === 'invalid-tooLong') && <InvalidEntry isTooLong={outcome === 'invalid-tooLong'} />}
+            {outcome === 'unknown' && <UnknownWord />}
+            {outcome === 'error' && <Error wordToCheck={wordToCheck} />}
+            {outcome === 'invalid-cannotMake' && <MaxTileLimitExceeded />}
+            {outcome === 'valid' && <ValidWord wordToCheck={wordToCheck.toLowerCase()} />}
             <MobileBar
                 setModalVisibility={setModalVisibility}
                 isStoreSearchHistory={isStoreSearchHistory}
