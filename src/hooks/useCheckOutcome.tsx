@@ -1,4 +1,5 @@
 import { checkForExceedingTileNumber } from "../reusableFunctions/checkExceedingTileNumber";
+import { addWordToSearchHistory } from "../reusableFunctions/searchHistorySave";
 import { checkWordExists } from "./useCheckWordInAdvancedDictionary";
 
 export type Outcome =
@@ -24,6 +25,9 @@ export async function checkOutcome(wordToCheck: string): Promise<Outcome> {
         if (!isValidWord) return 'unknown';
 
         const isWordProducible = !checkForExceedingTileNumber(wordToCheck.toLowerCase());
+        const isValidSettingsToStore = sessionStorage.getItem('isStoreSearchHistory') === 'true' && sessionStorage.getItem('isWordToBeChecked') === 'true';
+        if (isWordProducible && isValidSettingsToStore) addWordToSearchHistory(wordToCheck);
+
         return isWordProducible ? 'valid' : 'invalid-cannotMake';
     } catch (err) {
         console.error('Dictionary check failed', err);
