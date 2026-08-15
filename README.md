@@ -29,8 +29,9 @@ While the functionality is technically the same, the code is now more maintainab
 - Instructions accessible at any point 
 - Configure if word goes through dictionary check
 - Change the application's appearance
-- Store search history for valid words
+- Store valid words in search history
   - Configure if search history is on or off and clear history if on
+  - Only store if dictionary check is on
 
 ## ⚡ Supabase --> Wiktionary
 Originally, a Supabase database was connected and was used with Netlify serverless functions. This has been removed and replaced with Wiktionary (web scraping), so it's easier to manage. Originally a free api was used, now Wiktionary is for the main check 
