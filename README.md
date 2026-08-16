@@ -5,7 +5,7 @@
 React / Typescript / CSS / pnpm / APIs / Cypress (Testing) / Husky (Git Hooks)
 
 ## 🍼 Introduction
-Playing the original version of Scrabble, I know it can sometimes be difficult to calculate a word's score. Therefore, I created my own version of a Scrabble calculator. When a word is entered, it checks if the word is valid and displays its score. Bonuses and multipliers can be added to calculate the correct score.
+Playing the original version of Scrabble, it can sometimes be difficult to calculate a word's score. Therefore, I created my own version of a Scrabble calculator. When a word is entered, it checks if the word is valid and displays its score. Bonuses and multipliers can be added to calculate the correct score.
 
 ## ⚙️ Changes
 The commit 81ea887 was code clean-up for the entire project.  
