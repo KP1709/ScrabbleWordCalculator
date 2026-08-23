@@ -4,8 +4,6 @@ import { lookupLettersFromWord } from "../../reusableFunctions/lookupLettersFrom
 import Tile from "../tile";
 import '../../styles/validWord.css';
 import { getLetterNoTiles } from "../../reusableFunctions/letterNoTiles";
-import { addWordToSearchHistory } from "../../reusableFunctions/searchHistorySave";
-import { useSettings } from "../../hooks/useSettings";
 
 type ValidWordType = {
     wordToCheck: string,
@@ -29,7 +27,6 @@ const ScoreModifierButtons = ({ dataTest, onClick, buttonText }: ScoreModifierBu
 };
 
 const ValidWord = ({ wordToCheck }: ValidWordType) => {
-    const { isStoreSearchHistory } = useSettings();
     const [totalWordScore, setTotalWordScore] = useState(0);
     const [wordToCheckArray, setWordToCheckArray] = useState<LetterProperties[]>([]);
     const [scoreModifiers, setScoreModifiers] = useState({
@@ -49,7 +46,6 @@ const ValidWord = ({ wordToCheck }: ValidWordType) => {
 
     useEffect(() => {
         handleReset();
-        isStoreSearchHistory && addWordToSearchHistory(wordToCheck);
     }, []);
 
     useEffect(() => {

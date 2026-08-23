@@ -14,8 +14,7 @@ export type Outcome =
 
 const MAX_TILE_AMOUNT = 15;
 
-export async function checkOutcome(wordToCheck: string): Promise<Outcome> {
-    if (!wordToCheck || wordToCheck.length === 0) return 'start';
+const checkOutcome = async (wordToCheck: string): Promise<Outcome> => {
     if (sessionStorage.getItem("isWordToBeChecked") === 'false') return 'valid';
     if (wordToCheck.length > MAX_TILE_AMOUNT) return 'invalid-tooLong';
     if (!(/^[A-Z]+$/i).test(wordToCheck)) return 'invalid';
@@ -33,6 +32,6 @@ export async function checkOutcome(wordToCheck: string): Promise<Outcome> {
         console.error('Dictionary check failed', err);
         return 'error';
     }
-}
+};
 
 export default checkOutcome;
