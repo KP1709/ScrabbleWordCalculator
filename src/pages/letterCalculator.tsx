@@ -1,20 +1,14 @@
 import { useState } from "react";
 import "../styles/letterCalculator.css";
 import checkOutcome, { Outcome } from "../hooks/useCheckOutcome";
-import StartScreen from "../components/responseInterfaces/startScreen";
-import IsAnalysing from "../components/responseInterfaces/isAnalysing";
-import UnknownWord from "../components/responseInterfaces/unknownWord";
-import ValidWord from "../components/responseInterfaces/validWord";
-import Error from "../components/responseInterfaces/isError";
-import InvalidEntry from "../components/responseInterfaces/invalidEntry";
 import HowToModal from "../components/modals/howToModal";
 import SettingsModal from "../components/modals/settingsModal";
 import MobileBar from "../components/mobileBar";
 import HistoryModal from "../components/modals/historyModal";
-import MaxTileLimitExceeded from "../components/responseInterfaces/maxTileLimitExceeded";
 import { useSettings } from "../hooks/useSettings";
+import OutcomeView from "../components/outcomeView";
 
-export default function LetterCalculator() {
+const LetterCalculator = () => {
     const [wordToCheck, setWordToCheck] = useState("");
     const [outcome, setOutcome] = useState<Outcome>('start');
     const [modalVisibility, setModalVisibility] = useState({ howTo: false, settings: false, history: false });
@@ -71,17 +65,13 @@ export default function LetterCalculator() {
                 setWordToCheck={setWordToCheck}
             />
 
-            {outcome === 'start' && <StartScreen />}
-            {outcome === 'analysing' && <IsAnalysing />}
-            {(outcome === 'invalid' || outcome === 'invalid-tooLong') && <InvalidEntry isTooLong={outcome === 'invalid-tooLong'} />}
-            {outcome === 'unknown' && <UnknownWord />}
-            {outcome === 'error' && <Error wordToCheck={wordToCheck} />}
-            {outcome === 'invalid-cannotMake' && <MaxTileLimitExceeded />}
-            {outcome === 'valid' && <ValidWord wordToCheck={wordToCheck.toLowerCase()} />}
+            <OutcomeView outcome={outcome} wordToCheck={wordToCheck} />
             <MobileBar
                 setModalVisibility={setModalVisibility}
                 isStoreSearchHistory={isStoreSearchHistory}
             />
         </main>
     );
-}
+};
+
+export default LetterCalculator;
