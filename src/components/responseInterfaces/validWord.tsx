@@ -1,7 +1,7 @@
 import { LetterProperties } from "../../reusableTypes/LetterProperties";
 import { useEffect, useState } from "react";
 import { lookupLettersFromWord } from "../../lib/lookupLettersFromWord";
-import Tile from "../tile";
+import Tile from "../tile/tile";
 import '../../styles/validWord.css';
 import { getLetterNoTiles } from "../../lib/letterNoTiles";
 

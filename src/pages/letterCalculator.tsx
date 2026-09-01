@@ -3,7 +3,7 @@ import "../styles/letterCalculator.css";
 import checkOutcome, { Outcome } from "../hooks/useCheckOutcome";
 import HowToModal from "../components/modals/howToModal";
 import SettingsModal from "../components/modals/settingsModal";
-import MobileBar from "../components/mobileBar";
+import MobileBar from "../components/mobileBar/mobileBar";
 import HistoryModal from "../components/modals/historyModal";
 import { useSettings } from "../hooks/useSettings";
 import OutcomeView from "../components/outcomeView";

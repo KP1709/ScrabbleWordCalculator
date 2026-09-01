@@ -1,4 +1,4 @@
-import "../../styles/modal.css";
+import "./modal.css";
 import { clearSearchHistory } from "../../lib/searchHistorySave";
 import { useSettings } from "../../hooks/useSettings";
 import Modal from "./modal";

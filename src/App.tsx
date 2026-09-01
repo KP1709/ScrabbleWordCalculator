@@ -1,4 +1,4 @@
-import Header from "./components/header";
+import Header from "./components/header/header.tsx";
 import LetterCalculator from "./pages/letterCalculator";
 import ErrorBoundary from "./components/errorBoundary";
 import { useSettings } from "./hooks/useSettings.tsx";

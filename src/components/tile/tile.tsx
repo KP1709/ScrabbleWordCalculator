@@ -1,5 +1,5 @@
-import { LetterProperties } from "../reusableTypes/LetterProperties";
-import "../styles/tile.css";
+import { LetterProperties } from "../../reusableTypes/LetterProperties";
+import "./tile.css";
 
 type TileProp = LetterProperties & { onClick: () => void; };
 

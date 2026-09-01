@@ -1,4 +1,4 @@
-import '../styles/mobileBar.css';
+import './mobileBar.css';
 
 type MobileBarProps = {
     isStoreSearchHistory: boolean;

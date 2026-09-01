@@ -1,5 +1,5 @@
 import { HistoryModalType } from "../../reusableTypes/ModalProperties";
-import "../../styles/modal.css";
+import "./modal.css";
 import Modal from "./modal";
 
 const HistoryModal = ({ isOpen, onClose, setWordToCheck }: HistoryModalType) => {

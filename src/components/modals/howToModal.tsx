@@ -1,5 +1,5 @@
 import { HowToModalType } from "../../reusableTypes/ModalProperties";
-import "../../styles/modal.css";
+import "./modal.css";
 import Modal from "./modal";
 
 const HowToModal = ({ isOpen, onClose }: HowToModalType) => {
