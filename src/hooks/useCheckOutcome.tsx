@@ -1,5 +1,5 @@
-import { checkForExceedingTileNumber } from "../reusableFunctions/checkExceedingTileNumber";
-import { addWordToSearchHistory } from "../reusableFunctions/searchHistorySave";
+import { checkForExceedingTileNumber } from "../lib/checkExceedingTileNumber";
+import { addWordToSearchHistory } from "../lib/searchHistorySave";
 import { checkWordExists } from "./useCheckWordInAdvancedDictionary";
 
 export type Outcome =

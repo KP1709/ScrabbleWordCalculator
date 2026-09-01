@@ -1,5 +1,5 @@
 import "../../styles/modal.css";
-import { clearSearchHistory } from "../../reusableFunctions/searchHistorySave";
+import { clearSearchHistory } from "../../lib/searchHistorySave";
 import { useSettings } from "../../hooks/useSettings";
 import Modal from "./modal";
 import { SettingsModalType } from "../../reusableTypes/ModalProperties";

@@ -1,9 +1,9 @@
 import { LetterProperties } from "../../reusableTypes/LetterProperties";
 import { useEffect, useState } from "react";
-import { lookupLettersFromWord } from "../../reusableFunctions/lookupLettersFromWord";
+import { lookupLettersFromWord } from "../../lib/lookupLettersFromWord";
 import Tile from "../tile";
 import '../../styles/validWord.css';
-import { getLetterNoTiles } from "../../reusableFunctions/letterNoTiles";
+import { getLetterNoTiles } from "../../lib/letterNoTiles";
 
 type ValidWordType = {
     wordToCheck: string,
