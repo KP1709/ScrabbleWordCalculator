@@ -14,18 +14,14 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
-import '../../src/styles/app.css'
-import '../../src/styles/modal.css'
-import '../../src/styles/letterCalculator.css'
-import '../../src/styles/tile.css'
-import '../../src/styles/header.css'
-import '../../src/styles/validWord.css'
+import './commands';
+import '../../src/styles/app.css';
+import '../../src/components/header/header.css';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-import { mount } from 'cypress/react'
+import { mount } from 'cypress/react';
 
 // Augment the Cypress namespace to include type definitions for
 // your custom command.
@@ -34,12 +30,12 @@ import { mount } from 'cypress/react'
 declare global {
   namespace Cypress {
     interface Chainable {
-      mount: typeof mount
+      mount: typeof mount;
     }
   }
 }
 
-Cypress.Commands.add('mount', mount)
+Cypress.Commands.add('mount', mount);
 
 // Example use:
 // cy.mount(<MyComponent />)

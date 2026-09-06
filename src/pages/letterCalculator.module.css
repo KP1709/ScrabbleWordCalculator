@@ -1,23 +1,11 @@
-@import url("./app.css");
+@import url("../styles/app.css");
 
-.form__input-button,
-.form__input-text,
-.multiplier__button {
+.form__input__button,
+.form__input__text {
     font-family: "Poppins", sans-serif;
     padding: 5px 5px;
     border: 2px solid var(--search-border-clr);
     border-radius: 2px;
-}
-
-.response-interface {
-    color: var(--main-text-clr);
-    text-align: center;
-}
-
-.svg-response {
-    margin-top: 10px;
-    width: 10%;
-    fill: var(--svg-interface-clr);
 }
 
 main {

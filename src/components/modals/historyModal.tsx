@@ -1,5 +1,5 @@
 import { HistoryModalType } from "../../reusableTypes/ModalProperties";
-import "./modal.css";
+import styles from "./modal.module.css";
 import Modal from "./modal";
 
 const HistoryModal = ({ isOpen, onClose, setWordToCheck }: HistoryModalType) => {
@@ -13,7 +13,7 @@ const HistoryModal = ({ isOpen, onClose, setWordToCheck }: HistoryModalType) => 
         }
         else {
             return (
-                <ul className='modal-list'>
+                <ul className={styles.modalList}>
                     {searchHistory.map((word: string, index: number) => (
                         <li key={index} onClick={() => { setWordToCheck(word); onClose(); }}>{word}</li>
                     ))}

@@ -4,7 +4,7 @@ import InvalidEntry from './responseInterfaces/invalidEntry';
 import IsAnalysing from './responseInterfaces/isAnalysing';
 import UnknownWord from './responseInterfaces/unknownWord';
 import MaxTileLimitExceeded from './responseInterfaces/maxTileLimitExceeded';
-import ValidWord from './responseInterfaces/validWord';
+import ValidWord from './responseInterfaces/validWord/validWord';
 import Error from './responseInterfaces/isError';
 
 const OutcomeView = ({ outcome, wordToCheck }: { outcome: Outcome, wordToCheck: string; }) => {

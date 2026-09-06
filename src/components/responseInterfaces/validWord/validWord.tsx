@@ -1,9 +1,10 @@
-import { LetterProperties } from "../../reusableTypes/LetterProperties";
+import { LetterProperties } from "../../../reusableTypes/LetterProperties";
 import { useEffect, useState } from "react";
-import { lookupLettersFromWord } from "../../lib/lookupLettersFromWord";
-import Tile from "../tile/tile";
-import '../../styles/validWord.css';
-import { getLetterNoTiles } from "../../lib/letterNoTiles";
+import { lookupLettersFromWord } from "../../../lib/lookupLettersFromWord";
+import Tile from "../../tile/tile";
+import tileStyles from "../../tile/tile.module.css";
+import styles from './validWord.module.css';
+import { getLetterNoTiles } from "../../../lib/letterNoTiles";
 
 type ValidWordType = {
     wordToCheck: string,
@@ -18,7 +19,7 @@ type ScoreModifierButtonsType = {
 const ScoreModifierButtons = ({ dataTest, onClick, buttonText }: ScoreModifierButtonsType) => {
     return (
         <button
-            className='multiplier__button'
+            className={styles.multiplier__button}
             data-test={dataTest}
             onClick={onClick}>
             {buttonText}
@@ -44,9 +45,7 @@ const ValidWord = ({ wordToCheck }: ValidWordType) => {
         setWordToCheckArray(lookupLettersFromWord(wordToCheck));
     };
 
-    useEffect(() => {
-        handleReset();
-    }, []);
+    useEffect(() => handleReset(), []);
 
     useEffect(() => {
         let wordScoreMultiplier = 1;
@@ -94,9 +93,9 @@ const ValidWord = ({ wordToCheck }: ValidWordType) => {
 
     return (
         <div className="flex-centre-column" data-test="valid-word-screen">
-            <ul className="flex-centre-row tile-list">
+            <ul className={`flex-centre-row ${tileStyles.tileList}`}>
                 {wordToCheckArray.map(char =>
-                    <li key={char.id} className="flex-centre" data-test='word-tile'>
+                    <li key={char.id} className={`flex-centre ${tileStyles.tileItem}`} data-test='word-tile'>
                         <Tile
                             {...char}
                             onClick={() => { handleTileClick(char.id); }}
@@ -105,27 +104,30 @@ const ValidWord = ({ wordToCheck }: ValidWordType) => {
                 )}
             </ul>
 
-            <h3 id="score" data-test="total-word-score"> Total : {totalWordScore}</h3>
+            <span id={styles.score} data-test="total-word-score"> Total : {totalWordScore}</span>
 
-            <div id="multiplier__buttons" className="flex-centre-row">
+            <div className={`flex-centre-row ${styles.multiplier__buttons}`}>
                 <ScoreModifierButtons
                     dataTest='double-total-score-btn'
                     onClick={handleDoubleToggle}
                     buttonText={scoreModifiers.double ? 'Double selected' : 'Double total score'}
                 />
-                <ScoreModifierButtons dataTest='triple-total-score-btn'
+                <ScoreModifierButtons
+                    dataTest='triple-total-score-btn'
                     onClick={handleTripleToggle}
                     buttonText={scoreModifiers.triple ? 'Triple selected' : 'Triple total score'}
                 />
             </div>
-            <div id="multiplier__buttons" className="flex-centre-row">
+            <div className={`flex-centre-row ${styles.multiplier__buttons}`}>
                 {wordToCheckArray.length >= 7 &&
-                    <ScoreModifierButtons dataTest='bonus-btn'
+                    <ScoreModifierButtons
+                        dataTest='bonus-btn'
                         onClick={handleSevenTileBonus}
                         buttonText={scoreModifiers.sevenTileBonus ? 'Remove seven tile bonus' : 'Add seven tile bonus'}
                     />
                 }
-                <ScoreModifierButtons dataTest='reset-btn'
+                <ScoreModifierButtons
+                    dataTest='reset-btn'
                     onClick={handleReset}
                     buttonText='Reset all'
                 />

@@ -1,0 +1,27 @@
+@import url("../../../styles/app.css");
+
+.multiplier__buttons {
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#score {
+    font-size: 1.5rem;
+    color: var(--main-text-clr);
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+}
+
+.multiplier__button {
+    background-color: var(--multipler-btn-clr);
+    color: var(--main-text-clr);
+
+    font-family: "Poppins", sans-serif;
+    padding: 5px 5px;
+    border: 2px solid var(--search-border-clr);
+    border-radius: 2px;
+}

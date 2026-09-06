@@ -1,4 +1,4 @@
-import "./modal.css";
+import styles from "./modal.module.css";
 import { clearSearchHistory } from "../../lib/searchHistorySave";
 import { useSettings } from "../../hooks/useSettings";
 import Modal from "./modal";
@@ -30,6 +30,7 @@ const SettingsModal = ({ isOpen, onClose, isStoreSearchHistory, setIsStoreSearch
             <span className='flex-centre-column' style={{ gap: '10px', alignItems: 'flex-start' }}>
                 <span>
                     <input
+                        className={styles.checkbox}
                         type="checkbox"
                         id="wordCheckSetting"
                         checked={isWordToBeChecked}
@@ -39,6 +40,7 @@ const SettingsModal = ({ isOpen, onClose, isStoreSearchHistory, setIsStoreSearch
                 </span>
                 <span>
                     <input
+                        className={styles.checkbox}
                         type="checkbox"
                         id="wordSearchHistoryChecking"
                         checked={isStoreSearchHistory}
@@ -60,7 +62,7 @@ const SettingsModal = ({ isOpen, onClose, isStoreSearchHistory, setIsStoreSearch
                 </span>
                 <span>
                     <label htmlFor="themeSelection">Select theme:</label>
-                    <select name="themeSelection" id="themeSelection"
+                    <select className={styles.select} name="themeSelection" id="themeSelection"
                         value={currentTheme}
                         onChange={e => handleThemeSelection(e.target.value)}>
                         {OPTIONS.map(option => (

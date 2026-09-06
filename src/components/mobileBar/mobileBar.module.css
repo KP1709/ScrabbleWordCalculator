@@ -1,20 +1,25 @@
-.mobile-bar {
+.mobile__bar {
     margin-top: 30px;
     gap: 20px;
 }
 
-.bar-button {
+.bar__button {
     width: 50%;
     max-width: 150px;
     background-color: transparent;
     color: var(--svg-buttons-clr);
+
+    font-family: "Poppins", sans-serif;
+    padding: 5px 5px;
+    border: 2px solid var(--search-border-clr);
+    border-radius: 2px;
 }
 
-.bar-button:hover {
+.bar__button:hover {
     color: var(--svg-buttons-hover-clr);
 }
 
-.bar-button svg {
+.bar__button svg {
     --size: 25px;
     width: var(--size);
     height: var(--size);
@@ -22,6 +27,6 @@
     fill: var(--svg-buttons-clr)
 }
 
-.bar-button:hover svg {
+.bar__button:hover svg {
     fill: var(--svg-buttons-hover-clr)
 }

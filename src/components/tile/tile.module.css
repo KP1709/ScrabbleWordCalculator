@@ -20,20 +20,20 @@
     color: var(--primary-tile-text-clr);
 }
 
-ul.tile-list {
+.tileList {
     padding: 0;
     flex-wrap: wrap;
     list-style: none;
     gap: 10px;
 }
 
-ul.tile-list li {
+.tileItem {
     display: flex;
     flex-direction: column;
     padding: 0;
 }
 
-ul.tile-list h2 {
+.tileLetter {
     cursor: pointer;
     border: 2px solid var(--tile-border-clr);
     border-radius: 3px;
@@ -49,6 +49,6 @@ ul.tile-list h2 {
     /* Standard syntax */
 }
 
-ul.tile-list h3 {
+.tileScore {
     color: var(--main-text-clr);
 }

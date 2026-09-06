@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../styles/letterCalculator.css";
+import styles from "./letterCalculator.module.css";
 import checkOutcome, { Outcome } from "../hooks/useCheckOutcome";
 import HowToModal from "../components/modals/howToModal";
 import SettingsModal from "../components/modals/settingsModal";
@@ -31,7 +31,7 @@ const LetterCalculator = () => {
                 <form onSubmit={handleSubmit} className="flex-centre-row">
                     <label htmlFor="word">Word:</label>
                     <input type="text"
-                        className="form__input-text"
+                        className={styles.form__input__text}
                         name="word"
                         id="word"
                         data-test='word-form'
@@ -43,7 +43,7 @@ const LetterCalculator = () => {
                         type="submit"
                         value="Check"
                         data-test='submit-word-form-btn'
-                        className="form__input-button"
+                        className={styles.form__input__button}
                         title='Submit word for check'
                     />
                 </form>
