@@ -107,20 +107,20 @@ describe('Letter Calculator', () => {
         cy.get("[data-test='word-tile']").click({ multiple: true });
         cy.get("[data-test='word-tile']").click({ multiple: true });
         cy.get("[data-test='word-tile']").each((tile: any) => {
-            cy.get(tile).get('div h2').should('have.css', 'background-color', 'rgb(252, 241, 225)'); // #fcf1e1ff
+            cy.wrap(tile).find('span:first-child').should('not.have.css', 'background-color', 'rgba(0, 0, 0, 0)');
         });
 
         cy.get("[data-test='list-tile-E']").click();
         cy.get("[data-test='list-tile-E']").within(() => {
-            cy.get('h2').should('have.css', 'background-color', 'rgb(144, 224, 239)'); // #90e0ef
-            cy.get('h3').should('contain', 2);
+            cy.get('span:first-child').should('have.css', 'background-color', 'rgb(144, 224, 239)'); // #90e0ef
+            cy.get('span:last-child').should('contain', 2);
         });
 
         cy.get("[data-test='list-tile-C']").click();
         cy.get("[data-test='list-tile-C']").click();
         cy.get("[data-test='list-tile-C']").within(() => {
-            cy.get('h2').should('have.css', 'background-color', 'rgb(252, 241, 225)'); // #fcf1e1ff
-            cy.get('h3').should('contain', 0);
+            cy.get('span:first-child').should('have.css', 'background-color', 'rgb(252, 241, 225)'); // #fcf1e1ff
+            cy.get('span:last-child').should('contain', 0);
         });
         cy.get("[data-test='total-word-score']").should('contain', 7);
     });

@@ -1,21 +1,21 @@
 @import url("../../styles/app.css");
 
-.triple-tile-colour {
+.tripleTileColour {
     background-color: var(--triple-tile-clr);
     color: var(--primary-tile-text-clr);
 }
 
-.double-tile-colour {
+.doubleTileColour {
     background-color: var(--double-tile-clr);
     color: var(--primary-tile-text-clr);
 }
 
-.blank-tile-colour {
+.blankTileColour {
     background-color: var(--blank-tile-clr);
     color: var(--secondary-tile-text-clr);
 }
 
-.restore-tile-colour {
+.restoreTileColour {
     background-color: var(--restore-tile-clr);
     color: var(--primary-tile-text-clr);
 }
