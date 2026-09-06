@@ -1,9 +1,9 @@
-.mobile__bar {
+.mobileBar {
     margin-top: 30px;
     gap: 20px;
 }
 
-.bar__button {
+.barButton {
     width: 50%;
     max-width: 150px;
     background-color: transparent;
@@ -15,11 +15,11 @@
     border-radius: 2px;
 }
 
-.bar__button:hover {
+.barButton:hover {
     color: var(--svg-buttons-hover-clr);
 }
 
-.bar__button svg {
+.barButton svg {
     --size: 25px;
     width: var(--size);
     height: var(--size);
@@ -27,6 +27,6 @@
     fill: var(--svg-buttons-clr)
 }
 
-.bar__button:hover svg {
+.barButton:hover svg {
     fill: var(--svg-buttons-hover-clr)
 }

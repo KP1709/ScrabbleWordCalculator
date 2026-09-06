@@ -2,7 +2,7 @@ import styles from './responseInterface.module.css';
 
 const StartScreen = () => {
     return (
-        <div className={`flex-centre-column ${styles.response__interface}`} data-test="start-screen-screen">
+        <div className={`flex-centre-column ${styles.responseInterface}`} data-test="start-screen-screen">
             <h2>Enter a word to calculate score</h2>
         </div>
     );

@@ -1,6 +1,6 @@
 @import url("../../../styles/app.css");
 
-.multiplier__buttons {
+.multiplierButtons {
     gap: 10px;
     margin-bottom: 10px;
 }
@@ -16,7 +16,7 @@
     unicode-bidi: isolate;
 }
 
-.multiplier__button {
+.multiplierButton {
     background-color: var(--multipler-btn-clr);
     color: var(--main-text-clr);
 

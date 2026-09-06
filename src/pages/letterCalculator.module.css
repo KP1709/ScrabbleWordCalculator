@@ -1,7 +1,7 @@
 @import url("../styles/app.css");
 
-.form__input__button,
-.form__input__text {
+.formInputButton,
+.formInputText {
     font-family: "Poppins", sans-serif;
     padding: 5px 5px;
     border: 2px solid var(--search-border-clr);

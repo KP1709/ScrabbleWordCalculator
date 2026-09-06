@@ -19,7 +19,7 @@ type ScoreModifierButtonsType = {
 const ScoreModifierButtons = ({ dataTest, onClick, buttonText }: ScoreModifierButtonsType) => {
     return (
         <button
-            className={styles.multiplier__button}
+            className={styles.multiplierButton}
             data-test={dataTest}
             onClick={onClick}>
             {buttonText}
@@ -106,7 +106,7 @@ const ValidWord = ({ wordToCheck }: ValidWordType) => {
 
             <span id={styles.score} data-test="total-word-score"> Total : {totalWordScore}</span>
 
-            <div className={`flex-centre-row ${styles.multiplier__buttons}`}>
+            <div className={`flex-centre-row ${styles.multiplierButtons}`}>
                 <ScoreModifierButtons
                     dataTest='double-total-score-btn'
                     onClick={handleDoubleToggle}
@@ -118,7 +118,7 @@ const ValidWord = ({ wordToCheck }: ValidWordType) => {
                     buttonText={scoreModifiers.triple ? 'Triple selected' : 'Triple total score'}
                 />
             </div>
-            <div className={`flex-centre-row ${styles.multiplier__buttons}`}>
+            <div className={`flex-centre-row ${styles.multiplierButtons}`}>
                 {wordToCheckArray.length >= 7 &&
                     <ScoreModifierButtons
                         dataTest='bonus-btn'

@@ -6,14 +6,14 @@ type MobileBarProps = {
 };
 
 const BarButton = ({ onClick, children }: { onClick: () => void; children: React.ReactNode; }) => (
-    <button className={`flex-centre-row  ${styles.bar__button}`} onClick={onClick}>
+    <button className={`flex-centre-row  ${styles.barButton}`} onClick={onClick}>
         {children}
     </button>
 );
 
 const MobileBar = ({ setModalVisibility, isStoreSearchHistory }: MobileBarProps) => {
     return (
-        <span className={`flex-centre-row ${styles.mobile__bar}`}>
+        <span className={`flex-centre-row ${styles.mobileBar}`}>
             <BarButton
                 onClick={() => setModalVisibility((modal) => ({ ...modal, howTo: true }))}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" aria-hidden='true'>

@@ -31,7 +31,7 @@ const LetterCalculator = () => {
                 <form onSubmit={handleSubmit} className="flex-centre-row">
                     <label htmlFor="word">Word:</label>
                     <input type="text"
-                        className={styles.form__input__text}
+                        className={styles.formInputText}
                         name="word"
                         id="word"
                         data-test='word-form'
@@ -43,7 +43,7 @@ const LetterCalculator = () => {
                         type="submit"
                         value="Check"
                         data-test='submit-word-form-btn'
-                        className={styles.form__input__button}
+                        className={styles.formInputButton}
                         title='Submit word for check'
                     />
                 </form>
