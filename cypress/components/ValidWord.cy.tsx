@@ -1,5 +1,5 @@
 import { mount } from 'cypress/react';
-import ValidWord from "../../src/components/responseInterfaces/validWord";
+import ValidWord from "../../src/components/responseInterfaces/validWord/validWord";
 
 describe('<ValidWord  />', () => {
     it('Testing valid word screen functionality', () => {
@@ -22,25 +22,25 @@ describe('<ValidWord  />', () => {
         cy.get("[data-test='word-tile']").click({ multiple: true });
         cy.get("[data-test='word-tile']").click({ multiple: true });
         cy.get("[data-test='word-tile']").each((tile: any) => {
-            cy.wrap(tile).find('span:first-child').should('not.have.css', 'background-color', 'rgba(0, 0, 0, 0)');
+            cy.wrap(tile).find('button').should('not.have.css', 'background-color', 'rgba(0, 0, 0, 0)');
         });
 
         cy.get("[data-test='list-tile-E']").click();
         cy.get("[data-test='list-tile-E']").within(() => {
-            cy.get('span:first-child').should('have.css', 'background-color', 'rgb(144, 224, 239)'); // #90e0ef
+            cy.get('button').should('have.css', 'background-color', 'rgb(144, 224, 239)'); // #90e0ef
             cy.get('span:last-child').should('contain', 2);
         });
 
         cy.get("[data-test='list-tile-C']").click();
         cy.get("[data-test='list-tile-C']").click();
         cy.get("[data-test='list-tile-C']").within(() => {
-            cy.get('span:first-child').should('have.css', 'background-color', 'rgb(252, 241, 225)'); // #0077b6
+            cy.get('button').should('have.css', 'background-color', 'rgb(252, 241, 225)'); // #0077b6
             cy.get('span:last-child').should('contain', 0);
         });
 
         cy.get("[data-test='list-tile-T']").click();
         cy.get("[data-test='list-tile-T']").within(() => {
-            cy.get('span:first-child').should('have.css', 'background-color', 'rgb(0, 119, 182)'); // #0077b6
+            cy.get('button').should('have.css', 'background-color', 'rgb(0, 119, 182)'); // #0077b6
             cy.get('span:last-child').should('contain', 3);
         });
         cy.get("[data-test='total-word-score']").should('contain', 8);
@@ -53,7 +53,7 @@ describe('<ValidWord  />', () => {
         cy.get("[data-test='list-tile-E']").click();
         cy.get("[data-test='list-tile-E']").click();
         cy.get("[data-test='list-tile-E']").within(() => {
-            cy.get('span:first-child').should('have.css', 'background-color', 'rgb(252, 241, 225)'); // #fcf1e1ff
+            cy.get('button').should('have.css', 'background-color', 'rgb(252, 241, 225)'); // #fcf1e1ff
             cy.get('span:last-child').should('contain', 0);
         });
 
@@ -61,7 +61,7 @@ describe('<ValidWord  />', () => {
         cy.get("[data-test='list-tile-A']").click();
         cy.get("[data-test='list-tile-A']").click();
         cy.get("[data-test='list-tile-A']").within(() => {
-            cy.get('span:first-child').should('have.css', 'background-color', 'rgb(252, 241, 225)'); // #fcf1e1ff
+            cy.get('button').should('have.css', 'background-color', 'rgb(252, 241, 225)'); // #fcf1e1ff
             cy.get('span:last-child').should('contain', 0);
         });
 
@@ -69,7 +69,7 @@ describe('<ValidWord  />', () => {
         cy.get("[data-test='list-tile-R']").click();
         cy.get("[data-test='list-tile-R']").click();
         cy.get("[data-test='list-tile-R']").within(() => {
-            cy.get('span:first-child').should('have.css', 'background-color', 'rgb(252, 241, 225)'); // #fcf1e1ff
+            cy.get('button').should('have.css', 'background-color', 'rgb(252, 241, 225)'); // #fcf1e1ff
             cy.get('span:last-child').should('not.contain', 0);
         });
 

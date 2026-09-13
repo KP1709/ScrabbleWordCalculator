@@ -7,6 +7,17 @@ import MobileBar from "../components/mobileBar/mobileBar";
 import HistoryModal from "../components/modals/historyModal";
 import { useSettings } from "../hooks/useSettings";
 import OutcomeView from "../components/outcomeView";
+import { lookupLettersFromWord } from "../lib/lookupLettersFromWord";
+
+const outcomeAnnouncements: Record<Exclude<Outcome, 'valid'>, string> = {
+    start: "Enter a word to begin.",
+    analysing: "Checking word.",
+    invalid: "The entry is invalid.",
+    "invalid-tooLong": "The word is too long.",
+    unknown: "The word was not found in the dictionary.",
+    "invalid-cannotMake": "The word cannot be made with the available tiles.",
+    error: "There was an error checking the word.",
+};
 
 const LetterCalculator = () => {
     const [wordToCheck, setWordToCheck] = useState("");
@@ -14,6 +25,11 @@ const LetterCalculator = () => {
     const [modalVisibility, setModalVisibility] = useState({ howTo: false, settings: false, history: false });
 
     const { isStoreSearchHistory, setIsStoreSearchHistory } = useSettings();
+
+    const outcomeAnnouncement = outcome === 'valid'
+        ? `The word is valid. Word total: ${lookupLettersFromWord(wordToCheck.toLowerCase())
+            .reduce((total, tile) => total + tile.score, 0)} points.`
+        : outcomeAnnouncements[outcome];
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
@@ -65,6 +81,13 @@ const LetterCalculator = () => {
                 setWordToCheck={setWordToCheck}
             />
 
+            <div
+                className={styles.srOnly}
+                role="status"
+                aria-live="polite"
+                aria-atomic="true">
+                {outcomeAnnouncement}
+            </div>
             <OutcomeView outcome={outcome} wordToCheck={wordToCheck} />
             <MobileBar
                 setModalVisibility={setModalVisibility}

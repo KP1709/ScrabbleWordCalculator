@@ -1,5 +1,5 @@
 import { LetterProperties } from "../../../reusableTypes/LetterProperties";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { lookupLettersFromWord } from "../../../lib/lookupLettersFromWord";
 import Tile from "../../tile/tile";
 import tileStyles from "../../tile/tile.module.css";
@@ -29,6 +29,8 @@ const ScoreModifierButtons = ({ dataTest, onClick, buttonText }: ScoreModifierBu
 
 const ValidWord = ({ wordToCheck }: ValidWordType) => {
     const [totalWordScore, setTotalWordScore] = useState(0);
+    const [scoreAnnouncement, setScoreAnnouncement] = useState("");
+    const previousScore = useRef<number | null>(null);
     const [wordToCheckArray, setWordToCheckArray] = useState<LetterProperties[]>([]);
     const [scoreModifiers, setScoreModifiers] = useState({
         double: false,
@@ -53,7 +55,15 @@ const ValidWord = ({ wordToCheck }: ValidWordType) => {
         if (scoreModifiers.triple) wordScoreMultiplier *= 3;
 
         const newTotal = wordToCheckArray.reduce((sum, tile) => sum + tile.score, 0);
-        setTotalWordScore(newTotal * wordScoreMultiplier + (scoreModifiers.sevenTileBonus ? 50 : 0));
+        const calculatedTotal = newTotal * wordScoreMultiplier + (scoreModifiers.sevenTileBonus ? 50 : 0);
+        setTotalWordScore(calculatedTotal);
+
+        if (wordToCheckArray.length > 0) {
+            if (previousScore.current !== null && previousScore.current !== calculatedTotal) {
+                setScoreAnnouncement(`Word total: ${calculatedTotal} points`);
+            }
+            previousScore.current = calculatedTotal;
+        }
     }, [wordToCheckArray, scoreModifiers]);
 
     const handleTileClick = (id: string) => {
@@ -104,7 +114,18 @@ const ValidWord = ({ wordToCheck }: ValidWordType) => {
                 )}
             </ul>
 
-            <span id={styles.score} data-test="total-word-score"> Total : {totalWordScore}</span>
+            <span
+                id={styles.score}
+                data-test="total-word-score">
+                Word total: {totalWordScore} points
+            </span>
+            <span
+                className={styles.srOnly}
+                role="status"
+                aria-live="polite"
+                aria-atomic="true">
+                {scoreAnnouncement}
+            </span>
 
             <div className={`flex-centre-row ${styles.multiplierButtons}`}>
                 <ScoreModifierButtons

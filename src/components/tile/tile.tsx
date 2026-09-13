@@ -3,6 +3,13 @@ import styles from "./tile.module.css";
 
 type TileProp = LetterProperties & { onClick: () => void; };
 
+const actionLabels: Record<LetterProperties["action"], string> = {
+    double: "double word score",
+    triple: "triple word score",
+    blank: "blank tile",
+    restore: "regular score",
+};
+
 const tileColourStyles: Record<LetterProperties["colour"], string> = {
     "triple-tile-colour": styles.tripleTileColour,
     "double-tile-colour": styles.doubleTileColour,
@@ -10,14 +17,15 @@ const tileColourStyles: Record<LetterProperties["colour"], string> = {
     "restore-tile-colour": styles.restoreTileColour,
 };
 
-const Tile = ({ letter, score, onClick, colour }: TileProp) => (
+const Tile = ({ letter, score, onClick, colour, action }: TileProp) => (
     <div data-test={`list-tile-${letter}`}>
-        <span
+        <button
+            type="button"
+            aria-label={`${letter} tile, ${actionLabels[action]}, ${score} points. Activate to cycle tile value.`}
             className={`flex-centre-column ${styles.tileLetter} ${tileColourStyles[colour]}`}
-            tabIndex={0} onClick={onClick}
-            onKeyDown={(e) => { if (e.key === ' ') onClick(); }}>
+            onClick={onClick}>
             {letter}
-        </span>
+        </button>
         <span className={`flex-centre-column ${styles.tileScore}`}>{score}</span>
     </div>
 );

@@ -25,20 +25,26 @@
     flex-wrap: wrap;
     list-style: none;
     gap: 10px;
+    margin-top: 30px;
 }
 
 .tileItem {
     display: flex;
     flex-direction: column;
     padding: 0;
+    font-weight: bold;
 }
 
 .tileLetter {
     cursor: pointer;
     border: 2px solid var(--tile-border-clr);
     border-radius: 3px;
-    width: 2em;
-    height: 2em;
+    width: 2.5em;
+    height: 2.5em;
+    padding: 0;
+    font: inherit;
+    font-size: 1.5rem;
+    line-height: 1;
 
     /* Prevent highlighting when tapping on tile */
     -webkit-user-select: none;
@@ -49,6 +55,12 @@
     /* Standard syntax */
 }
 
+.tileLetter:hover {
+    filter: brightness(0.95);
+}
+
 .tileScore {
     color: var(--main-text-clr);
+    font-size: 1.25rem;
+    line-height: 1.2;
 }
