@@ -93,6 +93,17 @@ const LetterCalculator = () => {
                 setModalVisibility={setModalVisibility}
                 isStoreSearchHistory={isStoreSearchHistory}
             />
+            <a
+                className={styles.simpleAnalyticsCredit}
+                href="https://www.simpleanalytics.com?utm_source=kareenapatel-scrabblewordcalculator.netlify.app&utm_content=badge"
+                referrerPolicy="origin"
+                target="_blank"
+                rel="noopener"
+                aria-label="100% privacy-first analytics by Simple Analytics"
+            >
+                <span>100% privacy-first analytics</span>{" "}
+                <span className={styles.simpleAnalyticsByline}>by Simple Analytics</span>
+            </a>
         </main>
     );
 };

@@ -12,6 +12,31 @@ main {
     padding: 10px;
 }
 
+.simpleAnalyticsCredit,
+.simpleAnalyticsCredit:visited,
+.simpleAnalyticsCredit:hover,
+.simpleAnalyticsCredit:active {
+    all: unset !important;
+    display: block !important;
+    cursor: pointer !important;
+    line-height: 1.6 !important;
+    text-align: center !important;
+    margin-top: 10px !important;
+}
+
+.simpleAnalyticsCredit:focus-visible {
+    outline: 2px solid currentColor !important;
+    outline-offset: 4px !important;
+}
+
+.simpleAnalyticsCredit>span {
+    all: unset !important;
+}
+
+.simpleAnalyticsByline {
+    white-space: nowrap !important;
+}
+
 .srOnly {
     position: absolute;
     width: 1px;
