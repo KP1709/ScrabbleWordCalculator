@@ -34,7 +34,7 @@ While the functionality is technically the same, the code is now more maintainab
   - Only store if dictionary check is on
 
 ## ⚡ Supabase --> Wiktionary
-Originally, a Supabase database was connected and was used with Netlify serverless functions. This has been removed and replaced with Wiktionary (web scraping), so it's easier to manage. Originally a free api was used, now Wiktionary is for the main check 
+Originally, a Supabase database was connected and was used with Netlify serverless functions. This has been removed and replaced with Wiktionary (web scraping), so it's easier to manage. Originally, a free api was used, now Wiktionary is for the main check 
 
 ## 🧪 Experiment
 ### Testing valid words but with restrictions
@@ -48,7 +48,7 @@ This will run on every commit, so if updating the README, for example, it can be
 (This will save me from committing code and breaking functionality which I thought was working 😅) 
 
 ## 🔬 Analytics
-This web tool uses Simple Analytics. The tool doesn't use cookies, so no privacy banner is displayed.  
+This web tool uses Simple Analytics.
 Find out more - https://docs.simpleanalytics.com/introduction-to-legal 
 
 ## 📚 Resources
@@ -60,7 +60,7 @@ Find out more - https://docs.simpleanalytics.com/introduction-to-legal
 
 ## 🗄️ Archive
 ### 📚 Netlify Function Resources
-- Intro into Netlify Serverless functions - https://www.netlify.com/blog/intro-to-serverless-functions/
+- Intro to Netlify Serverless functions - https://www.netlify.com/blog/intro-to-serverless-functions/
 - Serverless function integration in React - https://www.freecodecamp.org/news/how-to-access-secret-api-keys-using-netlify-functions-in-a-react-app/
 - Netlify and Supabase integration - https://www.netlify.com/integrations/supabase/
 - Hiding API keys using Netlify - https://www.youtube.com/watch?v=m2Dr4L_Ab14
