@@ -1,7 +1,7 @@
 import Header from "./components/header/header.tsx";
 import LetterCalculator from "./pages/letterCalculator";
 import ErrorBoundary from "./components/errorBoundary";
-import { useSettings } from "./hooks/useSettings.tsx";
+import { useSettings } from "./hooks/useSettings/useSettings.tsx";
 import "./styles/app.css";
 import { useEffect } from "react";
 
@@ -26,7 +26,7 @@ export default function App() {
     else {
       handleThemeSelection(sessionStorage.getItem("currentTheme")?.replace(/"/g, "") || 'light-theme');
     }
-  }, []);
+  }, [handleThemeSelection, setIsStoreSearchHistory, setIsWordToBeChecked]);
 
   return (
     <ErrorBoundary>

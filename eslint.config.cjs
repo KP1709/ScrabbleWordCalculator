@@ -52,5 +52,10 @@ module.exports = defineConfig([
     globalIgnores([
         "**/dist",
         "**/.eslintrc.cjs",
+        "vite.config.ts",
+        "eslint.config.cjs",
+        "**/*.config.js",
+        "cypress.config.ts",
+        "**/cypress"
     ]),
 ]);

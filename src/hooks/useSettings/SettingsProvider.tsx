@@ -1,19 +1,5 @@
-import { createContext, useContext, useState, ReactNode } from "react";
-
-type SettingsContextType = {
-    isWordToBeChecked: boolean;
-    isStoreSearchHistory: boolean;
-    setIsWordToBeChecked: (value: boolean) => void;
-    setIsStoreSearchHistory: (checked: boolean) => void;
-    rerender: number;
-    setRerender: React.Dispatch<React.SetStateAction<number>>;
-    currentTheme: string;
-    handleWordCheck: (checked: boolean) => void;
-    handleSearchHistory: (checked: boolean) => void;
-    handleThemeSelection: (theme: string) => void;
-};
-
-const SettingsContext = createContext<SettingsContextType | undefined>(undefined);
+import { useCallback, useState, type ReactNode } from "react";
+import { SettingsContext } from "./SettingsContext";
 
 const getSettingValue = (key: string, defaultValue = false) => {
     return sessionStorage.getItem(key) === "true" ? true : defaultValue;
@@ -47,11 +33,11 @@ export function SettingsProvider({ children }: { children: ReactNode; }) {
         }
     };
 
-    const handleThemeSelection = (theme: string) => {
+    const handleThemeSelection = useCallback((theme: string) => {
         document.body.setAttribute("data-theme", theme);
         sessionStorage.setItem("currentTheme", JSON.stringify(theme));
-        setRerender(n => n + 1); // Force re-render to update dropdown
-    };
+        setRerender(n => n + 1);
+    }, []);
 
     return (
         <SettingsContext.Provider
@@ -71,12 +57,4 @@ export function SettingsProvider({ children }: { children: ReactNode; }) {
             {children}
         </SettingsContext.Provider>
     );
-}
-
-export function useSettings() {
-    const context = useContext(SettingsContext);
-    if (context === undefined) {
-        throw new Error("useSettings must be used within a SettingsProvider");
-    }
-    return context;
 }

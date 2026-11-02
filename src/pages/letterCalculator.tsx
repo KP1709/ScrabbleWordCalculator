@@ -5,7 +5,7 @@ import HowToModal from "../components/modals/howToModal";
 import SettingsModal from "../components/modals/settingsModal";
 import MobileBar from "../components/mobileBar/mobileBar";
 import HistoryModal from "../components/modals/historyModal";
-import { useSettings } from "../hooks/useSettings";
+import { useSettings } from "../hooks/useSettings/useSettings";
 import OutcomeView from "../components/outcomeView";
 import { lookupLettersFromWord } from "../lib/lookupLettersFromWord";
 

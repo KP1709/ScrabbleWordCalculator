@@ -1,5 +1,5 @@
 import { LetterProperties } from "../../../reusableTypes/LetterProperties";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { lookupLettersFromWord } from "../../../lib/lookupLettersFromWord";
 import Tile from "../../tile/tile";
 import tileStyles from "../../tile/tile.module.css";
@@ -28,11 +28,11 @@ const ScoreModifierButtons = ({ dataTest, onClick, buttonText }: ScoreModifierBu
 };
 
 const ValidWord = ({ wordToCheck }: ValidWordType) => {
-    const [totalWordScore, setTotalWordScore] = useState(0);
     const [scoreAnnouncement, setScoreAnnouncement] = useState("");
     const previousScore = useRef<number | null>(null);
-    const [wordToCheckArray, setWordToCheckArray] = useState<LetterProperties[]>([]);
-    const [scoreModifiers, setScoreModifiers] = useState({
+    const [wordToCheckArray, setWordToCheckArray] = useState<LetterProperties[]>(
+        () => lookupLettersFromWord(wordToCheck)
+    ); const [scoreModifiers, setScoreModifiers] = useState({
         double: false,
         triple: false,
         sevenTileBonus: false,
@@ -42,29 +42,25 @@ const ValidWord = ({ wordToCheck }: ValidWordType) => {
     const handleTripleToggle = () => setScoreModifiers(prev => ({ ...prev, triple: !prev.triple }));
     const handleSevenTileBonus = () => setScoreModifiers(prev => ({ ...prev, sevenTileBonus: !prev.sevenTileBonus }));
 
-    const handleReset = () => {
+    const totalWordScore =
+        wordToCheckArray.reduce((sum, tile) => sum + tile.score, 0) *
+        (scoreModifiers.double ? 2 : 1) *
+        (scoreModifiers.triple ? 3 : 1) +
+        (scoreModifiers.sevenTileBonus ? 50 : 0);
+
+    const handleReset = useCallback(() => {
         setScoreModifiers(prev => ({ ...prev, double: false, triple: false, sevenTileBonus: false }));
         setWordToCheckArray(lookupLettersFromWord(wordToCheck));
-    };
-
-    useEffect(() => handleReset(), []);
+    }, [wordToCheck]);
 
     useEffect(() => {
-        let wordScoreMultiplier = 1;
-        if (scoreModifiers.double) wordScoreMultiplier *= 2;
-        if (scoreModifiers.triple) wordScoreMultiplier *= 3;
-
-        const newTotal = wordToCheckArray.reduce((sum, tile) => sum + tile.score, 0);
-        const calculatedTotal = newTotal * wordScoreMultiplier + (scoreModifiers.sevenTileBonus ? 50 : 0);
-        setTotalWordScore(calculatedTotal);
-
         if (wordToCheckArray.length > 0) {
-            if (previousScore.current !== null && previousScore.current !== calculatedTotal) {
-                setScoreAnnouncement(`Word total: ${calculatedTotal} points`);
+            if (previousScore.current !== null && previousScore.current !== totalWordScore) {
+                setScoreAnnouncement(`Word total: ${totalWordScore} points`);
             }
-            previousScore.current = calculatedTotal;
+            previousScore.current = totalWordScore;
         }
-    }, [wordToCheckArray, scoreModifiers]);
+    }, [wordToCheckArray, scoreModifiers, totalWordScore]);
 
     const handleTileClick = (id: string) => {
         const hasMaxNumberOfBlanks = wordToCheckArray.filter(tile => tile.action === 'blank').length === getLetterNoTiles("");
