@@ -11,7 +11,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "cypress": "^16.0.0",
+    "cypress": "^16.2.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
@@ -21,16 +21,16 @@
     "@eslint/js": "^10.0.1",
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",
-    "@typescript-eslint/eslint-plugin": "^8.69.0",
-    "@typescript-eslint/parser": "^8.69.0",
+    "@typescript-eslint/eslint-plugin": "^8.72.1",
+    "@typescript-eslint/parser": "^8.72.1",
     "@vitejs/plugin-react": "^4.7.0",
-    "eslint": "^10.10.0",
+    "eslint": "^10.14.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.7",
     "globals": "^17.14.0",
     "husky": "^9.1.7",
     "typescript": "^5.9.3",
-    "vite": "^6.4.3"
+    "vite": "^6.4.5"
   },
   "packageManager": "pnpm@12.16.1"
 }
