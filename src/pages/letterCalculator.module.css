@@ -22,6 +22,7 @@ main {
     line-height: 1.6 !important;
     text-align: center !important;
     margin-top: 10px !important;
+    color: var(--main-text-clr) !important;
 }
 
 .simpleAnalyticsCredit:focus-visible {
