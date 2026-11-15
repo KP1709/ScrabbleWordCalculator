@@ -66,12 +66,14 @@ const ValidWord = ({ wordToCheck }: ValidWordType) => {
         const hasMaxNumberOfBlanks = wordToCheckArray.filter(tile => tile.action === 'blank').length === getLetterNoTiles("");
 
         setWordToCheckArray(prevValues => prevValues.map((tile) => {
-            if (tile.id === id && !hasMaxNumberOfBlanks) {
+            if (tile.id === id) {
                 switch (tile.action) {
                     case 'double':
                         return { ...tile, score: tile.originalScore * 3, action: 'triple', colour: 'triple-tile-colour' };
                     case 'triple':
-                        return { ...tile, score: 0, action: 'blank', colour: 'blank-tile-colour' };
+                        return hasMaxNumberOfBlanks ?
+                            { ...tile, score: tile.originalScore, action: 'restore', colour: 'restore-tile-colour' }
+                            : { ...tile, score: 0, action: 'blank', colour: 'blank-tile-colour' };
                     case 'blank':
                         return { ...tile, score: tile.originalScore, action: 'restore', colour: 'restore-tile-colour' };
                     case 'restore':
@@ -79,20 +81,6 @@ const ValidWord = ({ wordToCheck }: ValidWordType) => {
                 }
             }
 
-            if (tile.id === id && hasMaxNumberOfBlanks) {
-                switch (tile.action) {
-                    case 'double':
-                        return { ...tile, score: tile.originalScore * 3, action: 'triple', colour: 'triple-tile-colour' };
-                    case 'triple':
-                        return { ...tile, score: tile.originalScore, action: 'restore', colour: 'restore-tile-colour' };
-                    case 'restore':
-                        return { ...tile, score: tile.originalScore * 2, action: 'double', colour: 'double-tile-colour' };
-                }
-            }
-
-            if (tile.id === id && hasMaxNumberOfBlanks && tile.action === "blank") {
-                return { ...tile, score: tile.originalScore, action: 'restore', colour: 'restore-tile-colour' };
-            }
             return tile;
         }));
     };
