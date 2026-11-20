@@ -1,0 +1,45 @@
+
+name: Cypress Tests
+
+on:
+  pull_request:
+    branches:
+    # Allowed to run if target branch in listed
+      - main
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  cypress:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          # caches the pnpm package store to speed up subsequent runs
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # - name: Test Vite startup
+      #   run: pnpm run dev -- --host 127.0.0.1 --port 5173 --strictPort
+
+      - name: Cypress tests
+        uses: cypress-io/github-action@v7
+        with:
+          install: true
+          start: pnpm run dev -- --host 0.0.0.0
+          wait-on: 'http://127.0.0.1:5173'
+          wait-on-timeout: 120
+          command: pnpm exec cypress run
