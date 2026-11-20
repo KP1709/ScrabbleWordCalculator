@@ -1,3 +1,14 @@
+echo "Run Cypress tests before committing?"
+printf " [y/n] "
+
+if read -r ANSWER < /dev/tty; then
+  case "$ANSWER" in n)
+      echo "Skipping Cypress tests. Proceeding with git commit."
+      exit 0
+      ;;
+  esac
+fi
+
 echo "Running Cypress tests before commit..."
 
 pnpx cypress run

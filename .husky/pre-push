@@ -1,5 +1,15 @@
-echo "Running Cypress tests before pushing code..."
+echo "Run Cypress tests before pushing?"
+printf " [y/n] "
 
+if read -r ANSWER < /dev/tty; then
+  case "$ANSWER" in n)
+      echo "Skipping Cypress tests. Proceeding with git push."
+      exit 0
+      ;;
+  esac
+fi
+
+echo "Running Cypress tests..."
 pnpx cypress run
 RESULT=$?
 
@@ -8,5 +18,5 @@ if [ $RESULT -ne 0 ]; then
   exit 1
 fi
 
-echo "✅ All Cypress tests passed. Proceeding with git push."
+echo "✅ All Cypress tests passed."
 exit 0
