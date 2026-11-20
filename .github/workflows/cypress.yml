@@ -1,0 +1,39 @@
+
+name: Cypress Tests
+
+on:
+  pull_request:
+    branches:
+    # Allowed to run if target branch in listed
+      - main
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  cypress:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+        # Should match pnpm version in project
+          version: 12 
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          # caches the pnpm package store to speed up subsequent runs
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run Cypress tests
+        run: pnpm exec cypress run
