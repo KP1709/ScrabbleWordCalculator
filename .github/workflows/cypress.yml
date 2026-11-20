@@ -32,5 +32,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run Cypress tests
-        run: pnpm exec cypress run
+      # - name: Test Vite startup
+      #   run: pnpm run dev -- --host 127.0.0.1 --port 5173 --strictPort
+
+      - name: Cypress tests
+        uses: cypress-io/github-action@v7
+        with:
+          install: true
+          start: pnpm run dev -- --host 0.0.0.0
+          wait-on: 'http://127.0.0.1:5173'
+          wait-on-timeout: 120
+          command: pnpm exec cypress run
