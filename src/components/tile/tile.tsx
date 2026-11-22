@@ -17,8 +17,8 @@ const tileColourStyles: Record<LetterProperties["colour"], string> = {
     "restore-tile-colour": styles.restoreTileColour,
 };
 
-const Tile = ({ letter, score, onClick, colour, action }: TileProp) => (
-    <div data-test={`list-tile-${letter}`}>
+const Tile = ({ letter, score, onClick, colour, action, originalScore }: TileProp) => (
+    <div data-test={`list-tile-${letter}`} style={{ position: "relative" }}>
         <button
             type="button"
             aria-label={`${letter} tile, ${actionLabels[action]}, ${score} points. Activate to cycle tile value.`}
@@ -26,6 +26,7 @@ const Tile = ({ letter, score, onClick, colour, action }: TileProp) => (
             onClick={onClick}>
             {letter}
         </button>
+        {action !== 'blank' && <span className={`${styles.tileOriginalScore}`}>{originalScore}</span>}
         <span className={`flex-centre-column ${styles.tileScore}`}>{score}</span>
     </div>
 );
