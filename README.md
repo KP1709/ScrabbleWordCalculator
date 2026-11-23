@@ -5,24 +5,20 @@
 React / Typescript / CSS / pnpm / APIs / Cypress (Testing) / Husky (Git Hooks)
 
 ## 🍼 Introduction
-Playing the original version of Scrabble, it can sometimes be difficult to calculate a word's score. Therefore, I created my own version of a Scrabble calculator. When a word is entered, it checks if the word is valid and displays its score. Bonuses and multipliers can be added to calculate the correct score.
-
-## ⚙️ Changes
-The commit 81ea887 was code clean-up for the entire project.  
-While the functionality is technically the same, the code is now more maintainable and readable.  
+Playing the original version of Scrabble, it can sometimes be difficult to calculate a word's score. Therefore, I created my own version of a Scrabble calculator. A word is checked to see if it's valid and displays its score. Bonuses and multipliers can be added to calculate the correct score. 
 
 ## 🛠️ Features
 - Check to see if user input is valid
-  - Checks to see if word contains only alphabetic characters
+  - Checks to see if a word contains only alphabetic characters
   - Checks to see if a word is less than 15 letters
-  - Checks to see if word is in the dictionary (using Wiktionary)
-  - Check to see if word can be created based on number of tiles available
+  - Checks to see if a word is in the dictionary (using Wiktionary)
+  - Checks to see if a word can be created based on the number of tiles available
 - Score for whole word is calculated
 - Tried to maintain accessibility throughout the application
-- Instructions available on the start screen as an open and closable modal
+- Instructions available on the start screen as an openable and closable modal
 - Can indicate which tiles have a double score or triple score and update the total word score 
 - Can indicate which tiles are blank, update the total word score and limit the number
-- Can apply the 50 point bonus for words with seven letter tiles or longer
+- Can apply the 50-point bonus for words with seven-letter tiles or longer
 - Can indicate if the total word score doubles, triples or both
 - Can reset multipliers and bonuses added to letters and/or whole word
 - Error handling if either the API or database is down
@@ -34,17 +30,16 @@ While the functionality is technically the same, the code is now more maintainab
   - Only store if dictionary check is on
 
 ## ⚡ Supabase --> Wiktionary
-Originally, a Supabase database was connected and was used with Netlify serverless functions. This has been removed and replaced with Wiktionary (web scraping), so it's easier to manage. Originally, a free api was used, now Wiktionary is for the main check 
+Originally, a Supabase database was connected and was used with Netlify serverless functions. This stored words which weren't in the free dictionary api. The database has been removed and replaced with Wiktionary (web scraping) for easier management.
 
 ## 🧪 Experiment
 ### Testing valid words but with restrictions
-The word 'knickknacks' exists in the dictionary, but there are too many 'k' in the word, so it cannot be used in the game. This will display the 'Max Tile Limit Exceeded' screen. 
-
-The word 'counterbalancing' exists in the dictionary, but the word is more than 15 letters. This will display 'Invalid Entry' with a message about exceeding the tile limit.
+- 'knickknacks' - there are too many 'k's in the word, so it cannot be used in the game. This will display the 'Max Tile Limit Exceeded' screen. 
+- 'counterbalancing' - there are more than 15 letters. This will display 'Invalid Entry' with a message about exceeding the tile limit.
 
 ## 🕹️ Testing
-Component tests and end-to-end tests have been created using Cypress. Before committing new code, the end-to-end tests will run. As long as all the tests pass, the commit will be created. Husky has been used so this pre-commit check is accessible.  
-This will run on every commit, so if updating the README, for example, it can be bypassed by adding the flag '--no-verify' to the commit command.  
+Component tests and end-to-end tests have been created using Cypress. Before committing new code, the end-to-end tests will run. Husky is used so the pre-commit check is accessible to everyone.
+Cypress tests also run as part of GitHub Actions. Dependabot pull requests will be checked.   
 (This will save me from committing code and breaking functionality which I thought was working 😅) 
 
 ## 🔬 Analytics
